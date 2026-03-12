@@ -263,172 +263,142 @@
             box-shadow: 0 4px 0 #ff9eb5;
         }
         
-        /* Start Modal */
+        /* Start Modal - Full Page */
         #startModal {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(255, 200, 220, 0.95);
-            backdrop-filter: blur(8px);
+            background: linear-gradient(135deg, #ffb3c6, #ffd9e8);
             display: flex;
             justify-content: center;
             align-items: center;
             z-index: 2000;
-            padding: 15px;
+            padding: 20px;
         }
         
-        .start-content {
+        .start-page {
             background: white;
-            border-radius: 50px;
-            padding: 30px 20px;
-            max-width: 400px;
+            border-radius: 60px;
+            padding: 40px 25px;
+            max-width: 450px;
             width: 100%;
             text-align: center;
-            box-shadow: 0 20px 40px rgba(255, 100, 150, 0.3), 0 0 0 4px #ffb3c6, 0 0 0 8px #ffe2f0;
-            animation: popIn 0.5s ease-out;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2), 0 0 0 6px #ffb3c6, 0 0 0 12px #ffe2f0;
         }
         
-        .start-content h2 {
+        .start-page h2 {
             color: #d44e7a;
-            font-size: clamp(1.8rem, 6vw, 2rem);
+            font-size: 2.5rem;
             font-family: 'Pacifico', cursive;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
         
         .instruction-box {
             background: #ffe2f0;
-            border-radius: 40px;
-            padding: 20px;
-            margin: 15px 0;
+            border-radius: 50px;
+            padding: 25px;
+            margin: 20px 0;
             border: 4px dashed #ffb3c6;
         }
         
         .instruction-box p {
-            margin: 12px 0;
-            font-size: clamp(0.9rem, 4vw, 1rem);
+            margin: 15px 0;
+            font-size: 1.1rem;
             color: #b3547c;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
         }
         
         .volume-note {
             background: #ffb3c6;
             color: white;
-            padding: 10px;
-            border-radius: 30px;
-            margin-top: 15px;
-            font-size: 0.9rem;
+            padding: 12px;
+            border-radius: 40px;
+            margin-top: 20px;
+            font-size: 1rem;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
-            flex-wrap: wrap;
         }
         
         .start-button {
             background: #ffb3c6;
             color: white;
             border: none;
-            padding: 15px 35px;
+            padding: 18px 40px;
             border-radius: 60px;
-            font-size: clamp(1.2rem, 5vw, 1.3rem);
+            font-size: 1.4rem;
             font-weight: bold;
             cursor: pointer;
-            box-shadow: 0 6px 0 #ff8aa8;
-            transition: all 0.2s;
-            border: 3px solid white;
-            margin-top: 15px;
+            box-shadow: 0 8px 0 #ff8aa8;
+            border: 4px solid white;
+            margin-top: 20px;
             width: 100%;
-            max-width: 280px;
+            max-width: 300px;
         }
         
         .start-button:active {
             transform: translateY(4px);
-            box-shadow: 0 2px 0 #ff8aa8;
+            box-shadow: 0 4px 0 #ff8aa8;
         }
         
-        button {
-            background: #ffb3c6;
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 50px;
-            font-size: clamp(1.1rem, 5vw, 1.2rem);
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 6px 0 #ff8aa8;
-            transition: all 0.2s;
-            border: 3px solid white;
-            margin: 8px;
-            width: auto;
-            min-width: 200px;
-        }
-        
-        button:active {
-            transform: translateY(4px);
-            box-shadow: 0 2px 0 #ff8aa8;
-        }
-        
-        .hidden {
-            display: none !important;
-        }
-        
-        /* Memory Modal - Question Style */
+        /* Memory Question Modal - Full Page */
         #memoryModal {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(255, 200, 220, 0.95);
-            backdrop-filter: blur(5px);
+            background: linear-gradient(135deg, #ffb3c6, #ffd9e8);
             display: flex;
             justify-content: center;
             align-items: center;
             z-index: 1000;
-            padding: 15px;
+            padding: 20px;
         }
         
-        .modal-content {
+        .question-page {
             background: white;
-            border-radius: 50px;
-            padding: 25px 20px;
-            max-width: 400px;
+            border-radius: 60px;
+            padding: 30px 25px;
+            max-width: 450px;
             width: 100%;
             max-height: 90vh;
             overflow-y: auto;
             text-align: center;
-            box-shadow: 0 20px 40px rgba(255, 100, 150, 0.3), 0 0 0 4px #ffb3c6, 0 0 0 8px #ffe2f0;
-            animation: popIn 0.4s ease-out;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2), 0 0 0 6px #ffb3c6, 0 0 0 12px #ffe2f0;
+            animation: pagePop 0.4s ease-out;
         }
         
-        .modal-header h2 {
+        .memory-header h2 {
             color: #d44e7a;
-            font-size: clamp(1.5rem, 5vw, 1.8rem);
+            font-size: 2rem;
             font-family: 'Pacifico', cursive;
             margin-bottom: 5px;
         }
         
-        .modal-header h3 {
+        .memory-header h3 {
             color: #b3547c;
-            font-size: clamp(0.8rem, 4vw, 0.9rem);
+            font-size: 1rem;
+            margin-bottom: 15px;
         }
         
-        .modal-media {
+        .memory-media {
             width: 100%;
-            height: min(180px, 30vh);
+            height: 200px;
             background: #ffe2f0;
-            border-radius: 30px;
+            border-radius: 40px;
             margin: 15px 0;
             overflow: hidden;
             border: 4px solid #ffb3c6;
-            box-shadow: 0 4px 0 #ff9eb5;
+            box-shadow: 0 5px 0 #ff9eb5;
         }
         
-        .modal-media img, .modal-media video {
+        .memory-media img, .memory-media video {
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -441,128 +411,122 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 10px;
             cursor: pointer;
             background: #ffe2f0;
-            padding: 10px;
         }
         
         .upload-icon {
-            font-size: 35px;
+            font-size: 40px;
         }
         
         .upload-text {
             color: #d44e7a;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
         }
         
         .upload-input {
             display: none;
         }
         
-        .modal-question {
+        .memory-question {
             background: #ffe2f0;
-            padding: 15px;
-            border-radius: 30px;
+            padding: 20px;
+            border-radius: 40px;
             margin: 15px 0;
-            font-size: clamp(1rem, 4.5vw, 1.2rem);
+            font-size: 1.2rem;
             color: #d44e7a;
             font-weight: bold;
             border: 3px solid white;
         }
         
-        .modal-options {
+        .memory-options {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
             margin: 15px 0;
         }
         
-        .modal-option {
+        .memory-option {
             background: #f8f0f5;
             color: #b3547c;
             border: 3px solid #ffb3c6;
-            padding: 12px;
-            border-radius: 40px;
-            font-size: clamp(0.9rem, 4vw, 1rem);
+            padding: 15px;
+            border-radius: 50px;
+            font-size: 1.1rem;
             cursor: pointer;
             transition: all 0.2s;
-            box-shadow: 0 3px 0 #ff9eb5;
+            box-shadow: 0 4px 0 #ff9eb5;
         }
         
-        .modal-option:active {
-            transform: translateY(3px);
+        .memory-option:active {
+            transform: translateY(4px);
             box-shadow: 0 0 0 #ff9eb5;
         }
         
-        .modal-option.selected {
+        .memory-option.selected {
             background: #ffb3c6;
             color: white;
         }
         
-        .modal-option.correct {
+        .memory-option.correct {
             background: #a7e0a7;
             color: white;
         }
         
-        .modal-option.wrong {
+        .memory-option.wrong {
             background: #ffa7a7;
             color: white;
         }
         
-        .modal-feedback {
+        .memory-feedback {
             margin: 10px 0;
-            font-size: 1rem;
-            min-height: 25px;
+            font-size: 1.1rem;
+            min-height: 30px;
         }
         
-        .modal-feedback.success { color: #6f9e6f; }
-        .modal-feedback.error { color: #d44e7a; }
-        
-        .modal-hint {
+        .memory-hint {
             background: #ffe2f0;
-            padding: 10px;
+            padding: 15px;
             border-radius: 30px;
             margin: 10px 0;
             font-style: italic;
             color: #b3547c;
-            font-size: 0.9rem;
-            border-left: 4px solid #ffb3c6;
+            border-left: 5px solid #ffb3c6;
         }
         
-        .modal-button {
+        .memory-button {
             background: #ffb3c6;
             color: white;
             border: none;
-            padding: 12px 30px;
-            border-radius: 50px;
-            font-size: clamp(1rem, 4.5vw, 1.1rem);
+            padding: 15px 30px;
+            border-radius: 60px;
+            font-size: 1.2rem;
             font-weight: bold;
             cursor: pointer;
-            box-shadow: 0 4px 0 #ff8aa8;
-            transition: all 0.2s;
+            box-shadow: 0 5px 0 #ff8aa8;
             border: 3px solid white;
-            margin-top: 10px;
+            margin-top: 15px;
             width: 100%;
         }
         
-        .modal-button:disabled {
+        .memory-button:disabled {
             opacity: 0.5;
             transform: none;
-            box-shadow: 0 4px 0 #ff8aa8;
+            box-shadow: 0 5px 0 #ff8aa8;
         }
         
-        .modal-close {
+        .close-btn {
             position: absolute;
-            top: 10px;
-            right: 10px;
-            width: 35px;
-            height: 35px;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             background: #ffb3c6;
             border: 3px solid white;
             color: white;
-            font-size: 18px;
+            font-size: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -570,25 +534,105 @@
             box-shadow: 0 3px 0 #ff8aa8;
         }
         
-        .next-button {
+        /* Memory Card Modal - Full Page */
+        #memoryCardModal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #ffb3c6, #ffd9e8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1500;
+            padding: 20px;
+        }
+        
+        .card-page {
+            background: white;
+            border-radius: 60px;
+            padding: 30px 25px;
+            max-width: 450px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2), 0 0 0 6px #ffb3c6, 0 0 0 12px #ffe2f0;
+            animation: pagePop 0.4s ease-out;
+        }
+        
+        .card-header h2 {
+            color: #d44e7a;
+            font-size: 2rem;
+            font-family: 'Pacifico', cursive;
+            margin-bottom: 5px;
+        }
+        
+        .card-header h3 {
+            color: #b3547c;
+            font-size: 1rem;
+            margin-bottom: 15px;
+        }
+        
+        .card-media {
+            width: 100%;
+            height: 200px;
+            background: #ffe2f0;
+            border-radius: 40px;
+            margin: 15px 0;
+            overflow: hidden;
+            border: 4px solid #ffb3c6;
+            box-shadow: 0 5px 0 #ff9eb5;
+        }
+        
+        .card-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .card-message {
+            background: #ffe2f0;
+            padding: 20px;
+            border-radius: 40px;
+            margin: 15px 0;
+            font-size: 1.1rem;
+            color: #d44e7a;
+            line-height: 1.6;
+            border: 3px solid white;
+        }
+        
+        .card-next {
             background: #ffb3c6;
             color: white;
             border: none;
-            padding: 12px 40px;
-            border-radius: 50px;
+            padding: 15px 40px;
+            border-radius: 60px;
             font-size: 1.2rem;
             font-weight: bold;
             cursor: pointer;
             box-shadow: 0 5px 0 #ff8aa8;
             border: 3px solid white;
-            margin: 15px auto 5px;
+            margin-top: 15px;
             width: fit-content;
             min-width: 200px;
         }
         
-        .next-button:active {
+        .card-next:active {
             transform: translateY(4px);
             box-shadow: 0 1px 0 #ff8aa8;
+        }
+        
+        @keyframes pagePop {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
         }
         
         #progressBar {
@@ -609,7 +653,7 @@
             transition: width 0.3s;
         }
         
-        /* Time Capsule */
+        /* Time Capsule - Full Page */
         #timeCapsuleModal {
             position: fixed;
             top: 0;
@@ -622,57 +666,50 @@
             align-items: center;
             z-index: 3000;
             animation: timeVortex 1.5s ease-out;
-            padding: 15px;
+            padding: 20px;
         }
         
-        @keyframes timeVortex {
-            0% { transform: scale(0) rotate(0deg); opacity: 0; border-radius: 100%; }
-            50% { transform: scale(1.1) rotate(180deg); opacity: 0.8; border-radius: 50%; }
-            100% { transform: scale(1) rotate(360deg); opacity: 1; border-radius: 0; }
-        }
-        
-        .time-content {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 60px;
-            padding: 30px 20px;
-            max-width: 450px;
+        .time-page {
+            background: white;
+            border-radius: 80px;
+            padding: 40px 25px;
+            max-width: 500px;
             width: 100%;
             text-align: center;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.3), 0 0 0 6px white, 0 0 0 12px #ffb3c6;
-            animation: timeGlow 2s infinite alternate;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3), 0 0 0 8px white, 0 0 0 16px #ffb3c6;
             backdrop-filter: blur(10px);
         }
         
         .time-header h2 {
             color: #d44e7a;
-            font-size: clamp(1.8rem, 6vw, 2.2rem);
+            font-size: 2.2rem;
             font-family: 'Pacifico', cursive;
             margin-bottom: 5px;
         }
         
         .time-header p {
             color: #b3547c;
-            font-size: clamp(0.8rem, 4vw, 0.9rem);
+            font-size: 1rem;
         }
         
         .time-circle {
-            width: min(180px, 40vw);
-            height: min(180px, 40vw);
-            margin: 15px auto;
+            width: 200px;
+            height: 200px;
+            margin: 20px auto;
             background: linear-gradient(145deg, #ffb3c6, #d44e7a);
             border-radius: 50%;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            border: 6px solid white;
-            box-shadow: 0 10px 0 #b13e5c;
+            border: 8px solid white;
+            box-shadow: 0 12px 0 #b13e5c;
             animation: timePulse 1s infinite;
         }
         
         .time-number {
             color: white;
-            font-size: clamp(2.5rem, 8vw, 3rem);
+            font-size: 3.5rem;
             font-weight: bold;
             font-family: 'Pacifico', cursive;
             line-height: 1;
@@ -680,50 +717,50 @@
         
         .time-label {
             color: white;
-            font-size: clamp(0.9rem, 4vw, 1rem);
+            font-size: 1.1rem;
         }
         
         .time-stats {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin: 20px 0;
+            gap: 15px;
+            margin: 25px 0;
         }
         
         .time-stat {
             background: #ffe2f0;
-            padding: 12px 5px;
-            border-radius: 30px;
+            padding: 15px 5px;
+            border-radius: 40px;
             border: 3px solid #ffb3c6;
         }
         
         .time-stat-value {
             color: #d44e7a;
-            font-size: clamp(1.3rem, 5vw, 1.6rem);
+            font-size: 1.8rem;
             font-weight: bold;
         }
         
         .time-stat-label {
             color: #b3547c;
-            font-size: clamp(0.7rem, 3vw, 0.8rem);
+            font-size: 0.8rem;
         }
         
         .time-message {
             background: #ffe2f0;
-            padding: 15px;
-            border-radius: 40px;
-            margin: 15px 0;
+            padding: 20px;
+            border-radius: 50px;
+            margin: 20px 0;
             color: #d44e7a;
-            font-size: clamp(0.9rem, 4vw, 1rem);
+            font-size: 1.1rem;
             border: 4px dashed #ffb3c6;
         }
         
         .time-progress {
             width: 100%;
-            height: 6px;
+            height: 8px;
             background: rgba(255,255,255,0.3);
-            border-radius: 3px;
-            margin: 15px 0;
+            border-radius: 4px;
+            margin: 20px 0;
             overflow: hidden;
         }
         
@@ -739,113 +776,102 @@
             to { width: 100%; }
         }
         
-        /* Video Modal */
+        /* Video Modal - Full Page */
         #videoModal {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.95);
+            background: black;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             z-index: 2000;
             animation: videoFadeIn 1s ease-out;
-            padding: 15px;
+            padding: 20px;
         }
         
         .video-quote {
             color: white;
-            font-size: clamp(1rem, 4vw, 1.2rem);
-            margin-bottom: 15px;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
             font-style: italic;
             text-align: center;
-            padding: 0 10px;
             font-family: 'Pacifico', cursive;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            text-shadow: 2px 2px 4px rgba(255,255,255,0.3);
         }
         
-        .video-content {
+        .video-container {
             width: 100%;
-            max-width: 500px;
+            max-width: 600px;
             background: white;
-            border-radius: 40px;
+            border-radius: 50px;
             padding: 15px;
             border: 6px solid #ffb3c6;
         }
         
         .video-player {
             width: 100%;
-            border-radius: 30px;
+            border-radius: 40px;
             overflow: hidden;
-            background: #000;
         }
         
         .video-player video {
             width: 100%;
             display: block;
-            border-radius: 30px;
         }
         
-        /* Heart Popper */
+        /* Heart Popper - Full Page */
         #heartPopper {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 5000;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(5px);
-            animation: popperFadeIn 0.5s ease-out;
+            z-index: 4000;
         }
         
-        @keyframes popperFadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        .popper-container {
+            text-align: center;
+            animation: fadeIn 0.5s;
         }
         
         .popper-heart {
-            font-size: 100px;
+            font-size: 120px;
             cursor: pointer;
-            animation: heartBeat 0.5s infinite alternate;
-            filter: drop-shadow(0 0 30px #ff4d6d);
-            transition: all 0.3s;
+            animation: pulseGlow 0.8s infinite alternate;
+            transition: all 0.1s;
+            filter: drop-shadow(0 0 20px #ff4d6d);
         }
         
         .popper-heart:active {
-            transform: scale(1.5);
+            transform: scale(1.3);
+            filter: drop-shadow(0 0 40px #ff1744);
         }
         
-        @keyframes heartBeat {
-            from { transform: scale(1); }
-            to { transform: scale(1.2); }
-        }
-        
-        .popper-text {
-            position: absolute;
-            bottom: 30%;
-            color: white;
-            font-size: 1.2rem;
-            font-family: 'Pacifico', cursive;
-            text-align: center;
-            animation: fadeInUp 1s ease-out;
-        }
-        
-        @keyframes fadeInUp {
+        @keyframes pulseGlow {
             from {
-                opacity: 0;
-                transform: translateY(20px);
+                transform: scale(1);
+                filter: drop-shadow(0 0 20px #ff4d6d);
             }
             to {
-                opacity: 1;
-                transform: translateY(0);
+                transform: scale(1.2);
+                filter: drop-shadow(0 0 50px #ff1744);
             }
+        }
+        
+        .popper-hint {
+            color: white;
+            font-size: 1.2rem;
+            margin-top: 20px;
+            font-style: italic;
         }
         
         /* Confetti Canvas */
@@ -856,10 +882,10 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: 5500;
+            z-index: 4500;
         }
         
-        /* Win Screen */
+        /* Win Screen - Full Page */
         #winScreen {
             position: fixed;
             top: 0;
@@ -871,9 +897,9 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 6000;
+            z-index: 5000;
             animation: gradientBG 10s ease infinite;
-            padding: 15px;
+            padding: 20px;
         }
         
         @keyframes gradientBG {
@@ -882,48 +908,43 @@
             100% { background-position: 0% 50%; }
         }
         
-        .win-content {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 50px;
-            padding: 25px 20px;
-            max-width: 450px;
+        .win-page {
+            background: white;
+            border-radius: 70px;
+            padding: 35px 25px;
+            max-width: 500px;
             width: 100%;
             max-height: 90vh;
             overflow-y: auto;
             text-align: center;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.3), 0 0 0 6px white, 0 0 0 12px #ffb3c6;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3), 0 0 0 8px white, 0 0 0 16px #ffb3c6;
             backdrop-filter: blur(10px);
             animation: winPop 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
         
-        @keyframes winPop {
-            from { transform: scale(0.5) rotate(-5deg); opacity: 0; }
-            to { transform: scale(1) rotate(0); opacity: 1; }
-        }
-        
         .win-header h2 {
             color: #d44e7a;
-            font-size: clamp(1.8rem, 6vw, 2rem);
+            font-size: 2.2rem;
             font-family: 'Pacifico', cursive;
             margin-bottom: 15px;
         }
         
         .win-message {
             color: #b3547c;
-            font-size: clamp(0.8rem, 4vw, 0.9rem);
-            line-height: 1.6;
+            font-size: 0.95rem;
+            line-height: 1.8;
             margin: 15px 0;
             white-space: pre-line;
             background: #ffe2f0;
-            padding: 15px;
-            border-radius: 30px;
+            padding: 20px;
+            border-radius: 40px;
             border: 4px dashed #ffb3c6;
         }
         
         .win-photo {
             width: 100%;
             max-height: 180px;
-            border-radius: 30px;
+            border-radius: 40px;
             margin: 15px 0;
             overflow: hidden;
             border: 5px solid white;
@@ -936,57 +957,43 @@
             object-fit: cover;
         }
         
-        .win-footer {
-            margin-top: 15px;
-        }
-        
         .restart-button {
             background: #ffb3c6;
             color: white;
             border: none;
-            padding: 12px 30px;
-            border-radius: 50px;
-            font-size: clamp(1rem, 4.5vw, 1.1rem);
+            padding: 15px 30px;
+            border-radius: 60px;
+            font-size: 1.1rem;
             font-weight: bold;
             cursor: pointer;
-            box-shadow: 0 5px 0 #ff8aa8;
+            box-shadow: 0 6px 0 #ff8aa8;
             border: 3px solid white;
-            margin-top: 10px;
+            margin-top: 15px;
             width: 100%;
             max-width: 250px;
-            animation: bounce 2s infinite;
-        }
-        
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
         }
         
         .restart-button:active {
             transform: translateY(4px);
-            box-shadow: 0 1px 0 #ff8aa8;
+            box-shadow: 0 2px 0 #ff8aa8;
         }
         
-        @media (max-width: 400px) {
-            #gameContainer {
-                padding: 15px;
-            }
+        .hidden {
+            display: none !important;
+        }
+        
+        @media (max-width: 500px) {
+            .start-page { padding: 30px 20px; }
+            .start-page h2 { font-size: 2rem; }
+            .instruction-box p { font-size: 1rem; }
             
-            .stat-value {
-                font-size: 1.5rem;
+            .time-circle {
+                width: 150px;
+                height: 150px;
             }
+            .time-number { font-size: 2.5rem; }
             
-            .modal-content {
-                padding: 20px 15px;
-            }
-            
-            .time-stat {
-                padding: 8px 3px;
-            }
-            
-            .popper-heart {
-                font-size: 80px;
-            }
+            .popper-heart { font-size: 100px; }
         }
     </style>
 </head>
@@ -1039,9 +1046,9 @@
         <div id="message">💖 catch 5 hearts to unlock a memory! 💖</div>
     </div>
 
-    <!-- Start Modal -->
+    <!-- Start Page -->
     <div id="startModal">
-        <div class="start-content">
+        <div class="start-page">
             <h2>hi love! 💕</h2>
             <div class="instruction-box">
                 <p>🎮 <b>how to play:</b></p>
@@ -1061,51 +1068,49 @@
         </div>
     </div>
 
-    <!-- Memory Modal (for questions) -->
+    <!-- Memory Question Page -->
     <div id="memoryModal" class="hidden">
-        <div class="modal-content">
-            <div class="modal-close" onclick="closeModal()">✕</div>
-            
-            <div class="modal-header">
+        <div class="close-btn" onclick="closeModal()">✕</div>
+        <div class="question-page">
+            <div class="memory-header">
                 <h2 id="modalTitle">memory</h2>
                 <h3 id="modalSubtitle"></h3>
             </div>
             
-            <div class="modal-media" id="modalMedia"></div>
+            <div class="memory-media" id="modalMedia"></div>
             
-            <div class="modal-question" id="modalQuestion"></div>
+            <div class="memory-question" id="modalQuestion"></div>
             
-            <div class="modal-options" id="modalOptions"></div>
+            <div class="memory-options" id="modalOptions"></div>
             
-            <div class="modal-feedback" id="modalFeedback"></div>
+            <div class="memory-feedback" id="modalFeedback"></div>
             
-            <div class="modal-hint" id="modalHint"></div>
+            <div class="memory-hint" id="modalHint"></div>
             
-            <button class="modal-button" id="modalSubmit" disabled>check answer 💕</button>
+            <button class="memory-button" id="modalSubmit" disabled>check answer 💕</button>
         </div>
     </div>
 
-    <!-- Memory Card Modal -->
+    <!-- Memory Card Page -->
     <div id="memoryCardModal" class="hidden">
-        <div class="modal-content">
-            <div class="modal-close" onclick="closeCardModal()">✕</div>
-            
-            <div class="modal-header">
+        <div class="close-btn" onclick="closeCardModal()">✕</div>
+        <div class="card-page">
+            <div class="card-header">
                 <h2 id="cardTitle"></h2>
                 <h3 id="cardSubtitle"></h3>
             </div>
             
-            <div class="modal-media" id="cardMedia"></div>
+            <div class="card-media" id="cardMedia"></div>
             
-            <div class="modal-question" id="cardMessage" style="font-size: 1rem; line-height: 1.5;"></div>
+            <div class="card-message" id="cardMessage"></div>
             
-            <button class="next-button" id="cardNextBtn" onclick="goToNextFromCard()">next memory ➡️</button>
+            <button class="card-next" id="cardNextBtn" onclick="goToNextFromCard()">next memory ➡️</button>
         </div>
     </div>
 
-    <!-- Time Capsule -->
+    <!-- Time Capsule Page -->
     <div id="timeCapsuleModal" class="hidden">
-        <div class="time-content">
+        <div class="time-page">
             <div class="time-header">
                 <h2>our time together</h2>
                 <p>march 13, 2021 - march 13, 2026</p>
@@ -1141,33 +1146,34 @@
         </div>
     </div>
 
-    <!-- Video Modal -->
+    <!-- Video Page -->
     <div id="videoModal" class="hidden">
         <div class="video-quote">"this is one of the best memories of us together" 💕</div>
-        <div class="video-content">
+        <div class="video-container">
             <div class="video-player">
                 <video id="surpriseVideo" playsinline controls>
                     <source src="cebu_drone.mp4" type="video/mp4">
                     <source src="cebu_drone.mov" type="video/quicktime">
                     <source src="cebu_drone.webm" type="video/webm">
-                    <p style="color: #d44e7a; padding: 20px;">💕 video loading... please wait 💕</p>
                 </video>
             </div>
         </div>
     </div>
 
-    <!-- Heart Popper -->
+    <!-- Heart Popper Page -->
     <div id="heartPopper" class="hidden">
-        <div class="popper-heart" onclick="explodeHeart()">❤️</div>
-        <div class="popper-text">tap the heart for a surprise!</div>
+        <div class="popper-container">
+            <div class="popper-heart" onclick="explodeHeart()">❤️</div>
+            <div class="popper-hint">press it faster</div>
+        </div>
     </div>
 
     <!-- Confetti Canvas -->
     <canvas id="confettiCanvas" class="hidden"></canvas>
 
-    <!-- Win Screen -->
+    <!-- Win Page -->
     <div id="winScreen" class="hidden">
-        <div class="win-content">
+        <div class="win-page">
             <div class="win-header">
                 <h2>🎉 5 years of us! 🎉</h2>
             </div>
@@ -1256,7 +1262,7 @@
         let cardImage = null;
         let fadeInterval;
         
-        // UPDATED MEMORIES - Removed Summerblast, added Ka Lito memory
+        // Memories array
         const memories = [
             {
                 title: "💒 the beginning",
@@ -1522,12 +1528,9 @@
             fallingHearts.forEach(heart => heart.element.remove());
             fallingHearts = [];
             
-            // If it's a card type, show the card modal
             if (memory.type === "card") {
                 showCardModal(memory);
-            } 
-            // If it's a question type
-            else if (memory.type === "question") {
+            } else {
                 showQuestionModal(memory, index);
             }
         }
@@ -1552,7 +1555,7 @@
                 modalOptions.innerHTML = '';
                 memory.options.forEach((opt, idx) => {
                     const btn = document.createElement('div');
-                    btn.className = 'modal-option';
+                    btn.className = 'memory-option';
                     btn.textContent = opt;
                     btn.onclick = () => selectOption(idx);
                     modalOptions.appendChild(btn);
@@ -1569,7 +1572,7 @@
                 modalOptions.innerHTML = '';
                 memory.options.forEach((opt, idx) => {
                     const btn = document.createElement('div');
-                    btn.className = 'modal-option';
+                    btn.className = 'memory-option';
                     btn.textContent = opt;
                     btn.onclick = () => selectOption(idx);
                     modalOptions.appendChild(btn);
@@ -1590,35 +1593,24 @@
             cardTitle.textContent = memory.title;
             cardSubtitle.textContent = memory.subtitle;
             cardMessage.textContent = memory.message;
-            
-            // Load the image
             cardMedia.innerHTML = `<img src="${memory.media}" alt="Memory" onerror="this.onerror=null; this.innerHTML='📸 memory photo';">`;
-            
-            // Hide next button for last card? No, we have 5 memories total
             memoryCardModal.classList.remove('hidden');
         }
         
-        // Close card modal and go to next memory
+        // Navigation
         function goToNextFromCard() {
             memoryCardModal.classList.add('hidden');
-            
-            // Move to next memory
             currentMemoryIndex++;
             
-            // If we've completed all memories (should be 5 total)
             if (currentMemoryIndex < memories.length) {
                 heartsForCurrent = 0;
                 memoriesUnlockedDisplay.textContent = currentMemoryIndex + '/5';
                 progressFill.style.width = '0%';
                 messageDisplay.textContent = `💕 catch ${heartsNeeded} hearts for next memory!`;
                 gameActive = true;
-            } else {
-                // This shouldn't happen as we have exactly 5 memories
-                console.log("All memories completed");
             }
         }
         
-        // Close card modal without advancing
         function closeCardModal() {
             memoryCardModal.classList.add('hidden');
             heartsForCurrent = 0;
@@ -1631,7 +1623,7 @@
         
         function selectOption(idx) {
             selectedOption = idx;
-            document.querySelectorAll('.modal-option').forEach((btn, i) => {
+            document.querySelectorAll('.memory-option').forEach((btn, i) => {
                 btn.classList.remove('selected');
                 if (i === idx) btn.classList.add('selected');
             });
@@ -1653,7 +1645,7 @@
             if (memory.isUpload) {
                 if (cardImage) {
                     modalFeedback.textContent = '✨ thank you! ✨';
-                    modalFeedback.className = 'modal-feedback success';
+                    modalFeedback.className = 'memory-feedback success';
                     modalHint.innerHTML = memory.memory + '<br><br>' + memory.verse;
                     modalSubmit.disabled = true;
                     
@@ -1672,12 +1664,12 @@
             
             if (memory.isLast) {
                 if (selectedOption === memory.correct) {
-                    document.querySelectorAll('.modal-option').forEach((btn, i) => {
+                    document.querySelectorAll('.memory-option').forEach((btn, i) => {
                         if (i === memory.correct) btn.classList.add('correct');
                     });
                     
                     modalFeedback.textContent = '✨ correct! ✨';
-                    modalFeedback.className = 'modal-feedback success';
+                    modalFeedback.className = 'memory-feedback success';
                     modalHint.innerHTML = 'now, let\'s see how long we\'ve been together... 💕';
                     modalSubmit.disabled = true;
                     
@@ -1686,7 +1678,6 @@
                         calculateTimeTogether();
                         timeCapsuleModal.classList.remove('hidden');
                         
-                        // Fade out music over 6 seconds
                         fadeOutMusic(6000);
                         
                         setTimeout(() => {
@@ -1696,23 +1687,20 @@
                                 timeCapsuleModal.style.animation = '';
                                 videoModal.classList.remove('hidden');
                                 
-                                // Try to play video
                                 surpriseVideo.load();
                                 surpriseVideo.play().catch(e => {
-                                    console.log("Video play failed:", e);
                                     surpriseVideo.controls = true;
                                 });
                                 
                                 surpriseVideo.onended = () => {
                                     videoModal.classList.add('hidden');
-                                    // Show heart popper instead of win screen directly
-                                    showHeartPopper();
+                                    heartPopper.classList.remove('hidden');
                                 };
                             }, 1000);
                         }, 6000);
                     }, 1500);
                 } else {
-                    document.querySelectorAll('.modal-option').forEach((btn, i) => {
+                    document.querySelectorAll('.memory-option').forEach((btn, i) => {
                         if (i === selectedOption) btn.classList.add('wrong');
                         if (i === memory.correct) btn.classList.add('correct');
                     });
@@ -1731,12 +1719,12 @@
             }
             
             if (selectedOption === memory.correct) {
-                document.querySelectorAll('.modal-option').forEach((btn, i) => {
+                document.querySelectorAll('.memory-option').forEach((btn, i) => {
                     if (i === memory.correct) btn.classList.add('correct');
                 });
                 
                 modalFeedback.textContent = '✨ correct! ✨';
-                modalFeedback.className = 'modal-feedback success';
+                modalFeedback.className = 'memory-feedback success';
                 modalHint.innerHTML = memory.memory;
                 modalSubmit.disabled = true;
                 
@@ -1750,7 +1738,7 @@
                     gameActive = true;
                 }, 1500);
             } else {
-                document.querySelectorAll('.modal-option').forEach((btn, i) => {
+                document.querySelectorAll('.memory-option').forEach((btn, i) => {
                     if (i === selectedOption) btn.classList.add('wrong');
                     if (i === memory.correct) btn.classList.add('correct');
                 });
@@ -1767,32 +1755,23 @@
             }
         });
         
-        // ==================== HEART POPPER ====================
-        function showHeartPopper() {
-            heartPopper.classList.remove('hidden');
-        }
-        
+        // Heart Popper
         function explodeHeart() {
-            // Hide heart popper
             heartPopper.classList.add('hidden');
-            
-            // Start confetti
             startConfetti();
             
-            // Show win screen after a short delay
             setTimeout(() => {
                 stopConfetti();
                 showWinScreen();
             }, 2000);
         }
         
-        // ==================== CONFETTI ====================
+        // Confetti
         function startConfetti() {
             canvas.classList.remove('hidden');
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
             
-            // Create particles
             for (let i = 0; i < 150; i++) {
                 particles.push({
                     x: Math.random() * canvas.width,
@@ -1800,7 +1779,7 @@
                     size: Math.random() * 8 + 4,
                     speed: Math.random() * 5 + 3,
                     color: `hsl(${Math.random() * 360}, 100%, 70%)`,
-                    shape: Math.random() > 0.5 ? '❤️' : '🎉'
+                    shape: Math.random() > 0.5 ? '❤️' : '●'
                 });
             }
             
@@ -1814,13 +1793,11 @@
                 const p = particles[i];
                 p.y += p.speed;
                 
-                // Reset if off screen
                 if (p.y > canvas.height) {
                     p.y = -10;
                     p.x = Math.random() * canvas.width;
                 }
                 
-                // Draw either heart or confetti
                 if (p.shape === '❤️') {
                     ctx.font = `${p.size}px Arial`;
                     ctx.fillStyle = p.color;
@@ -1842,7 +1819,7 @@
             particles = [];
         }
         
-        // ==================== WIN SCREEN ====================
+        // Win Screen
         function showWinScreen() {
             gameActive = false;
             
@@ -1881,7 +1858,7 @@ forever yours,
             document.getElementById('winMessage').textContent = winMessage;
         }
         
-        // ==================== START GAME ====================
+        // Start Game
         function startGame() {
             gameActive = true;
             currentMemoryIndex = 0;
@@ -1919,7 +1896,7 @@ forever yours,
             }, 20);
         }
         
-        // ==================== RESET GAME ====================
+        // Reset Game
         function resetGame() {
             gameActive = false;
             clearInterval(heartInterval);
