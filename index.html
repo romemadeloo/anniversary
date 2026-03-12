@@ -680,7 +680,7 @@
             height: 100%;
             background: white;
             width: 0%;
-            animation: progressFill 10s linear forwards;
+            animation: progressFill 6s linear forwards;
         }
         
         @keyframes progressFill {
@@ -713,6 +713,7 @@
             text-align: center;
             padding: 0 10px;
             font-family: 'Pacifico', cursive;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
         
         .video-content {
@@ -728,11 +729,13 @@
             width: 100%;
             border-radius: 30px;
             overflow: hidden;
+            background: #000;
         }
         
         .video-player video {
             width: 100%;
             display: block;
+            border-radius: 30px;
         }
         
         /* Win Screen */
@@ -988,8 +991,11 @@
         <div class="video-quote">"this is one of the best memories of us together" 💕</div>
         <div class="video-content">
             <div class="video-player">
-                <video id="surpriseVideo" playsinline>
+                <video id="surpriseVideo" playsinline controls>
                     <source src="cebu_drone.mp4" type="video/mp4">
+                    <source src="cebu_drone.mov" type="video/quicktime">
+                    <source src="cebu_drone.webm" type="video/webm">
+                    <p style="color: #d44e7a; padding: 20px;">💕 video loading... please wait 💕</p>
                 </video>
             </div>
         </div>
@@ -1448,8 +1454,8 @@
                         calculateTimeTogether();
                         timeCapsuleModal.classList.remove('hidden');
                         
-                        // Fade out music over 10 seconds
-                        fadeOutMusic(10000);
+                        // Fade out music over 6 seconds
+                        fadeOutMusic(6000);
                         
                         setTimeout(() => {
                             timeCapsuleModal.style.animation = 'fadeOut 1s forwards';
@@ -1457,14 +1463,21 @@
                                 timeCapsuleModal.classList.add('hidden');
                                 timeCapsuleModal.style.animation = '';
                                 videoModal.classList.remove('hidden');
-                                surpriseVideo.play();
+                                
+                                // Try to play video with multiple format support
+                                surpriseVideo.load();
+                                surpriseVideo.play().catch(e => {
+                                    console.log("Video play failed:", e);
+                                    // If autoplay fails, show play button
+                                    surpriseVideo.controls = true;
+                                });
                                 
                                 surpriseVideo.onended = () => {
                                     videoModal.classList.add('hidden');
                                     showWinScreen();
                                 };
                             }, 1000);
-                        }, 10000);
+                        }, 6000);
                     }, 1500);
                 } else {
                     document.querySelectorAll('.modal-option').forEach((btn, i) => {
@@ -1534,6 +1547,8 @@
             
             if (cardImage) {
                 winPhoto.innerHTML = `<img src="${cardImage}" alt="Our Invitation Card">`;
+            } else {
+                winPhoto.innerHTML = '<p style="color: #d44e7a; padding: 20px;">💕 our special memory 💕</p>';
             }
             
             const winMessage = `my love,
