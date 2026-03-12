@@ -534,7 +534,7 @@
             box-shadow: 0 3px 0 #ff8aa8;
         }
         
-        /* Memory Card Modal - Full Page */
+        /* Swipeable Memory Cards Container */
         #memoryCardModal {
             position: fixed;
             top: 0;
@@ -549,22 +549,37 @@
             padding: 20px;
         }
         
-        .card-page {
+        .cards-container {
+            position: relative;
+            width: 100%;
+            max-width: 450px;
+            height: 550px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .memory-card {
+            position: absolute;
+            width: 100%;
             background: white;
             border-radius: 60px;
-            padding: 30px 25px;
-            max-width: 450px;
-            width: 100%;
-            max-height: 90vh;
-            overflow-y: auto;
+            padding: 25px;
             text-align: center;
             box-shadow: 0 20px 40px rgba(0,0,0,0.2), 0 0 0 6px #ffb3c6, 0 0 0 12px #ffe2f0;
-            animation: pagePop 0.4s ease-out;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            cursor: grab;
+            user-select: none;
+            touch-action: pan-y pinch-zoom;
+        }
+        
+        .memory-card:active {
+            cursor: grabbing;
         }
         
         .card-header h2 {
             color: #d44e7a;
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-family: 'Pacifico', cursive;
             margin-bottom: 5px;
         }
@@ -597,10 +612,32 @@
             padding: 20px;
             border-radius: 40px;
             margin: 15px 0;
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: #d44e7a;
             line-height: 1.6;
             border: 3px solid white;
+        }
+        
+        .card-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 15px 0;
+        }
+        
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ffb3c6;
+            border: 2px solid white;
+            transition: all 0.3s;
+        }
+        
+        .indicator.active {
+            background: #d44e7a;
+            transform: scale(1.3);
+            box-shadow: 0 0 10px #d44e7a;
         }
         
         .card-next {
@@ -614,7 +651,7 @@
             cursor: pointer;
             box-shadow: 0 5px 0 #ff8aa8;
             border: 3px solid white;
-            margin-top: 15px;
+            margin-top: 10px;
             width: fit-content;
             min-width: 200px;
         }
@@ -622,6 +659,16 @@
         .card-next:active {
             transform: translateY(4px);
             box-shadow: 0 1px 0 #ff8aa8;
+        }
+        
+        .swipe-hint {
+            color: #b3547c;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
         }
         
         @keyframes pagePop {
@@ -830,7 +877,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.9);
             backdrop-filter: blur(5px);
             display: flex;
             justify-content: center;
@@ -844,34 +891,18 @@
         }
         
         .popper-heart {
-            font-size: 120px;
+            font-size: 60px;
             cursor: pointer;
-            animation: pulseGlow 0.8s infinite alternate;
-            transition: all 0.1s;
+            transition: all 0.1s ease;
             filter: drop-shadow(0 0 20px #ff4d6d);
+            margin-bottom: 20px;
         }
         
-        .popper-heart:active {
-            transform: scale(1.3);
-            filter: drop-shadow(0 0 40px #ff1744);
-        }
-        
-        @keyframes pulseGlow {
-            from {
-                transform: scale(1);
-                filter: drop-shadow(0 0 20px #ff4d6d);
-            }
-            to {
-                transform: scale(1.2);
-                filter: drop-shadow(0 0 50px #ff1744);
-            }
-        }
-        
-        .popper-hint {
+        .press-count {
             color: white;
             font-size: 1.2rem;
             margin-top: 20px;
-            font-style: italic;
+            font-family: 'Pacifico', cursive;
         }
         
         /* Confetti Canvas */
@@ -993,7 +1024,17 @@
             }
             .time-number { font-size: 2.5rem; }
             
-            .popper-heart { font-size: 100px; }
+            .cards-container {
+                height: 500px;
+            }
+            
+            .memory-card {
+                padding: 20px;
+            }
+            
+            .card-media {
+                height: 160px;
+            }
         }
     </style>
 </head>
@@ -1091,21 +1132,10 @@
         </div>
     </div>
 
-    <!-- Memory Card Page -->
+    <!-- Swipeable Memory Cards -->
     <div id="memoryCardModal" class="hidden">
         <div class="close-btn" onclick="closeCardModal()">✕</div>
-        <div class="card-page">
-            <div class="card-header">
-                <h2 id="cardTitle"></h2>
-                <h3 id="cardSubtitle"></h3>
-            </div>
-            
-            <div class="card-media" id="cardMedia"></div>
-            
-            <div class="card-message" id="cardMessage"></div>
-            
-            <button class="card-next" id="cardNextBtn" onclick="goToNextFromCard()">next memory ➡️</button>
-        </div>
+        <div class="cards-container" id="cardsContainer"></div>
     </div>
 
     <!-- Time Capsule Page -->
@@ -1163,8 +1193,8 @@
     <!-- Heart Popper Page -->
     <div id="heartPopper" class="hidden">
         <div class="popper-container">
-            <div class="popper-heart" onclick="explodeHeart()">❤️</div>
-            <div class="popper-hint">press it faster</div>
+            <div class="popper-heart" id="popperHeart" onclick="pressHeart()">❤️</div>
+            <div class="press-count" id="pressCount">0 / 5</div>
         </div>
     </div>
 
@@ -1225,19 +1255,17 @@
         const modalHint = document.getElementById('modalHint');
         const modalSubmit = document.getElementById('modalSubmit');
         
-        // Card elements
-        const cardMedia = document.getElementById('cardMedia');
-        const cardTitle = document.getElementById('cardTitle');
-        const cardSubtitle = document.getElementById('cardSubtitle');
-        const cardMessage = document.getElementById('cardMessage');
-        const cardNextBtn = document.getElementById('cardNextBtn');
-        
         // Time elements
         const totalDaysSpan = document.getElementById('totalDays');
         const totalYearsSpan = document.getElementById('totalYears');
         const totalMonthsSpan = document.getElementById('totalMonths');
         const totalHoursSpan = document.getElementById('totalHours');
         const timeMessage = document.getElementById('timeMessage');
+        
+        // Heart popper elements
+        const popperHeart = document.getElementById('popperHeart');
+        const pressCount = document.getElementById('pressCount');
+        let heartPresses = 0;
         
         // Confetti
         const canvas = document.getElementById('confettiCanvas');
@@ -1289,11 +1317,23 @@
                 type: "question"
             },
             {
-                title: "🙏 ka lito's farewell",
-                subtitle: "july 2022",
-                message: "the farewell of ka lito, our destinado. this is one of our core memories together. a moment that strengthened our faith and our bond. 💒",
-                media: "ka_lito.jpg",
-                type: "card"
+                title: "💒 core memories",
+                subtitle: "swipe to view",
+                cards: [
+                    {
+                        title: "🙏 ka lito's farewell",
+                        date: "july 2022",
+                        message: "the farewell of ka lito, our destinado. this moment strengthened our faith and brought us closer together. a core memory we will always cherish.",
+                        media: "ka_lito.jpg"
+                    },
+                    {
+                        title: "💍 tita apol & tito jerry",
+                        date: "their wedding day",
+                        message: "attending tita apol and tito jerry's wedding. seeing their love and commitment inspired us and reminded us of the beauty of marriage and family.",
+                        media: "wedding.jpg"
+                    }
+                ],
+                type: "cards"
             },
             {
                 title: "👨‍👩‍👧‍👦 family firsts",
@@ -1528,8 +1568,10 @@
             fallingHearts.forEach(heart => heart.element.remove());
             fallingHearts = [];
             
-            if (memory.type === "card") {
-                showCardModal(memory);
+            if (memory.type === "cards") {
+                showCardsModal(memory.cards);
+            } else if (memory.type === "card") {
+                showSingleCardModal(memory);
             } else {
                 showQuestionModal(memory, index);
             }
@@ -1588,27 +1630,130 @@
             memoryModal.classList.remove('hidden');
         }
         
-        // Show card modal
-        function showCardModal(memory) {
-            cardTitle.textContent = memory.title;
-            cardSubtitle.textContent = memory.subtitle;
-            cardMessage.textContent = memory.message;
-            cardMedia.innerHTML = `<img src="${memory.media}" alt="Memory" onerror="this.onerror=null; this.innerHTML='📸 memory photo';">`;
+        // Show swipeable cards modal
+        function showCardsModal(cards) {
+            const container = document.getElementById('cardsContainer');
+            container.innerHTML = '';
+            
+            let currentCardIndex = 0;
+            
+            cards.forEach((card, index) => {
+                const cardElement = document.createElement('div');
+                cardElement.className = 'memory-card';
+                cardElement.dataset.index = index;
+                cardElement.innerHTML = `
+                    <div class="card-header">
+                        <h2>${card.title}</h2>
+                        <h3>${card.date}</h3>
+                    </div>
+                    <div class="card-media">
+                        <img src="${card.media}" alt="Memory" onerror="this.onerror=null; this.parentElement.innerHTML='📸 memory photo';">
+                    </div>
+                    <div class="card-message">${card.message}</div>
+                    <div class="card-indicators">
+                        ${cards.map((_, i) => `<div class="indicator ${i === index ? 'active' : ''}"></div>`).join('')}
+                    </div>
+                    ${index === cards.length - 1 ? 
+                        '<button class="card-next" onclick="finishCards()">next memory ➡️</button>' : 
+                        '<div class="swipe-hint">👆 swipe left for next memory 👆</div>'
+                    }
+                `;
+                
+                container.appendChild(cardElement);
+            });
+            
+            // Setup swipe functionality
+            let startX, currentX;
+            const cards_elements = document.querySelectorAll('.memory-card');
+            
+            cards_elements.forEach((card, index) => {
+                card.style.transform = `translateX(${index * 100}%) scale(${index === 0 ? 1 : 0.8})`;
+                card.style.opacity = index === 0 ? 1 : 0.5;
+                card.style.zIndex = cards.length - index;
+                
+                card.addEventListener('touchstart', (e) => {
+                    startX = e.touches[0].clientX;
+                });
+                
+                card.addEventListener('touchmove', (e) => {
+                    if (startX === undefined) return;
+                    e.preventDefault();
+                    currentX = e.touches[0].clientX;
+                    const diff = currentX - startX;
+                    
+                    if (index === currentCardIndex && diff < 0) {
+                        card.style.transform = `translateX(${index * 100 + diff}px) scale(${1 - Math.abs(diff)/500})`;
+                    }
+                });
+                
+                card.addEventListener('touchend', (e) => {
+                    if (startX === undefined || currentX === undefined) return;
+                    
+                    const diff = currentX - startX;
+                    
+                    if (index === currentCardIndex && diff < -50 && currentCardIndex < cards.length - 1) {
+                        // Swipe left - next card
+                        currentCardIndex++;
+                        updateCards();
+                    }
+                    
+                    startX = undefined;
+                    currentX = undefined;
+                });
+            });
+            
+            function updateCards() {
+                cards_elements.forEach((card, i) => {
+                    if (i < currentCardIndex) {
+                        card.style.transform = `translateX(-100%) scale(0.6)`;
+                        card.style.opacity = 0;
+                    } else if (i === currentCardIndex) {
+                        card.style.transform = `translateX(0) scale(1)`;
+                        card.style.opacity = 1;
+                    } else {
+                        card.style.transform = `translateX(100%) scale(0.8)`;
+                        card.style.opacity = 0.5;
+                    }
+                });
+                
+                // Update indicators
+                document.querySelectorAll('.indicator').forEach((ind, i) => {
+                    ind.className = `indicator ${i === currentCardIndex ? 'active' : ''}`;
+                });
+            }
+            
             memoryCardModal.classList.remove('hidden');
         }
         
-        // Navigation
-        function goToNextFromCard() {
+        // Show single card modal
+        function showSingleCardModal(memory) {
+            const container = document.getElementById('cardsContainer');
+            container.innerHTML = `
+                <div class="memory-card" style="transform: translateX(0) scale(1); opacity: 1;">
+                    <div class="card-header">
+                        <h2>${memory.title}</h2>
+                        <h3>${memory.subtitle}</h3>
+                    </div>
+                    <div class="card-media">
+                        <img src="${memory.media}" alt="Memory" onerror="this.onerror=null; this.parentElement.innerHTML='📸 memory photo';">
+                    </div>
+                    <div class="card-message">${memory.message}</div>
+                    <button class="card-next" onclick="finishCards()">next memory ➡️</button>
+                </div>
+            `;
+            
+            memoryCardModal.classList.remove('hidden');
+        }
+        
+        // Finish cards and go to next memory
+        function finishCards() {
             memoryCardModal.classList.add('hidden');
             currentMemoryIndex++;
-            
-            if (currentMemoryIndex < memories.length) {
-                heartsForCurrent = 0;
-                memoriesUnlockedDisplay.textContent = currentMemoryIndex + '/5';
-                progressFill.style.width = '0%';
-                messageDisplay.textContent = `💕 catch ${heartsNeeded} hearts for next memory!`;
-                gameActive = true;
-            }
+            heartsForCurrent = 0;
+            memoriesUnlockedDisplay.textContent = currentMemoryIndex + '/5';
+            progressFill.style.width = '0%';
+            messageDisplay.textContent = `💕 catch ${heartsNeeded} hearts for next memory!`;
+            gameActive = true;
         }
         
         function closeCardModal() {
@@ -1694,6 +1839,10 @@
                                 
                                 surpriseVideo.onended = () => {
                                     videoModal.classList.add('hidden');
+                                    // Reset heart counter and show popper
+                                    heartPresses = 0;
+                                    popperHeart.style.fontSize = '60px';
+                                    pressCount.textContent = '0 / 5';
                                     heartPopper.classList.remove('hidden');
                                 };
                             }, 1000);
@@ -1755,15 +1904,34 @@
             }
         });
         
-        // Heart Popper
-        function explodeHeart() {
-            heartPopper.classList.add('hidden');
-            startConfetti();
+        // Heart Popper - 5 presses
+        function pressHeart() {
+            heartPresses++;
             
-            setTimeout(() => {
-                stopConfetti();
-                showWinScreen();
-            }, 2000);
+            if (heartPresses <= 5) {
+                // Update counter
+                pressCount.textContent = `${heartPresses} / 5`;
+                
+                // Grow heart (60px to 180px)
+                const newSize = 60 + (heartPresses * 24);
+                popperHeart.style.fontSize = newSize + 'px';
+                
+                // Add extra glow on 5th press
+                if (heartPresses === 5) {
+                    popperHeart.style.filter = 'drop-shadow(0 0 50px #ff1744)';
+                    
+                    // Hide heart popper
+                    setTimeout(() => {
+                        heartPopper.classList.add('hidden');
+                        startConfetti();
+                        
+                        setTimeout(() => {
+                            stopConfetti();
+                            showWinScreen();
+                        }, 2000);
+                    }, 200);
+                }
+            }
         }
         
         // Confetti
@@ -1772,14 +1940,14 @@
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
             
-            for (let i = 0; i < 150; i++) {
+            for (let i = 0; i < 200; i++) {
                 particles.push({
                     x: Math.random() * canvas.width,
                     y: Math.random() * canvas.height - canvas.height,
-                    size: Math.random() * 8 + 4,
-                    speed: Math.random() * 5 + 3,
+                    size: Math.random() * 10 + 4,
+                    speed: Math.random() * 6 + 3,
                     color: `hsl(${Math.random() * 360}, 100%, 70%)`,
-                    shape: Math.random() > 0.5 ? '❤️' : '●'
+                    shape: Math.random() > 0.4 ? '❤️' : '●'
                 });
             }
             
@@ -1842,6 +2010,7 @@
 from that first chat in march 2021,
 to our tagaytay adventure,
 ka lito's farewell that strengthened our faith,
+tita apol and tito jerry's wedding that inspired us,
 our first family celebration with tita, tito, and mama,
 and now cebu with drone shots at tops360...
 
@@ -1917,8 +2086,8 @@ forever yours,
         
         window.closeModal = closeModal;
         window.closeCardModal = closeCardModal;
-        window.goToNextFromCard = goToNextFromCard;
-        window.explodeHeart = explodeHeart;
+        window.finishCards = finishCards;
+        window.pressHeart = pressHeart;
     </script>
 </body>
 </html>
