@@ -659,6 +659,153 @@
             box-shadow: 0 8px 0 #ff9eb5;
         }
         
+        /* Time Capsule Modal */
+        #timeCapsuleModal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(212, 78, 122, 0.9);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 3000;
+            animation: fadeIn 1s ease;
+        }
+        
+        .time-content {
+            background: white;
+            border-radius: 100px 100px 50px 50px;
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.2), 0 0 0 6px #ffb3c6, 0 0 0 12px #ffe2f0;
+            animation: timePop 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        
+        @keyframes timePop {
+            0% { transform: scale(0.3) rotate(-10deg); opacity: 0; }
+            100% { transform: scale(1) rotate(0); opacity: 1; }
+        }
+        
+        .time-header {
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .time-header h2 {
+            color: #d44e7a;
+            font-size: 2.2rem;
+            font-family: 'Pacifico', cursive;
+            margin-bottom: 10px;
+        }
+        
+        .time-header p {
+            color: #b3547c;
+            font-size: 1.1rem;
+        }
+        
+        .time-circle {
+            width: 200px;
+            height: 200px;
+            margin: 20px auto;
+            background: linear-gradient(145deg, #ffb3c6, #d44e7a);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 8px solid white;
+            box-shadow: 0 15px 0 #b13e5c, 0 20px 30px rgba(0,0,0,0.2);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .time-number {
+            color: white;
+            font-size: 3.5rem;
+            font-weight: bold;
+            font-family: 'Pacifico', cursive;
+            line-height: 1;
+            text-shadow: 3px 3px 0 rgba(0,0,0,0.2);
+        }
+        
+        .time-label {
+            color: white;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+        }
+        
+        .time-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 30px 0;
+        }
+        
+        .time-stat {
+            background: #ffe2f0;
+            padding: 15px;
+            border-radius: 40px;
+            border: 3px solid #ffb3c6;
+        }
+        
+        .time-stat-value {
+            color: #d44e7a;
+            font-size: 1.8rem;
+            font-weight: bold;
+            font-family: 'Pacifico', cursive;
+        }
+        
+        .time-stat-label {
+            color: #b3547c;
+            font-size: 0.8rem;
+            margin-top: 5px;
+        }
+        
+        .time-message {
+            background: #ffe2f0;
+            padding: 20px;
+            border-radius: 50px;
+            margin: 20px 0;
+            color: #d44e7a;
+            font-size: 1.2rem;
+            line-height: 1.6;
+            border: 3px dashed #ffb3c6;
+        }
+        
+        .time-button {
+            background: #d44e7a;
+            color: white;
+            border: none;
+            padding: 18px 45px;
+            border-radius: 80px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 8px 0 #b13e5c;
+            transition: all 0.2s;
+            border: 4px solid white;
+            margin-top: 20px;
+        }
+        
+        .time-button:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 0 #b13e5c;
+        }
+        
+        .time-button:active {
+            transform: translateY(4px);
+            box-shadow: 0 4px 0 #b13e5c;
+        }
+        
         /* Video modal special */
         #videoModal {
             position: fixed;
@@ -728,6 +875,23 @@
             
             .instruction-box p {
                 font-size: 1rem;
+            }
+            
+            .time-circle {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .time-number {
+                font-size: 2.5rem;
+            }
+            
+            .time-stats {
+                gap: 5px;
+            }
+            
+            .time-stat-value {
+                font-size: 1.3rem;
             }
         }
     </style>
@@ -827,6 +991,42 @@
         </div>
     </div>
 
+    <!-- Time Capsule Modal -->
+    <div id="timeCapsuleModal" class="hidden">
+        <div class="time-content">
+            <div class="time-header">
+                <h2>our time together</h2>
+                <p>march 13, 2021 - march 13, 2026</p>
+            </div>
+            
+            <div class="time-circle">
+                <span class="time-number" id="totalDays">0</span>
+                <span class="time-label">days</span>
+            </div>
+            
+            <div class="time-stats">
+                <div class="time-stat">
+                    <div class="time-stat-value" id="totalYears">0</div>
+                    <div class="time-stat-label">years</div>
+                </div>
+                <div class="time-stat">
+                    <div class="time-stat-value" id="totalMonths">0</div>
+                    <div class="time-stat-label">months</div>
+                </div>
+                <div class="time-stat">
+                    <div class="time-stat-value" id="totalHours">0</div>
+                    <div class="time-stat-label">hours</div>
+                </div>
+            </div>
+            
+            <div class="time-message" id="timeMessage">
+                every moment with you has been a blessing
+            </div>
+            
+            <button class="time-button" onclick="showVideoAfterTime()">watch our memory 🎥</button>
+        </div>
+    </div>
+
     <!-- Video Surprise Modal (for Tops) -->
     <div id="videoModal" class="hidden">
         <div class="video-content">
@@ -870,6 +1070,7 @@
         
         const startModal = document.getElementById('startModal');
         const memoryModal = document.getElementById('memoryModal');
+        const timeCapsuleModal = document.getElementById('timeCapsuleModal');
         const videoModal = document.getElementById('videoModal');
         const winScreen = document.getElementById('winScreen');
         const surpriseVideo = document.getElementById('surpriseVideo');
@@ -881,6 +1082,13 @@
         const modalFeedback = document.getElementById('modalFeedback');
         const modalHint = document.getElementById('modalHint');
         const modalSubmit = document.getElementById('modalSubmit');
+        
+        // Time display elements
+        const totalDaysSpan = document.getElementById('totalDays');
+        const totalYearsSpan = document.getElementById('totalYears');
+        const totalMonthsSpan = document.getElementById('totalMonths');
+        const totalHoursSpan = document.getElementById('totalHours');
+        const timeMessage = document.getElementById('timeMessage');
         
         let gameActive = false;
         let currentMemoryIndex = 0;
@@ -898,6 +1106,41 @@
         
         // Store uploaded card image
         let cardImage = null;
+        
+        // ==================== TIME CALCULATION ====================
+        function calculateTimeTogether() {
+            const startDate = new Date(2021, 2, 13); // March 13, 2021 (month is 0-indexed, so 2 = March)
+            const endDate = new Date(2026, 2, 13);   // March 13, 2026
+            
+            const diffTime = endDate - startDate;
+            
+            // Calculate different units
+            const totalDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+            const totalHours = Math.floor(diffTime / (1000 * 60 * 60));
+            const totalMinutes = Math.floor(diffTime / (1000 * 60));
+            
+            const years = Math.floor(totalDays / 365);
+            const months = Math.floor((totalDays % 365) / 30);
+            const days = totalDays % 30;
+            
+            // Update display
+            totalDaysSpan.textContent = totalDays.toLocaleString();
+            totalYearsSpan.textContent = years;
+            totalMonthsSpan.textContent = Math.floor(totalDays / 30); // Approximate months
+            totalHoursSpan.textContent = totalHours.toLocaleString();
+            
+            // Sweet message based on the time
+            const messages = [
+                "every moment with you has been a blessing",
+                "5 years of love, laughter, and memories",
+                "from that first chat to forever",
+                "you are the answer to my prayers",
+                "1,826 days of growing together",
+                "and this is just the beginning..."
+            ];
+            
+            timeMessage.textContent = messages[Math.floor(Math.random() * messages.length)];
+        }
         
         // ==================== OUR MEMORIES ====================
         const memories = [
@@ -949,7 +1192,7 @@
                 options: ["tops360", "crown regency", "mactan", "bohol"],
                 correct: 0,
                 hint: "🎥 top of cebu... 360 view...",
-                memory: "december 2025 - our first trip to cebu! here's a special surprise...",
+                memory: "december 2025 - our first trip to cebu! before the video, let's see how long we've been together...",
                 media: null,
                 subtitle: "tops360",
                 isLast: true
@@ -1214,13 +1457,16 @@
                     
                     modalFeedback.textContent = '✨ correct! ✨';
                     modalFeedback.className = 'modal-feedback success';
-                    modalHint.innerHTML = 'now for your surprise... 🎁';
+                    modalHint.innerHTML = 'now, let\'s see how long we\'ve been together... 💕';
                     modalSubmit.disabled = true;
                     
                     setTimeout(() => {
                         memoryModal.classList.add('hidden');
-                        bgMusic.pause(); // Stop background music for video
-                        showVideoModal();
+                        bgMusic.pause(); // Stop background music
+                        
+                        // Calculate and show time capsule
+                        calculateTimeTogether();
+                        timeCapsuleModal.classList.remove('hidden');
                     }, 2000);
                 } else {
                     document.querySelectorAll('.modal-option').forEach((btn, i) => {
@@ -1283,8 +1529,9 @@
             }
         });
         
-        // ==================== VIDEO MODAL ====================
-        function showVideoModal() {
+        // ==================== TIME CAPSULE TO VIDEO ====================
+        function showVideoAfterTime() {
+            timeCapsuleModal.classList.add('hidden');
             videoModal.classList.remove('hidden');
             surpriseVideo.play();
         }
@@ -1304,6 +1551,7 @@
             
             startModal.classList.add('hidden');
             memoryModal.classList.add('hidden');
+            timeCapsuleModal.classList.add('hidden');
             videoModal.classList.add('hidden');
             winScreen.classList.remove('hidden');
             
@@ -1346,6 +1594,7 @@ forever yours,
             startModal.classList.add('hidden');
             winScreen.classList.add('hidden');
             memoryModal.classList.add('hidden');
+            timeCapsuleModal.classList.add('hidden');
             videoModal.classList.add('hidden');
             
             messageDisplay.textContent = '💕 catch 3 hearts for our first memory!';
@@ -1371,6 +1620,7 @@ forever yours,
             startModal.classList.remove('hidden');
             winScreen.classList.add('hidden');
             memoryModal.classList.add('hidden');
+            timeCapsuleModal.classList.add('hidden');
             videoModal.classList.add('hidden');
         }
         
