@@ -35,6 +35,7 @@
         #gameHeader {
             text-align: center;
             margin-bottom: 15px;
+            position: relative;
         }
         
         #gameHeader h1 {
@@ -44,10 +45,31 @@
             text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
         
+        #musicControl {
+            margin: 10px auto;
+        }
+        
+        #musicToggle {
+            background: #f8f0e7;
+            color: #b76e79;
+            border: 2px solid #b76e79;
+            padding: 10px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        #musicToggle:hover {
+            background: #b76e79;
+            color: white;
+        }
+        
         #countdownTimer {
             color: #4a4e69;
             font-size: 1.1em;
-            margin-top: 5px;
+            margin-top: 10px;
             padding: 8px;
             background: #f8f0e7;
             border-radius: 50px;
@@ -94,7 +116,35 @@
             width: 100%;
             max-width: 760px;
             height: auto;
-            touch-action: none; /* Prevents page scrolling when touching canvas */
+            touch-action: none;
+        }
+        
+        #touchControls {
+            display: none;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+            padding: 10px;
+            background: #f8f0e7;
+            border-radius: 10px;
+        }
+        
+        .touch-btn {
+            display: inline-block;
+            padding: 15px;
+            font-size: 1.3em;
+            background: #b76e79;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.1s;
+            width: 100%;
+        }
+        
+        .touch-btn:active {
+            transform: scale(0.95);
         }
         
         #controls {
@@ -110,7 +160,7 @@
             color: #4a4e69;
         }
         
-        .key, .touch-btn {
+        .key {
             display: inline-block;
             padding: 5px 15px;
             background: white;
@@ -119,36 +169,6 @@
             margin: 0 5px;
             font-weight: bold;
             color: #b76e79;
-        }
-        
-        .touch-btn {
-            padding: 12px 20px;
-            font-size: 1.2em;
-            background: #b76e79;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: transform 0.1s;
-        }
-        
-        .touch-btn:active {
-            transform: scale(0.95);
-        }
-        
-        #touchControls {
-            display: none;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-top: 15px;
-            padding: 10px;
-            background: #f8f0e7;
-            border-radius: 10px;
-        }
-        
-        #touchControls .touch-btn {
-            width: 100%;
         }
         
         #message {
@@ -211,20 +231,8 @@
             white-space: pre-line;
         }
         
-        .heart {
-            color: #ff6b6b;
-            font-size: 1.5em;
-            animation: pulse 1s infinite;
-        }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-            100% { transform: scale(1); }
-        }
-        
         .hidden {
-            display: none;
+            display: none !important;
         }
         
         /* Question Modal Styles */
@@ -272,23 +280,6 @@
             font-size: 1.8em;
         }
         
-        .modal-content p {
-            color: #4a4e69;
-            margin-bottom: 20px;
-            font-size: 1.1em;
-            line-height: 1.6;
-        }
-        
-        .question-text {
-            background: #f8f0e7;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            font-size: 1.2em;
-            color: #333;
-            font-weight: bold;
-        }
-        
         .photo-memory {
             width: 100%;
             height: 200px;
@@ -319,6 +310,16 @@
             background: #f8f0e7;
         }
         
+        .question-text {
+            background: #f8f0e7;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-size: 1.2em;
+            color: #333;
+            font-weight: bold;
+        }
+        
         .options {
             display: flex;
             flex-direction: column;
@@ -341,7 +342,6 @@
         .option-btn:hover {
             background: #b76e79;
             color: white;
-            transform: scale(1.02);
         }
         
         .option-btn.selected {
@@ -403,23 +403,6 @@
             font-size: 0.9em;
         }
         
-        /* Music control */
-        #musicControl {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: white;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-            z-index: 100;
-        }
-        
         /* Mobile styles */
         @media (max-width: 600px) {
             #touchControls {
@@ -429,19 +412,6 @@
             .key {
                 display: none;
             }
-            
-            #stats {
-                font-size: 0.9em;
-            }
-            
-            .modal-content {
-                padding: 20px 15px;
-            }
-            
-            .option-btn {
-                padding: 12px;
-                font-size: 1em;
-            }
         }
     </style>
 </head>
@@ -449,6 +419,12 @@
     <div id="gameContainer">
         <div id="gameHeader">
             <h1>❤️ 4 Years of Us ❤️</h1>
+            
+            <!-- Music Control Button -->
+            <div id="musicControl">
+                <button id="musicToggle">🎵 Play Music</button>
+            </div>
+            
             <div id="countdownTimer">Together for: <span id="countdownDisplay">Calculating...</span></div>
         </div>
         
@@ -460,6 +436,7 @@
         
         <canvas id="gameCanvas" width="760" height="400"></canvas>
         
+        <!-- Touch Controls for Mobile -->
         <div id="touchControls">
             <div></div>
             <button class="touch-btn" id="touchUp">⬆️</button>
@@ -506,10 +483,10 @@
         </div>
     </div>
 
-    <!-- Hidden audio element for background music -->
-    <audio id="bgMusic" loop>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-        <!-- Replace with your own romantic song URL -->
+    <!-- Audio element for background music -->
+    <audio id="bgMusic" loop preload="auto">
+        <source src="bg-music.mp3" type="audio/mpeg">
+        Your browser doesn't support audio. I love you! ❤️
     </audio>
 
     <script>
@@ -518,17 +495,27 @@
         
         // Music control
         const bgMusic = document.getElementById('bgMusic');
+        const musicToggle = document.getElementById('musicToggle');
         let musicPlaying = false;
         
-        // Try to autoplay music (may be blocked by browsers)
-        document.addEventListener('click', function initMusic() {
-            if (!musicPlaying) {
+        musicToggle.addEventListener('click', () => {
+            if (musicPlaying) {
+                bgMusic.pause();
+                musicToggle.textContent = '🎵 Play Music';
+                musicPlaying = false;
+            } else {
                 bgMusic.play().then(() => {
+                    musicToggle.textContent = '🔊 Pause Music';
                     musicPlaying = true;
-                }).catch(e => console.log("Audio autoplay prevented"));
+                }).catch(e => {
+                    console.log("Playback failed - user interaction needed");
+                    alert("Click anywhere on the page first to enable music!");
+                });
             }
-            document.removeEventListener('click', initMusic);
-        }, { once: true });
+        });
+        
+        // Set volume
+        bgMusic.volume = 0.3;
         
         // Game state
         let gameStarted = false;
@@ -542,10 +529,9 @@
         
         // Anniversary countdown
         function updateCountdown() {
-            const anniversary = new Date(new Date().getFullYear(), 2, 13); // March 13 (month is 0-indexed)
             const today = new Date();
+            const anniversary = new Date(today.getFullYear(), 2, 13); // March 13
             
-            // If anniversary has passed this year, use next year
             if (today > anniversary) {
                 anniversary.setFullYear(anniversary.getFullYear() + 1);
             }
@@ -555,6 +541,8 @@
             
             if (diffDays === 0) {
                 document.getElementById('countdownDisplay').textContent = "TODAY! ❤️";
+            } else if (diffDays === 365) {
+                document.getElementById('countdownDisplay').textContent = "ONE YEAR! 🎉";
             } else {
                 document.getElementById('countdownDisplay').textContent = `${diffDays} days until our anniversary`;
             }
@@ -586,7 +574,7 @@
         // Hearts
         let hearts = [];
         
-        // PERSONALIZE THESE QUESTIONS AND ANSWERS WITH YOUR PHOTOS!
+        // !!! PERSONALIZE THESE WITH YOUR REAL MEMORIES AND PHOTOS !!!
         const levelQuestions = {
             1: {
                 year: "Year 1: The Beginning",
@@ -597,10 +585,10 @@
                     "The pizza place near the park",
                     "The sushi spot you loved"
                 ],
-                correct: 0,
+                correct: 0, // Change this to the correct answer index (0, 1, 2, or 3)
                 memory: "I still remember how your eyes lit up when you tried their caramel latte. ☕",
                 hint: "Think about where we had our first coffee together...",
-                photo: "" // Add photo URL here like "firstdate.jpg"
+                photo: "photo1.jpg" // Your first date photo
             },
             2: {
                 year: "Year 2: First Adventures",
@@ -611,10 +599,10 @@
                     "Mountain cabin retreat",
                     "That cute bed & breakfast"
                 ],
-                correct: 1,
+                correct: 1, // Change this!
                 memory: "We got lost trying to find it, but getting lost with you was the best adventure.",
                 hint: "Remember the sound of waves and the sunset walks?",
-                photo: "" // Add photo URL here
+                photo: "photo2.jpg" // Your first trip photo
             },
             3: {
                 year: "Year 3: Growing Together",
@@ -625,10 +613,10 @@
                     "The IKEA dresser",
                     "The kitchen table"
                 ],
-                correct: 2,
+                correct: 2, // Change this!
                 memory: "We argued over the instructions, but we figured it out together. Just like everything else.",
                 hint: "It came in a flat box and had way too many screws...",
-                photo: "" // Add photo URL here
+                photo: "photo3.jpg" // Your moving in / furniture photo
             },
             4: {
                 year: "Year 4: Stronger Than Ever",
@@ -639,19 +627,18 @@
                     "How kind you are to everyone",
                     "All of the above"
                 ],
-                correct: 3,
+                correct: 3, // This one is probably "All of the above" ❤️
                 memory: "It's impossible to pick just one thing. I love EVERYTHING about you.",
                 hint: "The answer is always 'all of the above' when it comes to you ❤️",
-                photo: "" // Add photo URL here
+                photo: "photo4.jpg" // Your recent favorite photo
             }
         };
         
-        // Level data with photo memories
+        // Level data
         const levelData = {
             1: {
                 name: "Year 1: The Beginning",
                 message: "March 13, 2022 - Our first date. I knew from that moment you were special.",
-                photo: "", // Add photo URL
                 platforms: [
                     { x: 0, y: 350, width: 200, height: 20 },
                     { x: 250, y: 300, width: 150, height: 20 },
@@ -667,7 +654,6 @@
             2: {
                 name: "Year 2: First Adventures",
                 message: "Summer 2023 - Our first trip together. Getting lost with you was the best adventure.",
-                photo: "", // Add photo URL
                 platforms: [
                     { x: 0, y: 350, width: 150, height: 20 },
                     { x: 200, y: 300, width: 100, height: 20 },
@@ -684,7 +670,6 @@
             3: {
                 name: "Year 3: Growing Together",
                 message: "January 2024 - Moving in together. Building a home and a life with you is my greatest joy.",
-                photo: "", // Add photo URL
                 platforms: [
                     { x: 0, y: 350, width: 300, height: 20 },
                     { x: 350, y: 280, width: 150, height: 20 },
@@ -700,7 +685,6 @@
             4: {
                 name: "Year 4: Stronger Than Ever",
                 message: "Today - 4 years, 1,461 days, and countless beautiful moments. Here's to forever with you.",
-                photo: "", // Add photo URL
                 platforms: [
                     { x: 0, y: 350, width: 200, height: 20 },
                     { x: 250, y: 300, width: 100, height: 20 },
@@ -721,23 +705,38 @@
         let leftPressed = false;
         let rightPressed = false;
         let upPressed = false;
-        let downPressed = false; // For mobile
         
         // Keyboard controls
         document.addEventListener('keydown', (e) => {
             if (!gameStarted || gameWon || showingQuestion) return;
             
-            if (e.key === 'ArrowLeft') leftPressed = true;
-            if (e.key === 'ArrowRight') rightPressed = true;
-            if (e.key === 'ArrowUp') upPressed = true;
-            e.preventDefault(); // Prevent page scrolling
+            if (e.key === 'ArrowLeft') {
+                leftPressed = true;
+                e.preventDefault();
+            }
+            if (e.key === 'ArrowRight') {
+                rightPressed = true;
+                e.preventDefault();
+            }
+            if (e.key === 'ArrowUp') {
+                upPressed = true;
+                e.preventDefault();
+            }
         });
         
         document.addEventListener('keyup', (e) => {
-            if (e.key === 'ArrowLeft') leftPressed = false;
-            if (e.key === 'ArrowRight') rightPressed = false;
-            if (e.key === 'ArrowUp') upPressed = false;
-            e.preventDefault();
+            if (e.key === 'ArrowLeft') {
+                leftPressed = false;
+                e.preventDefault();
+            }
+            if (e.key === 'ArrowRight') {
+                rightPressed = false;
+                e.preventDefault();
+            }
+            if (e.key === 'ArrowUp') {
+                upPressed = false;
+                e.preventDefault();
+            }
         });
         
         // Touch controls
@@ -802,7 +801,7 @@
             
             // Show photo if available
             if (question.photo) {
-                photoMemory.innerHTML = `<img src="${question.photo}" alt="Memory">`;
+                photoMemory.innerHTML = `<img src="${question.photo}" alt="Memory" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'photo-placeholder\'>📸 Photo not found</div>';">`;
             } else {
                 photoMemory.innerHTML = '<div class="photo-placeholder">📸 Add your photo here</div>';
             }
@@ -919,8 +918,6 @@
                         
                         document.getElementById('message').textContent = `💕 You found a heart from ${levelData[currentLevel].name}! 💕`;
                         
-                        // Play a little sound effect (if we had one)
-                        
                         // Check if level complete
                         if (heartsCollected === totalHeartsInLevel) {
                             document.getElementById('message').textContent = `✨ All hearts collected! Time to answer the question! ✨`;
@@ -942,8 +939,8 @@
             document.getElementById('startScreen').classList.add('hidden');
             document.getElementById('winScreen').classList.remove('hidden');
             
-            // PERSONALIZE THIS FINAL MESSAGE!
-            const finalMessage = `My dearest [Her Name],
+            // !!! PERSONALIZE THIS FINAL MESSAGE !!!
+            const finalMessage = `My dearest [HER NAME],
 
 You did it! You collected all our memories AND answered every question perfectly.
 
@@ -961,13 +958,11 @@ You are my everything, my best friend, my love.
 Happy 4th Anniversary!
 
 Forever yours,
-[Your Name]
+[YOUR NAME]
 
 March 13, 2026`;
             
             document.getElementById('winMessage').textContent = finalMessage;
-            
-            // Play a special victory sound or music
         }
         
         function update() {
@@ -1049,19 +1044,17 @@ March 13, 2026`;
             ctx.arc(570, 80, 20, 0, Math.PI * 2);
             ctx.fill();
             
-            // Draw floating hearts (decorative)
-            ctx.fillStyle = 'rgba(255, 107, 107, 0.3)';
-            ctx.beginPath();
-            ctx.moveTo(200, 150);
-            ctx.bezierCurveTo(190, 140, 180, 160, 200, 170);
-            ctx.bezierCurveTo(220, 160, 210, 140, 200, 150);
-            ctx.fill();
-            
-            ctx.beginPath();
-            ctx.moveTo(500, 300);
-            ctx.bezierCurveTo(490, 290, 480, 310, 500, 320);
-            ctx.bezierCurveTo(520, 310, 510, 290, 500, 300);
-            ctx.fill();
+            // Draw floating hearts
+            ctx.fillStyle = 'rgba(255, 107, 107, 0.2)';
+            for (let i = 0; i < 3; i++) {
+                let x = 150 + i * 200;
+                let y = 100 + i * 50;
+                ctx.beginPath();
+                ctx.moveTo(x, y);
+                ctx.bezierCurveTo(x-10, y-10, x-20, y+10, x, y+20);
+                ctx.bezierCurveTo(x+20, y+10, x+10, y-10, x, y);
+                ctx.fill();
+            }
             
             // Draw platforms
             platforms.forEach(platform => {
@@ -1083,20 +1076,15 @@ March 13, 2026`;
                     ctx.bezierCurveTo(heart.x + 25, heart.y + 10, heart.x + 20, heart.y, heart.x + 10, heart.y + 5);
                     ctx.fill();
                     
-                    ctx.fillStyle = '#ff8a8a';
+                    // Sparkle
+                    ctx.fillStyle = '#fff';
                     ctx.beginPath();
                     ctx.arc(heart.x + 6, heart.y + 8, 2, 0, Math.PI * 2);
-                    ctx.fill();
-                    
-                    // Add sparkle
-                    ctx.fillStyle = 'white';
-                    ctx.beginPath();
-                    ctx.arc(heart.x + 13, heart.y + 5, 1.5, 0, Math.PI * 2);
                     ctx.fill();
                 }
             });
             
-            // Draw player
+            // Draw player (two characters)
             ctx.fillStyle = '#4a4e69';
             ctx.fillRect(player.x, player.y, 12, player.height);
             ctx.fillStyle = '#f2e9e4';
@@ -1111,7 +1099,7 @@ March 13, 2026`;
             ctx.arc(player.x + 24, player.y - 5, 8, 0, Math.PI * 2);
             ctx.fill();
             
-            // Connection heart between them
+            // Connection heart
             ctx.fillStyle = '#ff6b6b';
             ctx.font = '20px Arial';
             ctx.fillText('❤️', player.x + 9, player.y - 15);
@@ -1120,11 +1108,6 @@ March 13, 2026`;
             ctx.fillStyle = '#4a4e69';
             ctx.font = 'bold 14px Arial';
             ctx.fillText(levelData[currentLevel].name, 10, 25);
-            
-            // Year label
-            ctx.fillStyle = '#b76e79';
-            ctx.font = 'bold 16px Arial';
-            ctx.fillText(`Year ${currentLevel}`, canvas.width - 80, 30);
         }
         
         function gameLoop() {
@@ -1174,7 +1157,7 @@ March 13, 2026`;
         // Set up submit button
         document.getElementById('submitAnswer').addEventListener('click', checkAnswer);
         
-        // Handle window resize for mobile
+        // Handle window resize
         window.addEventListener('resize', () => {
             if (gameStarted && !gameWon) {
                 if (window.innerWidth <= 600) {
