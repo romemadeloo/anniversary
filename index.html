@@ -3,34 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Catch Our Love - 4th Anniversary</title>
+    <title>Our Love Story 💖 5 Years</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
         }
         
         body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #f8e0f0;
+            background-image: radial-gradient(#ffd9e8 2px, transparent 2px);
+            background-size: 30px 30px;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            padding: 10px;
+            padding: 15px;
+            font-family: 'Quicksand', 'Arial', sans-serif;
         }
         
         #gameContainer {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 30px;
-            padding: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            max-width: 500px;
+            background: rgba(255, 245, 250, 0.95);
+            border-radius: 50px;
+            padding: 25px;
+            box-shadow: 0 20px 40px rgba(255, 150, 180, 0.3), 0 0 0 3px #ffe2f0, 0 0 0 6px #ffb3c6;
+            max-width: 600px;
             width: 100%;
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(3px);
         }
         
         #gameHeader {
@@ -40,534 +41,650 @@
         }
         
         #gameHeader h1 {
-            color: #d44e5e;
-            font-size: clamp(1.8em, 5vw, 2.2em);
-            margin-bottom: 5px;
-            text-shadow: 2px 2px 4px rgba(255,255,255,0.5);
-            font-family: 'Georgia', serif;
+            color: #d44e7a;
+            font-size: clamp(1.8em, 6vw, 2.5em);
+            margin-bottom: 10px;
+            font-family: 'Pacifico', cursive;
+            text-shadow: 3px 3px 0 #ffe2f0;
+            letter-spacing: 2px;
         }
         
-        #anniversaryBadge {
-            background: linear-gradient(145deg, #fff, #f8e0e0);
-            color: #d44e5e;
-            padding: 8px 25px;
-            border-radius: 50px;
-            display: inline-block;
-            font-weight: bold;
-            margin: 10px 0;
-            box-shadow: 0 4px 15px rgba(212, 78, 94, 0.2);
-            border: 1px solid rgba(212, 78, 94, 0.3);
+        .floating-hearts {
+            position: relative;
+            height: 30px;
+        }
+        
+        .floating-hearts span {
+            position: absolute;
+            font-size: 20px;
+            animation: float 3s infinite;
+        }
+        
+        .floating-hearts span:nth-child(1) { left: 20%; animation-delay: 0s; }
+        .floating-hearts span:nth-child(2) { left: 50%; animation-delay: 0.5s; }
+        .floating-hearts span:nth-child(3) { left: 80%; animation-delay: 1s; }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
         
         #musicControl {
-            margin: 10px auto;
+            margin: 15px 0;
         }
         
         #musicToggle {
             background: white;
-            color: #d44e5e;
-            border: 2px solid #d44e5e;
-            padding: 8px 25px;
-            border-radius: 50px;
+            color: #d44e7a;
+            border: 3px solid #ffb3c6;
+            padding: 12px 30px;
+            border-radius: 60px;
             cursor: pointer;
-            font-size: 1em;
+            font-size: 1rem;
             font-weight: bold;
-            transition: all 0.3s;
-            box-shadow: 0 2px 10px rgba(212, 78, 94, 0.2);
+            box-shadow: 0 5px 0 #ff9eb5;
+            transition: all 0.2s;
+            font-family: 'Quicksand', sans-serif;
         }
         
         #musicToggle:hover {
-            background: #d44e5e;
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(212, 78, 94, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 0 #ff9eb5;
+        }
+        
+        #musicToggle:active {
+            transform: translateY(3px);
+            box-shadow: 0 2px 0 #ff9eb5;
         }
         
         #stats {
             display: flex;
-            justify-content: space-around;
+            justify-content: center;
+            gap: 30px;
             margin: 20px 0;
             padding: 15px;
-            background: linear-gradient(145deg, #fff, #fce4e4);
-            border-radius: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            border: 1px solid rgba(212, 78, 94, 0.2);
+            background: white;
+            border-radius: 80px;
+            border: 3px solid #ffb3c6;
+            box-shadow: 0 5px 0 #ff9eb5;
         }
         
         .stat-box {
             text-align: center;
-            position: relative;
         }
         
         .stat-label {
-            color: #888;
-            font-size: 0.9em;
+            color: #b3547c;
+            font-size: 0.9rem;
             margin-bottom: 5px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            font-weight: bold;
         }
         
         .stat-value {
-            color: #d44e5e;
-            font-size: 2.2em;
+            color: #d44e7a;
+            font-size: 2rem;
             font-weight: bold;
-            text-shadow: 2px 2px 4px rgba(212, 78, 94, 0.2);
         }
         
         #gameArea {
             position: relative;
             width: 100%;
-            height: 500px;
-            background: linear-gradient(180deg, #ffd1dc 0%, #b5e6e6 100%);
-            border-radius: 30px;
+            height: 400px;
+            background: linear-gradient(180deg, #ffd9e8 0%, #ffb3c6 100%);
+            border-radius: 40px;
             overflow: hidden;
-            border: 3px solid white;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border: 4px solid white;
+            box-shadow: 0 10px 0 #ff9eb5, 0 10px 20px rgba(255, 100, 150, 0.3);
             touch-action: none;
+            margin: 20px 0;
         }
         
-        /* Decorative elements */
-        .tree {
+        /* Decorative clouds */
+        .cloud {
             position: absolute;
-            bottom: 0;
+            background: white;
+            border-radius: 60px;
+            opacity: 0.7;
+            box-shadow: 0 5px 0 #ffe2f0;
+        }
+        
+        .cloud1 {
             width: 80px;
-            height: 120px;
-            z-index: 5;
-        }
-        
-        .tree-left {
+            height: 30px;
+            top: 20px;
             left: 10px;
         }
         
-        .tree-right {
-            right: 10px;
+        .cloud2 {
+            width: 100px;
+            height: 35px;
+            top: 60px;
+            right: 15px;
         }
         
-        .tree-trunk {
-            position: absolute;
-            bottom: 0;
-            left: 30px;
-            width: 20px;
-            height: 80px;
-            background: linear-gradient(90deg, #8B4513, #A0522D);
-            border-radius: 5px 5px 0 0;
-            box-shadow: 2px 0 5px rgba(0,0,0,0.2);
+        .cloud3 {
+            width: 70px;
+            height: 25px;
+            top: 120px;
+            left: 50px;
         }
         
-        .tree-leaves {
-            position: absolute;
-            bottom: 60px;
-            left: 10px;
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(145deg, #ffb7c5, #ff9eb2);
-            border-radius: 50%;
-            box-shadow: 0 5px 15px rgba(255, 158, 178, 0.5);
-        }
-        
-        .tree-leaves::before, .tree-leaves::after {
+        .cloud::before, .cloud::after {
             content: '';
             position: absolute;
-            background: inherit;
+            background: white;
             border-radius: 50%;
         }
         
-        .tree-leaves::before {
+        .cloud::before {
             width: 40px;
             height: 40px;
-            top: -20px;
+            top: -15px;
             left: 10px;
         }
         
-        .tree-leaves::after {
-            width: 35px;
-            height: 35px;
-            top: -10px;
-            right: -10px;
+        .cloud::after {
+            width: 50px;
+            height: 50px;
+            top: -20px;
+            left: 30px;
         }
         
-        /* Cherry blossoms */
-        .blossom {
+        /* Cute floating elements */
+        .floating-item {
             position: absolute;
-            width: 8px;
-            height: 8px;
-            background: #ffa5b9;
-            border-radius: 50%;
-            animation: fallBlossom linear infinite;
-            z-index: 10;
+            font-size: 30px;
+            animation: bob 3s infinite;
         }
         
-        @keyframes fallBlossom {
-            from {
-                transform: translateY(-20px) rotate(0deg);
-                opacity: 0.8;
-            }
-            to {
-                transform: translateY(520px) rotate(360deg);
-                opacity: 0;
-            }
+        @keyframes bob {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(5deg); }
         }
         
-        /* Animals */
-        .animal {
-            position: absolute;
-            font-size: 25px;
-            z-index: 15;
-            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.2));
-            animation: runAnimation linear infinite;
-        }
+        .item1 { bottom: 80px; left: 20px; animation-delay: 0s; }
+        .item2 { bottom: 120px; right: 30px; animation-delay: 0.5s; }
+        .item3 { top: 80px; left: 50%; animation-delay: 1s; }
         
-        @keyframes runAnimation {
-            from {
-                transform: translateX(-50px);
-            }
-            to {
-                transform: translateX(550px);
-            }
-        }
-        
-        .dog {
-            bottom: 10px;
-        }
-        
-        .cat {
-            bottom: 45px;
-        }
-        
-        /* Floating lanterns */
-        .lantern {
-            position: absolute;
-            font-size: 20px;
-            z-index: 8;
-            opacity: 0.6;
-            animation: floatLantern 8s ease-in-out infinite;
-        }
-        
-        @keyframes floatLantern {
-            0%, 100% {
-                transform: translateY(0) rotate(0deg);
-            }
-            25% {
-                transform: translateY(-20px) rotate(5deg);
-            }
-            75% {
-                transform: translateY(20px) rotate(-5deg);
-            }
-        }
-        
-        /* Ground */
-        .ground {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            height: 20px;
-            background: linear-gradient(180deg, #90be6d, #6a994e);
-            border-radius: 10px 10px 0 0;
-            z-index: 20;
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
-        }
-        
-        .ground::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 3px;
-            top: 0;
-            background: rgba(255,255,255,0.3);
-        }
-        
+        /* Cute basket */
         #catcher {
             position: absolute;
-            bottom: 25px;
-            width: 100px;
-            height: 60px;
-            background: #d44e5e;
-            border-radius: 50px 50px 20px 20px;
+            bottom: 20px;
+            width: 90px;
+            height: 50px;
             transform: translateX(-50%);
             left: 50%;
-            transition: left 0.1s ease;
-            box-shadow: 0 8px 0 #a13e4a, 0 10px 15px rgba(0,0,0,0.2);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 35px;
-            z-index: 30;
-            border: 2px solid #ffe6e6;
+            transition: left 0.08s linear;
+            z-index: 50;
+            filter: drop-shadow(0 8px 5px rgba(0,0,0,0.1));
         }
         
-        #catcher::before {
-            content: "👫";
-            filter: drop-shadow(0 2px 2px rgba(0,0,0,0.3));
-        }
-        
-        #catcher::after {
-            content: '';
+        .basket-body {
             position: absolute;
-            width: 120%;
-            height: 10px;
-            background: rgba(0,0,0,0.1);
-            border-radius: 50%;
-            bottom: -10px;
-            left: -10%;
-            filter: blur(3px);
+            bottom: 0;
+            width: 90px;
+            height: 35px;
+            background: #ffb3c6;
+            border-radius: 0 0 30px 30px;
+            border: 4px solid white;
+            box-shadow: 0 5px 0 #ff8aa8;
         }
         
+        .basket-handle {
+            position: absolute;
+            bottom: 25px;
+            left: 25px;
+            width: 40px;
+            height: 20px;
+            border: 4px solid white;
+            border-bottom: none;
+            border-radius: 40px 40px 0 0;
+            box-shadow: 0 -3px 0 #ff8aa8;
+        }
+        
+        .basket-heart {
+            position: absolute;
+            bottom: 8px;
+            left: 35px;
+            font-size: 20px;
+            animation: heartbeat 1s infinite;
+        }
+        
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+        
+        /* Hearts falling */
         .heart {
             position: absolute;
-            font-size: 35px;
-            cursor: pointer;
+            font-size: 30px;
             user-select: none;
-            animation: float 3s infinite ease-in-out;
-            filter: drop-shadow(0 5px 10px rgba(212, 78, 94, 0.4));
-            z-index: 25;
-            text-shadow: 0 2px 5px white;
+            cursor: pointer;
+            filter: drop-shadow(0 5px 5px rgba(255, 100, 150, 0.4));
+            animation: wiggle 2s infinite;
+            z-index: 40;
         }
         
-        @keyframes float {
-            0%, 100% { 
-                transform: translateY(0) rotate(0deg); 
-            }
-            25% { 
-                transform: translateY(-8px) rotate(5deg); 
-            }
-            75% { 
-                transform: translateY(8px) rotate(-5deg); 
-            }
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(5deg); }
+            75% { transform: rotate(-5deg); }
         }
         
-        .heart.special {
-            font-size: 45px;
-            filter: drop-shadow(0 0 20px gold);
-            animation: specialFloat 2s infinite ease-in-out;
-        }
-        
-        @keyframes specialFloat {
-            0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-15px) scale(1.2); }
-        }
-        
+        /* Message box */
         #message {
             text-align: center;
-            margin: 15px 0;
+            margin: 20px 0;
             padding: 15px;
-            font-size: 1.2em;
-            color: #d44e5e;
+            background: white;
+            border-radius: 80px;
+            border: 3px solid #ffb3c6;
+            color: #d44e7a;
             font-weight: bold;
-            min-height: 50px;
-            background: linear-gradient(145deg, #fff, #fce4e4);
-            border-radius: 50px;
-            border: 1px solid rgba(212, 78, 94, 0.3);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            font-size: 1.1rem;
+            box-shadow: 0 5px 0 #ff9eb5;
         }
         
-        #startScreen, #memoryScreen, #winScreen {
+        /* Start screen */
+        #startScreen {
             text-align: center;
             padding: 30px 20px;
         }
         
-        #startScreen h2, #memoryScreen h2, #winScreen h2 {
-            color: #d44e5e;
-            font-size: 2em;
+        #startScreen h2 {
+            color: #d44e7a;
+            font-size: 2rem;
             margin-bottom: 20px;
-            font-family: 'Georgia', serif;
+            font-family: 'Pacifico', cursive;
         }
         
-        #startScreen p, #memoryScreen p, #winScreen p {
-            color: #666;
-            margin-bottom: 15px;
+        #startScreen p {
+            color: #b3547c;
+            margin: 15px 0;
+            font-size: 1.1rem;
             line-height: 1.6;
         }
         
+        .instruction-box {
+            background: #ffe2f0;
+            border-radius: 30px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 3px dashed #ffb3c6;
+        }
+        
+        .instruction-box p {
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
         button {
-            background: linear-gradient(145deg, #d44e5e, #b13e4c);
+            background: #ffb3c6;
             color: white;
             border: none;
             padding: 15px 40px;
-            font-size: 1.2em;
-            border-radius: 50px;
-            cursor: pointer;
+            border-radius: 60px;
+            font-size: 1.3rem;
             font-weight: bold;
-            transition: all 0.3s;
+            cursor: pointer;
+            box-shadow: 0 8px 0 #ff8aa8;
+            transition: all 0.2s;
+            border: 3px solid white;
             margin: 10px;
-            box-shadow: 0 8px 0 #7a2c36, 0 10px 20px rgba(212, 78, 94, 0.4);
-            border: 1px solid #ffb6b6;
         }
         
         button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 11px 0 #7a2c36, 0 15px 25px rgba(212, 78, 94, 0.5);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 0 #ff8aa8;
         }
         
         button:active {
-            transform: translateY(5px);
-            box-shadow: 0 3px 0 #7a2c36, 0 5px 15px rgba(212, 78, 94, 0.4);
+            transform: translateY(4px);
+            box-shadow: 0 4px 0 #ff8aa8;
         }
         
         .hidden {
             display: none !important;
         }
         
-        #memoryContent {
-            background: linear-gradient(145deg, #fff, #fce4e4);
-            border-radius: 20px;
-            padding: 25px;
-            margin: 20px 0;
-            border: 2px solid white;
-            box-shadow: 0 10px 30px rgba(212, 78, 94, 0.2);
+        /* Modal styles */
+        #memoryModal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 200, 220, 0.9);
+            backdrop-filter: blur(5px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
         }
         
-        #memoryPhoto {
+        .modal-content {
+            background: white;
+            border-radius: 60px;
+            padding: 30px;
+            max-width: 450px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(255, 100, 150, 0.3), 0 0 0 4px #ffb3c6, 0 0 0 8px #ffe2f0;
+            animation: popIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        
+        @keyframes popIn {
+            from {
+                transform: scale(0.5) translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1) translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .modal-header {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .modal-header h2 {
+            color: #d44e7a;
+            font-size: 2rem;
+            font-family: 'Pacifico', cursive;
+            margin: 0;
+            text-shadow: 2px 2px 0 #ffe2f0;
+        }
+        
+        .modal-header h3 {
+            color: #b3547c;
+            font-size: 1rem;
+            margin-top: 5px;
+        }
+        
+        .modal-media {
             width: 100%;
             height: 200px;
-            background: linear-gradient(145deg, #ffe6e6, #ffd1d1);
-            border-radius: 15px;
-            margin-bottom: 20px;
+            background: #ffe2f0;
+            border-radius: 40px;
+            margin: 20px 0;
             overflow: hidden;
+            border: 4px solid #ffb3c6;
+            box-shadow: 0 5px 0 #ff9eb5;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 3px dashed #d44e5e;
-            box-shadow: inset 0 0 20px rgba(212, 78, 94, 0.1);
         }
         
-        #memoryPhoto img {
+        .modal-media img, .modal-media video {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
         
-        #memoryQuestion {
-            font-size: 1.3em;
-            color: #333;
-            margin-bottom: 20px;
-            font-weight: bold;
-            line-height: 1.5;
+        /* Upload area */
+        .upload-area {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            cursor: pointer;
+            background: #ffe2f0;
         }
         
-        #memoryOptions {
+        .upload-icon {
+            font-size: 40px;
+        }
+        
+        .upload-text {
+            color: #d44e7a;
+            font-size: 0.9rem;
+        }
+        
+        .upload-input {
+            display: none;
+        }
+        
+        .modal-question {
+            background: #ffe2f0;
+            padding: 20px;
+            border-radius: 40px;
+            margin: 20px 0;
+            font-size: 1.3rem;
+            color: #d44e7a;
+            font-weight: bold;
+            border: 3px solid white;
+        }
+        
+        .modal-options {
             display: flex;
             flex-direction: column;
             gap: 12px;
-            margin-bottom: 20px;
-        }
-        
-        .memory-option {
-            background: white;
-            color: #333;
-            border: 2px solid #d44e5e;
-            padding: 15px;
-            border-radius: 15px;
-            font-size: 1.1em;
-            cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
-        
-        .memory-option:hover {
-            background: #d44e5e;
-            color: white;
-            transform: translateX(5px);
-            box-shadow: 0 5px 15px rgba(212, 78, 94, 0.3);
-        }
-        
-        .memory-option.selected {
-            background: #d44e5e;
-            color: white;
-            border-color: #a13e4a;
-        }
-        
-        .memory-option.correct {
-            background: #4CAF50;
-            border-color: #45a049;
-            color: white;
-        }
-        
-        .memory-option.wrong {
-            background: #f44336;
-            border-color: #da190b;
-            color: white;
-        }
-        
-        #memoryFeedback {
-            margin: 15px 0;
-            font-size: 1.2em;
-            min-height: 30px;
-            font-weight: bold;
-        }
-        
-        .success { color: #4CAF50; }
-        .error { color: #f44336; }
-        
-        #memoryHint {
-            color: #888;
-            font-style: italic;
-            margin-top: 10px;
-            font-size: 0.95em;
-        }
-        
-        #winMessage {
-            font-size: 1.3em;
-            color: #d44e5e;
             margin: 20px 0;
-            padding: 25px;
-            background: linear-gradient(145deg, #fff, #fce4e4);
-            border-radius: 20px;
-            white-space: pre-line;
-            border: 2px solid white;
-            box-shadow: 0 10px 30px rgba(212, 78, 94, 0.2);
-            line-height: 1.8;
+        }
+        
+        .modal-option {
+            background: #f8f0f5;
+            color: #b3547c;
+            border: 3px solid #ffb3c6;
+            padding: 15px;
+            border-radius: 60px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 4px 0 #ff9eb5;
+        }
+        
+        .modal-option:hover {
+            background: #ffb3c6;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 0 #ff8aa8;
+        }
+        
+        .modal-option.selected {
+            background: #ffb3c6;
+            color: white;
+            border-color: white;
+            transform: scale(1.02);
+        }
+        
+        .modal-option.correct {
+            background: #a7e0a7;
+            color: white;
+            border-color: white;
+        }
+        
+        .modal-option.wrong {
+            background: #ffa7a7;
+            color: white;
+            border-color: white;
+        }
+        
+        .modal-feedback {
+            margin: 15px 0;
+            font-size: 1.2rem;
+            font-weight: bold;
+            min-height: 30px;
+        }
+        
+        .modal-feedback.success { color: #6f9e6f; }
+        .modal-feedback.error { color: #d44e7a; }
+        
+        .modal-hint {
+            background: #ffe2f0;
+            padding: 15px;
+            border-radius: 40px;
+            margin: 15px 0;
+            font-style: italic;
+            color: #b3547c;
+            border-left: 5px solid #ffb3c6;
+        }
+        
+        .modal-button {
+            background: #ffb3c6;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 60px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 5px 0 #ff8aa8;
+            transition: all 0.2s;
+            border: 3px solid white;
+            margin-top: 15px;
+        }
+        
+        .modal-button:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 0 #ff8aa8;
+        }
+        
+        .modal-button:active:not(:disabled) {
+            transform: translateY(3px);
+            box-shadow: 0 2px 0 #ff8aa8;
+        }
+        
+        .modal-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #ffb3c6;
+            border: 3px solid white;
+            color: white;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 3px 0 #ff8aa8;
+            transition: all 0.2s;
+        }
+        
+        .modal-close:hover {
+            transform: rotate(90deg);
+            background: #ff8aa8;
         }
         
         #progressBar {
             width: 100%;
-            height: 12px;
-            background: #f0d0d0;
-            border-radius: 6px;
-            margin: 15px 0;
+            height: 15px;
+            background: #ffe2f0;
+            border-radius: 30px;
+            margin: 20px 0;
             overflow: hidden;
-            border: 1px solid rgba(212, 78, 94, 0.3);
+            border: 3px solid white;
+            box-shadow: 0 3px 0 #ff9eb5;
         }
         
         #progressFill {
             height: 100%;
-            background: linear-gradient(90deg, #ffb6c1, #d44e5e, #a13e4a);
+            background: linear-gradient(90deg, #ffb3c6, #d44e7a);
             width: 0%;
-            transition: width 0.3s ease;
-            border-radius: 6px;
-            box-shadow: 0 0 10px #ffb6c1;
+            transition: width 0.3s;
+            border-radius: 30px;
         }
         
-        /* Decorative corner hearts */
-        .corner-heart {
-            position: absolute;
-            font-size: 20px;
-            opacity: 0.3;
-            color: #d44e5e;
-            z-index: 1;
+        #winScreen {
+            text-align: center;
+            padding: 30px;
+        }
+        
+        #winScreen h2 {
+            color: #d44e7a;
+            font-size: 2rem;
+            font-family: 'Pacifico', cursive;
+            margin-bottom: 20px;
+        }
+        
+        #winMessage {
+            background: white;
+            border-radius: 40px;
+            padding: 25px;
+            margin: 20px 0;
+            color: #b3547c;
+            font-size: 1rem;
+            line-height: 1.8;
+            white-space: pre-line;
+            border: 4px solid #ffb3c6;
+            box-shadow: 0 8px 0 #ff9eb5;
+        }
+        
+        /* Video modal special */
+        #videoModal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+        
+        .video-content {
+            width: 90%;
+            max-width: 600px;
+            background: white;
+            border-radius: 60px;
+            padding: 20px;
+            border: 6px solid #ffb3c6;
+        }
+        
+        .video-player {
+            width: 100%;
+            border-radius: 40px;
+            overflow: hidden;
+        }
+        
+        .video-player video {
+            width: 100%;
+            display: block;
+        }
+        
+        .video-close {
+            margin-top: 15px;
+            background: #ffb3c6;
+            color: white;
+            border: none;
+            padding: 10px 30px;
+            border-radius: 60px;
+            font-size: 1rem;
+            cursor: pointer;
+            border: 3px solid white;
         }
         
         @media (max-width: 600px) {
             #gameArea {
-                height: 400px;
+                height: 350px;
             }
             
-            #catcher {
-                width: 80px;
-                height: 50px;
-                font-size: 30px;
+            .modal-content {
+                padding: 20px;
             }
             
-            .heart {
-                font-size: 28px;
-            }
-            
-            .animal {
-                font-size: 22px;
-            }
-            
-            .tree {
-                width: 60px;
-                height: 100px;
+            .modal-question {
+                font-size: 1.1rem;
             }
         }
     </style>
@@ -575,97 +692,114 @@
 <body>
     <div id="gameContainer">
         <div id="gameHeader">
-            <h1>🌸 Catch Our Love 🌸</h1>
-            <div id="anniversaryBadge">4 Years Together ❤️</div>
+            <h1>our love story</h1>
+            <div class="floating-hearts">
+                <span>❤️</span>
+                <span>💕</span>
+                <span>💗</span>
+            </div>
             
-            <!-- Music Control -->
             <div id="musicControl">
-                <button id="musicToggle">🎵 Play Music</button>
+                <button id="musicToggle">🎵 play music</button>
             </div>
         </div>
         
-        <!-- Game Stats -->
         <div id="stats">
             <div class="stat-box">
-                <div class="stat-label">Hearts</div>
+                <div class="stat-label">hearts</div>
                 <div class="stat-value" id="heartsCaught">0</div>
             </div>
             <div class="stat-box">
-                <div class="stat-label">Memories</div>
-                <div class="stat-value" id="memoriesUnlocked">0/4</div>
-            </div>
-            <div class="stat-box">
-                <div class="stat-label">Year</div>
-                <div class="stat-value" id="currentLevel">1</div>
+                <div class="stat-label">memories</div>
+                <div class="stat-value" id="memoriesUnlocked">0/5</div>
             </div>
         </div>
         
-        <!-- Progress Bar -->
         <div id="progressBar">
             <div id="progressFill"></div>
         </div>
         
-        <!-- Game Area -->
         <div id="gameArea">
-            <!-- Ground -->
-            <div class="ground"></div>
+            <!-- Cute clouds -->
+            <div class="cloud cloud1"></div>
+            <div class="cloud cloud2"></div>
+            <div class="cloud cloud3"></div>
             
-            <!-- Cherry Blossom Trees -->
-            <div class="tree tree-left">
-                <div class="tree-trunk"></div>
-                <div class="tree-leaves"></div>
+            <!-- Floating cute items -->
+            <div class="floating-item item1">🌸</div>
+            <div class="floating-item item2">✨</div>
+            <div class="floating-item item3">💫</div>
+            
+            <!-- Basket catcher -->
+            <div id="catcher">
+                <div class="basket-body"></div>
+                <div class="basket-handle"></div>
+                <div class="basket-heart">❤️</div>
             </div>
-            
-            <div class="tree tree-right">
-                <div class="tree-trunk"></div>
-                <div class="tree-leaves"></div>
-            </div>
-            
-            <!-- Catcher (will be positioned by JS) -->
-            <div id="catcher"></div>
-            
-            <!-- Decorative corner hearts -->
-            <span class="corner-heart" style="top: 10px; left: 10px;">❤️</span>
-            <span class="corner-heart" style="top: 10px; right: 10px;">❤️</span>
-            <span class="corner-heart" style="bottom: 30px; left: 10px;">❤️</span>
-            <span class="corner-heart" style="bottom: 30px; right: 10px;">❤️</span>
         </div>
         
-        <div id="message">🌸 Catch hearts to unlock our memories! 🌸</div>
+        <div id="message">💖 catch hearts to unlock our memories! 💖</div>
         
-        <!-- Start Screen -->
+        <!-- Start Screen (Onboarding) -->
         <div id="startScreen">
-            <h2>🌸 Our 4th Anniversary! 🌸</h2>
-            <p>Catch the falling hearts to unlock special memories from our 4 years together.</p>
-            <p>Watch the cherry blossoms fall, the dogs and cats play, and catch all the hearts!</p>
-            <p>Each year has 3 hearts. Answer the question to unlock the next year!</p>
-            <p>❤️ Move left and right to catch the hearts ❤️</p>
-            <button onclick="startGame()">Start Catching Love 🌸</button>
-        </div>
-        
-        <!-- Memory Screen (Question Modal) -->
-        <div id="memoryScreen" class="hidden">
-            <h2 id="memoryYear">Year 1 Memory</h2>
-            <div id="memoryContent">
-                <div id="memoryPhoto"></div>
-                <div id="memoryQuestion"></div>
-                <div id="memoryOptions"></div>
-                <div id="memoryFeedback"></div>
-                <div id="memoryHint"></div>
-                <button id="submitMemory" disabled>Check Answer</button>
+            <h2>hi love! 💕</h2>
+            <div class="instruction-box">
+                <p>🎮 <b>how to play:</b></p>
+                <p>❤️ catch the falling hearts with the basket</p>
+                <p>💕 each heart unlocks a special memory</p>
+                <p>💗 answer the questions about us</p>
+                <p>🎁 the last memory has a special surprise</p>
             </div>
+            <p>ready to relive our story?</p>
+            <button onclick="startGame()">start our journey ❤️</button>
         </div>
         
         <!-- Win Screen -->
         <div id="winScreen" class="hidden">
-            <h2>🎉 4 Years Complete! 🎉</h2>
+            <h2>🎉 5 years of us! 🎉</h2>
             <div id="winMessage"></div>
-            <button onclick="resetGame()">Play Again 🌸</button>
+            <button onclick="resetGame()">play again 💕</button>
         </div>
     </div>
 
-    <!-- Audio -->
-    <audio id="bgMusic" loop preload="auto">
+    <!-- Memory Modal -->
+    <div id="memoryModal" class="hidden">
+        <div class="modal-content">
+            <div class="modal-close" onclick="closeModal()">✕</div>
+            
+            <div class="modal-header">
+                <h2 id="modalTitle">memory</h2>
+                <h3 id="modalSubtitle"></h3>
+            </div>
+            
+            <div class="modal-media" id="modalMedia"></div>
+            
+            <div class="modal-question" id="modalQuestion"></div>
+            
+            <div class="modal-options" id="modalOptions"></div>
+            
+            <div class="modal-feedback" id="modalFeedback"></div>
+            
+            <div class="modal-hint" id="modalHint"></div>
+            
+            <button class="modal-button" id="modalSubmit" disabled>check answer 💕</button>
+        </div>
+    </div>
+
+    <!-- Video Surprise Modal (for Tops) -->
+    <div id="videoModal" class="hidden">
+        <div class="video-content">
+            <div class="video-player">
+                <video id="surpriseVideo" controls autoplay>
+                    <source src="cebu_drone.mp4" type="video/mp4">
+                    your browser doesn't support video.
+                </video>
+            </div>
+            <button class="video-close" onclick="closeVideoModal()">close 💕</button>
+        </div>
+    </div>
+
+    <audio id="bgMusic" loop>
         <source src="bg-music.mp3" type="audio/mpeg">
     </audio>
 
@@ -675,20 +809,22 @@
         const musicToggle = document.getElementById('musicToggle');
         let musicPlaying = false;
         
-        musicToggle.addEventListener('click', () => {
+        musicToggle.addEventListener('click', toggleMusic);
+        
+        function toggleMusic() {
             if (musicPlaying) {
                 bgMusic.pause();
-                musicToggle.textContent = '🎵 Play Music';
+                musicToggle.textContent = '🎵 play music';
                 musicPlaying = false;
             } else {
                 bgMusic.play().then(() => {
-                    musicToggle.textContent = '🔊 Pause Music';
+                    musicToggle.textContent = '🔊 pause music';
                     musicPlaying = true;
                 }).catch(e => {
-                    alert("🌸 Click anywhere on the page first to enable music! 🌸");
+                    console.log("Click to enable music");
                 });
             }
-        });
+        }
         
         bgMusic.volume = 0.3;
         
@@ -697,193 +833,113 @@
         const catcher = document.getElementById('catcher');
         const heartsCaughtDisplay = document.getElementById('heartsCaught');
         const memoriesUnlockedDisplay = document.getElementById('memoriesUnlocked');
-        const currentLevelDisplay = document.getElementById('currentLevel');
         const messageDisplay = document.getElementById('message');
         const progressFill = document.getElementById('progressFill');
         
-        let gameActive = false;
-        let currentYear = 1;
-        let heartsForCurrentYear = 0;
-        const heartsNeededPerYear = 3;
-        let totalHeartsCaught = 0;
-        let unlockedYears = [1];
+        const memoryModal = document.getElementById('memoryModal');
+        const videoModal = document.getElementById('videoModal');
+        const surpriseVideo = document.getElementById('surpriseVideo');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalSubtitle = document.getElementById('modalSubtitle');
+        const modalMedia = document.getElementById('modalMedia');
+        const modalQuestion = document.getElementById('modalQuestion');
+        const modalOptions = document.getElementById('modalOptions');
+        const modalFeedback = document.getElementById('modalFeedback');
+        const modalHint = document.getElementById('modalHint');
+        const modalSubmit = document.getElementById('modalSubmit');
         
-        // Falling hearts array
+        let gameActive = false;
+        let currentMemoryIndex = 0;
+        let heartsForCurrent = 0;
+        const heartsNeeded = 3;
+        let totalHearts = 0;
+        
         let fallingHearts = [];
         let heartInterval;
         let gameLoopInterval;
-        let blossomInterval;
-        let animalInterval;
         
-        // Animals
-        const animals = ['🐕', '🐕‍🦺', '🐩', '🐈', '🐈⬛', '🐱', '🐶'];
-        let runningAnimals = [];
-        
-        // Catcher position
-        let catcherX = 50; // percentage
+        let catcherX = 50;
         let moveLeft = false;
         let moveRight = false;
         
-        // ==================== YOUR PERSONALIZED MEMORIES ====================
-        const memories = {
-            1: {
-                year: "🌸 Year 1: The Beginning 🌸",
-                question: "Where did we go on our very first date?",
-                options: [
-                    "Cozy Coffee Shop Downtown",
-                    "Italian Restaurant on Main",
-                    "Pizza Place near the Park",
-                    "Sushi Spot You Loved"
-                ],
+        // Store uploaded card image
+        let cardImage = null;
+        
+        // ==================== OUR MEMORIES ====================
+        const memories = [
+            {
+                title: "💒 the beginning",
+                question: "remember this card? upload or take a picture of it 💕",
+                options: [], // No options for upload
                 correct: 0,
-                memory: "I still remember your smile when you tried their caramel latte. ☕",
-                hint: "Think about where we had our first coffee...",
-                photo: "photo1.jpg"
+                hint: "✨ it has a special bible verse...",
+                memory: "march 13, 2021 - i invited you to kadiwa. you weren't even a member yet, but god had a plan.",
+                media: null, // Will be uploaded by user
+                verse: "kawikaan 19:14 - 'ang mabait na asawa ay galing sa panginoon.'",
+                subtitle: "the invitation",
+                isUpload: true
             },
-            2: {
-                year: "🐕 Year 2: First Adventures 🐈",
-                question: "Where did we take our first weekend trip together?",
-                options: [
-                    "Lake Tahoe",
-                    "The Beach House",
-                    "Mountain Cabin",
-                    "Bed & Breakfast"
-                ],
+            {
+                title: "🏔️ first adventure",
+                question: "where was our first trip together?",
+                options: ["baguio", "tagaytay", "palawan", "cebu"],
                 correct: 1,
-                memory: "We got lost finding it, but getting lost with you was the best adventure.",
-                hint: "Remember the sound of waves?",
-                photo: "photo2.jpg"
+                hint: "🌋 we saw taal volcano!",
+                memory: "our first trip to tagaytay! the cold weather, the view, and your smile - perfect.",
+                media: "tagaytay_us.jpg",
+                subtitle: "tagaytay"
             },
-            3: {
-                year: "🏠 Year 3: Growing Together 🏠",
-                question: "What was the first furniture we built together?",
-                options: [
-                    "Bookshelf",
-                    "Bed Frame",
-                    "IKEA Dresser",
-                    "Kitchen Table"
-                ],
-                correct: 2,
-                memory: "We argued over instructions, but figured it out together.",
-                hint: "It came in a flat box with many screws...",
-                photo: "photo3.jpg"
+            {
+                title: "🎂 special birthday",
+                question: "whose birthday did we celebrate at summerblast?",
+                options: ["yours", "mine", "our friend's", "no one's"],
+                correct: 0,
+                hint: "🎈 it was YOUR special day!",
+                memory: "april 30, 2022 - first time celebrating your birthday with a concert! and june 5, 2021 - the first time someone gave me a cake.",
+                media: "summerblast.jpg",
+                subtitle: "summerblast & birthday"
             },
-            4: {
-                year: "❤️ Year 4: Stronger Than Ever ❤️",
-                question: "What's my favorite thing about you?",
-                options: [
-                    "Your Smile",
-                    "Your Laugh",
-                    "Your Kindness",
-                    "All of the Above"
-                ],
-                correct: 3,
-                memory: "It's impossible to pick just one. I love EVERYTHING about you.",
-                hint: "The answer is always 'all of the above' ❤️",
-                photo: "photo4.jpg"
+            {
+                title: "☕ first anniversary",
+                question: "where did we celebrate our first anniversary?",
+                options: ["jdb cafe", "tagaytay", "cebu", "church"],
+                correct: 0,
+                hint: "☕ j... d... b...",
+                memory: "march 13, 2023 at jdb cafe - our first anniversary. now we're 5 years!",
+                media: "anniversary.jpg",
+                subtitle: "jdb cafe"
+            },
+            {
+                title: "🚁 our cebu adventure",
+                question: "what's the name of the place with the drone shot in cebu?",
+                options: ["tops360", "crown regency", "mactan", "bohol"],
+                correct: 0,
+                hint: "🎥 top of cebu... 360 view...",
+                memory: "december 2025 - our first trip to cebu! here's a special surprise...",
+                media: null, // No media until correct answer
+                subtitle: "tops360",
+                isLast: true
             }
-        };
+        ];
         
-        // ==================== DECORATIVE ELEMENTS ====================
-        
-        // Create falling cherry blossoms
-        function createBlossom() {
-            if (!gameActive) return;
-            
-            const blossom = document.createElement('div');
-            blossom.className = 'blossom';
-            
-            // Random position
-            blossom.style.left = Math.random() * 100 + '%';
-            blossom.style.animationDuration = (Math.random() * 3 + 3) + 's';
-            blossom.style.animationDelay = Math.random() * 2 + 's';
-            
-            // Random pink shade
-            const pinkShades = ['#ffb7c5', '#ff9eb2', '#ff85a0', '#ff6b8b'];
-            blossom.style.background = pinkShades[Math.floor(Math.random() * pinkShades.length)];
-            
-            gameArea.appendChild(blossom);
-            
-            // Remove after animation
-            setTimeout(() => {
-                if (blossom.parentNode) {
-                    blossom.remove();
-                }
-            }, 6000);
-        }
-        
-        // Create running animals
-        function createAnimal() {
-            if (!gameActive) return;
-            
-            const animal = document.createElement('div');
-            animal.className = 'animal';
-            
-            // Random animal
-            animal.textContent = animals[Math.floor(Math.random() * animals.length)];
-            
-            // Random position (dog on ground, cat slightly higher)
-            if (animal.textContent.includes('🐕') || animal.textContent.includes('🐶')) {
-                animal.classList.add('dog');
-                animal.style.bottom = '10px';
-            } else {
-                animal.classList.add('cat');
-                animal.style.bottom = '45px';
-            }
-            
-            animal.style.left = '-50px';
-            animal.style.animationDuration = (Math.random() * 3 + 4) + 's';
-            animal.style.animationDelay = Math.random() * 2 + 's';
-            animal.style.fontSize = (Math.random() * 10 + 20) + 'px';
-            
-            gameArea.appendChild(animal);
-            
-            // Remove after animation
-            setTimeout(() => {
-                if (animal.parentNode) {
-                    animal.remove();
-                }
-            }, 7000);
-        }
-        
-        // Create floating lanterns
-        function createLantern() {
-            if (!gameActive) return;
-            
-            const lantern = document.createElement('div');
-            lantern.className = 'lantern';
-            lantern.textContent = '🏮';
-            lantern.style.left = Math.random() * 100 + '%';
-            lantern.style.top = Math.random() * 60 + '%';
-            lantern.style.animationDuration = (Math.random() * 4 + 6) + 's';
-            
-            gameArea.appendChild(lantern);
-        }
-        
-        // ==================== GAME FUNCTIONS ====================
-        
-        // Move catcher with mouse/touch
+        // ==================== CONTROLS ====================
         gameArea.addEventListener('mousemove', (e) => {
             if (!gameActive) return;
             const rect = gameArea.getBoundingClientRect();
             const x = e.clientX - rect.left;
-            const percentage = (x / rect.width) * 100;
-            catcherX = Math.min(95, Math.max(5, percentage));
+            catcherX = Math.min(85, Math.max(15, (x / rect.width) * 100));
             catcher.style.left = catcherX + '%';
         });
         
-        // Touch support
         gameArea.addEventListener('touchmove', (e) => {
             if (!gameActive) return;
             e.preventDefault();
             const rect = gameArea.getBoundingClientRect();
             const x = e.touches[0].clientX - rect.left;
-            const percentage = (x / rect.width) * 100;
-            catcherX = Math.min(95, Math.max(5, percentage));
+            catcherX = Math.min(85, Math.max(15, (x / rect.width) * 100));
             catcher.style.left = catcherX + '%';
         });
         
-        // Keyboard controls
         document.addEventListener('keydown', (e) => {
             if (!gameActive) return;
             if (e.key === 'ArrowLeft') {
@@ -907,300 +963,399 @@
             }
         });
         
-        // Update catcher position with keyboard
         function updateCatcher() {
             if (!gameActive) return;
-            
-            if (moveLeft) {
-                catcherX = Math.max(5, catcherX - 2);
-            }
-            if (moveRight) {
-                catcherX = Math.min(95, catcherX + 2);
-            }
+            if (moveLeft) catcherX = Math.max(15, catcherX - 3);
+            if (moveRight) catcherX = Math.min(85, catcherX + 3);
             catcher.style.left = catcherX + '%';
         }
         
-        // Create a new heart
+        // ==================== HEARTS ====================
         function createHeart() {
             if (!gameActive) return;
             
             const heart = document.createElement('div');
             heart.className = 'heart';
             
-            // Random heart emoji
-            const hearts = ['❤️', '💕', '💗', '💓', '💖', '💘', '💝'];
+            const hearts = ['❤️', '💕', '💗', '💓', '💖'];
             heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
             
-            // Random position
-            const left = Math.random() * 90 + 5;
-            heart.style.left = left + '%';
+            heart.style.left = Math.random() * 80 + 10 + '%';
             heart.style.top = '-40px';
             
-            // Random speed
-            const baseSpeed = 1 + (currentYear * 0.3);
-            const speed = baseSpeed + Math.random() * 1.5;
+            const speed = 1.5 + Math.random() * 1.5;
             
-            // Store heart data
-            const heartData = {
+            fallingHearts.push({
                 element: heart,
                 speed: speed,
+                top: -40,
                 caught: false
-            };
+            });
             
-            fallingHearts.push(heartData);
             gameArea.appendChild(heart);
         }
         
-        // Update heart positions
         function updateHearts() {
             if (!gameActive) return;
             
             for (let i = fallingHearts.length - 1; i >= 0; i--) {
                 const heart = fallingHearts[i];
-                const top = parseFloat(heart.element.style.top) || -40;
-                const newTop = top + heart.speed;
+                heart.top += heart.speed;
+                heart.element.style.top = heart.top + 'px';
                 
-                heart.element.style.top = newTop + 'px';
-                
-                // Check if caught
                 const heartRect = heart.element.getBoundingClientRect();
                 const catcherRect = catcher.getBoundingClientRect();
                 
                 if (!heart.caught && 
                     heartRect.bottom >= catcherRect.top &&
-                    heartRect.left >= catcherRect.left - 20 &&
-                    heartRect.right <= catcherRect.right + 20) {
+                    heartRect.left >= catcherRect.left - 15 &&
+                    heartRect.right <= catcherRect.right + 15) {
                     
-                    // Heart caught!
                     heart.caught = true;
                     heart.element.remove();
                     fallingHearts.splice(i, 1);
                     
-                    // Update counters
-                    totalHeartsCaught++;
-                    heartsForCurrentYear++;
-                    heartsCaughtDisplay.textContent = totalHeartsCaught;
+                    totalHearts++;
+                    heartsForCurrent++;
+                    heartsCaughtDisplay.textContent = totalHearts;
                     
-                    // Update progress bar
-                    const progress = (heartsForCurrentYear / heartsNeededPerYear) * 100;
+                    const progress = (heartsForCurrent / heartsNeeded) * 100;
                     progressFill.style.width = progress + '%';
                     
-                    // Show message
-                    messageDisplay.textContent = `❤️ You caught a heart! ${heartsForCurrentYear}/${heartsNeededPerYear} for Year ${currentYear}`;
-                    
-                    // Check if year complete
-                    if (heartsForCurrentYear >= heartsNeededPerYear) {
-                        showMemoryQuestion(currentYear);
+                    if (heartsForCurrent >= heartsNeeded) {
+                        showMemoryModal(currentMemoryIndex);
                     }
                 }
                 
-                // Remove if off screen
-                if (newTop > gameArea.offsetHeight) {
+                if (heart.top > 400) {
                     heart.element.remove();
                     fallingHearts.splice(i, 1);
                 }
             }
         }
         
-        // Show memory question
-        function showMemoryQuestion(year) {
-            gameActive = false;
-            const memory = memories[year];
+        // ==================== UPLOAD FUNCTION ====================
+        function setupUpload() {
+            const uploadArea = document.createElement('div');
+            uploadArea.className = 'upload-area';
+            uploadArea.innerHTML = `
+                <div class="upload-icon">📸</div>
+                <div class="upload-text">click to upload or take a photo</div>
+                <input type="file" id="cardUpload" accept="image/*" capture="environment" class="upload-input">
+            `;
             
-            // Clear falling hearts
+            modalMedia.innerHTML = '';
+            modalMedia.appendChild(uploadArea);
+            
+            const uploadInput = document.getElementById('cardUpload');
+            uploadInput.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        cardImage = event.target.result;
+                        modalMedia.innerHTML = `<img src="${cardImage}" alt="Invitation Card">`;
+                        
+                        // Show the next button or enable continue
+                        modalSubmit.disabled = false;
+                        modalSubmit.textContent = 'next memory 💕';
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+            
+            // Click on upload area triggers file input
+            uploadArea.addEventListener('click', () => {
+                uploadInput.click();
+            });
+        }
+        
+        // ==================== MODAL ====================
+        let selectedOption = null;
+        
+        function showMemoryModal(index) {
+            gameActive = false;
+            const memory = memories[index];
+            
             fallingHearts.forEach(heart => heart.element.remove());
             fallingHearts = [];
             
-            // Show memory screen
-            document.getElementById('startScreen').classList.add('hidden');
-            document.getElementById('memoryScreen').classList.remove('hidden');
-            document.getElementById('winScreen').classList.add('hidden');
+            modalTitle.textContent = memory.title;
+            modalSubtitle.textContent = memory.subtitle;
             
-            // Set content
-            document.getElementById('memoryYear').textContent = memory.year;
-            document.getElementById('memoryQuestion').textContent = memory.question;
-            
-            // Show photo
-            const photoDiv = document.getElementById('memoryPhoto');
-            if (memory.photo) {
-                photoDiv.innerHTML = `<img src="${memory.photo}" alt="Memory" onerror="this.onerror=null; this.parentElement.innerHTML='🌸 Memory Photo 🌸';">`;
-            } else {
-                photoDiv.innerHTML = '🌸 Add your photo here 🌸';
+            // Special handling for upload
+            if (memory.isUpload) {
+                setupUpload();
+                modalQuestion.textContent = memory.question;
+                modalOptions.innerHTML = ''; // No options
+                modalHint.innerHTML = memory.hint + '<br><br>💕 ' + memory.verse;
+                modalSubmit.disabled = true;
+                modalSubmit.textContent = 'upload first 📸';
+            } 
+            // Special handling for last question
+            else if (memory.isLast) {
+                modalMedia.innerHTML = ''; // No media yet
+                modalQuestion.textContent = memory.question;
+                
+                modalOptions.innerHTML = '';
+                memory.options.forEach((opt, idx) => {
+                    const btn = document.createElement('div');
+                    btn.className = 'modal-option';
+                    btn.textContent = opt;
+                    btn.onclick = () => selectOption(idx);
+                    modalOptions.appendChild(btn);
+                });
+                
+                modalHint.innerHTML = memory.hint;
+                modalSubmit.disabled = true;
+                modalSubmit.textContent = 'check answer 💕';
+            }
+            // Regular memory with photo
+            else {
+                modalMedia.innerHTML = `<img src="${memory.media}" alt="Memory" onerror="this.onerror=null; this.parentElement.innerHTML='📸 ' + '${memory.subtitle}';">`;
+                modalQuestion.textContent = memory.question;
+                
+                modalOptions.innerHTML = '';
+                memory.options.forEach((opt, idx) => {
+                    const btn = document.createElement('div');
+                    btn.className = 'modal-option';
+                    btn.textContent = opt;
+                    btn.onclick = () => selectOption(idx);
+                    modalOptions.appendChild(btn);
+                });
+                
+                modalHint.innerHTML = `${memory.hint}<br><br>💕 ${memory.verse || ''}`;
+                modalSubmit.disabled = true;
+                modalSubmit.textContent = 'check answer 💕';
             }
             
-            // Create options
-            const optionsDiv = document.getElementById('memoryOptions');
-            optionsDiv.innerHTML = '';
-            memory.options.forEach((option, index) => {
-                const btn = document.createElement('div');
-                btn.className = 'memory-option';
-                btn.textContent = option;
-                btn.dataset.index = index;
-                btn.onclick = () => selectMemoryOption(index);
-                optionsDiv.appendChild(btn);
-            });
+            modalFeedback.textContent = '';
+            selectedOption = null;
             
-            document.getElementById('memoryHint').textContent = memory.hint;
-            document.getElementById('memoryFeedback').textContent = '';
-            document.getElementById('submitMemory').disabled = true;
+            memoryModal.classList.remove('hidden');
         }
         
-        // Select memory option
-        let selectedOption = null;
-        
-        function selectMemoryOption(index) {
-            selectedOption = index;
-            document.querySelectorAll('.memory-option').forEach((btn, i) => {
+        function selectOption(idx) {
+            selectedOption = idx;
+            document.querySelectorAll('.modal-option').forEach((btn, i) => {
                 btn.classList.remove('selected');
-                if (i === index) {
-                    btn.classList.add('selected');
-                }
+                if (i === idx) btn.classList.add('selected');
             });
-            document.getElementById('submitMemory').disabled = false;
+            modalSubmit.disabled = false;
         }
         
-        // Submit answer
-        document.getElementById('submitMemory').addEventListener('click', () => {
-            const memory = memories[currentYear];
-            const feedback = document.getElementById('memoryFeedback');
-            const options = document.querySelectorAll('.memory-option');
+        function closeModal() {
+            memoryModal.classList.add('hidden');
             
+            if (currentMemoryIndex < 4) {
+                heartsForCurrent = 0;
+                progressFill.style.width = '0%';
+                gameActive = true;
+            }
+        }
+        
+        modalSubmit.addEventListener('click', () => {
+            const memory = memories[currentMemoryIndex];
+            
+            // Special case: upload (no question to check)
+            if (memory.isUpload) {
+                if (cardImage) {
+                    modalFeedback.textContent = '✨ thank you for this memory! ✨';
+                    modalFeedback.className = 'modal-feedback success';
+                    modalHint.innerHTML = memory.memory + '<br><br>' + memory.verse;
+                    modalSubmit.disabled = true;
+                    
+                    setTimeout(() => {
+                        memoryModal.classList.add('hidden');
+                        currentMemoryIndex++;
+                        heartsForCurrent = 0;
+                        memoriesUnlockedDisplay.textContent = currentMemoryIndex + '/5';
+                        progressFill.style.width = '0%';
+                        messageDisplay.textContent = `💕 catch 3 hearts for next memory!`;
+                        gameActive = true;
+                    }, 2500);
+                }
+                return;
+            }
+            
+            // Special case: last question
+            if (memory.isLast) {
+                if (selectedOption === memory.correct) {
+                    document.querySelectorAll('.modal-option').forEach((btn, i) => {
+                        if (i === memory.correct) btn.classList.add('correct');
+                    });
+                    
+                    modalFeedback.textContent = '✨ correct! ✨';
+                    modalFeedback.className = 'modal-feedback success';
+                    modalHint.innerHTML = 'now for your surprise... 🎁';
+                    modalSubmit.disabled = true;
+                    
+                    setTimeout(() => {
+                        memoryModal.classList.add('hidden');
+                        // Stop background music
+                        if (musicPlaying) {
+                            bgMusic.pause();
+                            musicToggle.textContent = '🎵 play music';
+                            musicPlaying = false;
+                        }
+                        // Show video modal
+                        showVideoModal();
+                    }, 2000);
+                } else {
+                    document.querySelectorAll('.modal-option').forEach((btn, i) => {
+                        if (i === selectedOption) btn.classList.add('wrong');
+                        if (i === memory.correct) btn.classList.add('correct');
+                    });
+                    
+                    modalFeedback.textContent = '💔 try again!';
+                    modalFeedback.className = 'modal-feedback error';
+                    
+                    setTimeout(() => {
+                        memoryModal.classList.add('hidden');
+                        heartsForCurrent = 0;
+                        progressFill.style.width = '0%';
+                        messageDisplay.textContent = `💕 catch 3 hearts for this memory`;
+                        gameActive = true;
+                    }, 2000);
+                }
+                return;
+            }
+            
+            // Regular question check
             if (selectedOption === memory.correct) {
-                // Correct!
-                options.forEach((btn, i) => {
+                document.querySelectorAll('.modal-option').forEach((btn, i) => {
                     if (i === memory.correct) btn.classList.add('correct');
                 });
                 
-                feedback.textContent = '✨ Correct! You remember! ✨';
-                feedback.className = 'success';
-                document.getElementById('memoryHint').textContent = memory.memory;
-                document.getElementById('submitMemory').disabled = true;
+                modalFeedback.textContent = '✨ correct! ✨';
+                modalFeedback.className = 'modal-feedback success';
+                modalHint.innerHTML = memory.memory;
+                modalSubmit.disabled = true;
                 
-                // Unlock next year
                 setTimeout(() => {
-                    document.getElementById('memoryScreen').classList.add('hidden');
+                    memoryModal.classList.add('hidden');
                     
-                    if (currentYear < 4) {
-                        currentYear++;
-                        heartsForCurrentYear = 0;
-                        currentLevelDisplay.textContent = currentYear;
-                        memoriesUnlockedDisplay.textContent = `${currentYear-1}/4`;
+                    if (currentMemoryIndex < 4) {
+                        currentMemoryIndex++;
+                        heartsForCurrent = 0;
+                        memoriesUnlockedDisplay.textContent = currentMemoryIndex + '/5';
                         progressFill.style.width = '0%';
-                        messageDisplay.textContent = `🌸 Year ${currentYear} unlocked! Catch ${heartsNeededPerYear} hearts! 🌸`;
+                        messageDisplay.textContent = `💕 catch 3 hearts for next memory!`;
                         gameActive = true;
-                    } else {
-                        // All years complete!
-                        winGame();
                     }
-                }, 3000);
+                }, 2500);
             } else {
-                // Wrong answer
-                options.forEach((btn, i) => {
+                document.querySelectorAll('.modal-option').forEach((btn, i) => {
                     if (i === selectedOption) btn.classList.add('wrong');
                     if (i === memory.correct) btn.classList.add('correct');
                 });
                 
-                feedback.textContent = '❤️ Not quite... but our memories are worth revisiting! Try again? ❤️';
-                feedback.className = 'error';
+                modalFeedback.textContent = '💔 try again!';
+                modalFeedback.className = 'modal-feedback error';
                 
-                // Reset hearts for this year
                 setTimeout(() => {
-                    document.getElementById('memoryScreen').classList.add('hidden');
-                    heartsForCurrentYear = 0;
+                    memoryModal.classList.add('hidden');
+                    heartsForCurrent = 0;
                     progressFill.style.width = '0%';
-                    messageDisplay.textContent = `🌸 Let's catch ${heartsNeededPerYear} hearts again! 🌸`;
+                    messageDisplay.textContent = `💕 catch 3 hearts for this memory`;
                     gameActive = true;
-                }, 3000);
+                }, 2000);
             }
         });
         
-        // Win game
-        function winGame() {
+        // ==================== VIDEO MODAL ====================
+        function showVideoModal() {
+            videoModal.classList.remove('hidden');
+            surpriseVideo.play();
+        }
+        
+        function closeVideoModal() {
+            videoModal.classList.add('hidden');
+            surpriseVideo.pause();
+            
+            // Move to win screen after video
+            setTimeout(() => {
+                showWinScreen();
+            }, 500);
+        }
+        
+        // ==================== WIN SCREEN ====================
+        function showWinScreen() {
             gameActive = false;
             
             document.getElementById('startScreen').classList.add('hidden');
-            document.getElementById('memoryScreen').classList.add('hidden');
             document.getElementById('winScreen').classList.remove('hidden');
             
-            // PERSONALIZE THIS MESSAGE!
-            const winMessage = `🌸 My love 🌸
+            const winMessage = `my love,
 
-You caught all 12 hearts and unlocked every memory!
-Each heart represents a moment I've cherished with you.
+from that first chat in march 2021,
+to our tagaytay adventure,
+your birthday surprise, the first cake i ever received,
+our first anniversary at jdb cafe,
+and now cebu with drone shots at tops360...
 
-4 years. 1,461 days. Countless beautiful moments.
-And you remembered them all.
+5 years. 1,826 days.
+you are the answer to kawikaan 19:14.
 
-You are my everything.
-Happy Anniversary, [Her Name]!
+happy anniversary, my love!
 
-Forever yours,
-[Your Name] ❤️
+forever yours,
+[your name] ❤️
 
-🐕 🐈 🏮 🌸`;
+"ang mabait na asawa ay galing sa panginoon."`;
             
             document.getElementById('winMessage').textContent = winMessage;
         }
         
-        // Start game
+        // ==================== START GAME ====================
         function startGame() {
             gameActive = true;
-            currentYear = 1;
-            heartsForCurrentYear = 0;
-            totalHeartsCaught = 0;
-            unlockedYears = [1];
+            currentMemoryIndex = 0;
+            heartsForCurrent = 0;
+            totalHearts = 0;
+            cardImage = null;
             
             heartsCaughtDisplay.textContent = '0';
-            memoriesUnlockedDisplay.textContent = '0/4';
-            currentLevelDisplay.textContent = '1';
+            memoriesUnlockedDisplay.textContent = '0/5';
             progressFill.style.width = '0%';
             
-            // Clear any existing elements
             fallingHearts.forEach(heart => heart.element.remove());
             fallingHearts = [];
             
-            // Remove all decorative elements
-            document.querySelectorAll('.blossom, .animal, .lantern').forEach(el => el.remove());
-            
             document.getElementById('startScreen').classList.add('hidden');
-            document.getElementById('memoryScreen').classList.add('hidden');
             document.getElementById('winScreen').classList.add('hidden');
+            memoryModal.classList.add('hidden');
+            videoModal.classList.add('hidden');
             
-            messageDisplay.textContent = '🌸 Catch 3 hearts to unlock Year 1 memory! 🌸';
+            messageDisplay.textContent = '💕 catch 3 hearts for our first memory!';
             
-            // Start game loops
-            if (heartInterval) clearInterval(heartInterval);
-            if (gameLoopInterval) clearInterval(gameLoopInterval);
-            if (blossomInterval) clearInterval(blossomInterval);
-            if (animalInterval) clearInterval(animalInterval);
-            
-            heartInterval = setInterval(createHeart, 900);
-            blossomInterval = setInterval(createBlossom, 500);
-            animalInterval = setInterval(createAnimal, 3000);
-            
-            // Create initial lanterns
-            for (let i = 0; i < 3; i++) {
-                setTimeout(createLantern, i * 2000);
+            // Start music automatically
+            if (!musicPlaying) {
+                toggleMusic();
             }
             
+            if (heartInterval) clearInterval(heartInterval);
+            if (gameLoopInterval) clearInterval(gameLoopInterval);
+            
+            heartInterval = setInterval(createHeart, 900);
             gameLoopInterval = setInterval(() => {
                 updateCatcher();
                 updateHearts();
             }, 20);
         }
         
-        // Reset game
         function resetGame() {
             gameActive = false;
             clearInterval(heartInterval);
             clearInterval(gameLoopInterval);
-            clearInterval(blossomInterval);
-            clearInterval(animalInterval);
             
             document.getElementById('startScreen').classList.remove('hidden');
-            document.getElementById('memoryScreen').classList.add('hidden');
             document.getElementById('winScreen').classList.add('hidden');
+            memoryModal.classList.add('hidden');
+            videoModal.classList.add('hidden');
         }
+        
+        window.closeModal = closeModal;
     </script>
 </body>
 </html>
