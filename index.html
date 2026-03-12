@@ -376,7 +376,7 @@
             display: none !important;
         }
         
-        /* Memory Modal */
+        /* Memory Modal - Question Style */
         #memoryModal {
             position: fixed;
             top: 0;
@@ -500,6 +500,36 @@
             color: white;
         }
         
+        .modal-option.correct {
+            background: #a7e0a7;
+            color: white;
+        }
+        
+        .modal-option.wrong {
+            background: #ffa7a7;
+            color: white;
+        }
+        
+        .modal-feedback {
+            margin: 10px 0;
+            font-size: 1rem;
+            min-height: 25px;
+        }
+        
+        .modal-feedback.success { color: #6f9e6f; }
+        .modal-feedback.error { color: #d44e7a; }
+        
+        .modal-hint {
+            background: #ffe2f0;
+            padding: 10px;
+            border-radius: 30px;
+            margin: 10px 0;
+            font-style: italic;
+            color: #b3547c;
+            font-size: 0.9rem;
+            border-left: 4px solid #ffb3c6;
+        }
+        
         .modal-button {
             background: #ffb3c6;
             color: white;
@@ -538,6 +568,27 @@
             justify-content: center;
             cursor: pointer;
             box-shadow: 0 3px 0 #ff8aa8;
+        }
+        
+        .next-button {
+            background: #ffb3c6;
+            color: white;
+            border: none;
+            padding: 12px 40px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 5px 0 #ff8aa8;
+            border: 3px solid white;
+            margin: 15px auto 5px;
+            width: fit-content;
+            min-width: 200px;
+        }
+        
+        .next-button:active {
+            transform: translateY(4px);
+            box-shadow: 0 1px 0 #ff8aa8;
         }
         
         #progressBar {
@@ -738,6 +789,76 @@
             border-radius: 30px;
         }
         
+        /* Heart Popper */
+        #heartPopper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 5000;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            animation: popperFadeIn 0.5s ease-out;
+        }
+        
+        @keyframes popperFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .popper-heart {
+            font-size: 100px;
+            cursor: pointer;
+            animation: heartBeat 0.5s infinite alternate;
+            filter: drop-shadow(0 0 30px #ff4d6d);
+            transition: all 0.3s;
+        }
+        
+        .popper-heart:active {
+            transform: scale(1.5);
+        }
+        
+        @keyframes heartBeat {
+            from { transform: scale(1); }
+            to { transform: scale(1.2); }
+        }
+        
+        .popper-text {
+            position: absolute;
+            bottom: 30%;
+            color: white;
+            font-size: 1.2rem;
+            font-family: 'Pacifico', cursive;
+            text-align: center;
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Confetti Canvas */
+        #confettiCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5500;
+        }
+        
         /* Win Screen */
         #winScreen {
             position: fixed;
@@ -750,7 +871,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 4000;
+            z-index: 6000;
             animation: gradientBG 10s ease infinite;
             padding: 15px;
         }
@@ -772,6 +893,12 @@
             text-align: center;
             box-shadow: 0 30px 60px rgba(0,0,0,0.3), 0 0 0 6px white, 0 0 0 12px #ffb3c6;
             backdrop-filter: blur(10px);
+            animation: winPop 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        
+        @keyframes winPop {
+            from { transform: scale(0.5) rotate(-5deg); opacity: 0; }
+            to { transform: scale(1) rotate(0); opacity: 1; }
         }
         
         .win-header h2 {
@@ -827,6 +954,12 @@
             margin-top: 10px;
             width: 100%;
             max-width: 250px;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
         }
         
         .restart-button:active {
@@ -849,6 +982,10 @@
             
             .time-stat {
                 padding: 8px 3px;
+            }
+            
+            .popper-heart {
+                font-size: 80px;
             }
         }
     </style>
@@ -924,7 +1061,7 @@
         </div>
     </div>
 
-    <!-- Memory Modal -->
+    <!-- Memory Modal (for questions) -->
     <div id="memoryModal" class="hidden">
         <div class="modal-content">
             <div class="modal-close" onclick="closeModal()">✕</div>
@@ -945,6 +1082,24 @@
             <div class="modal-hint" id="modalHint"></div>
             
             <button class="modal-button" id="modalSubmit" disabled>check answer 💕</button>
+        </div>
+    </div>
+
+    <!-- Memory Card Modal -->
+    <div id="memoryCardModal" class="hidden">
+        <div class="modal-content">
+            <div class="modal-close" onclick="closeCardModal()">✕</div>
+            
+            <div class="modal-header">
+                <h2 id="cardTitle"></h2>
+                <h3 id="cardSubtitle"></h3>
+            </div>
+            
+            <div class="modal-media" id="cardMedia"></div>
+            
+            <div class="modal-question" id="cardMessage" style="font-size: 1rem; line-height: 1.5;"></div>
+            
+            <button class="next-button" id="cardNextBtn" onclick="goToNextFromCard()">next memory ➡️</button>
         </div>
     </div>
 
@@ -1001,6 +1156,15 @@
         </div>
     </div>
 
+    <!-- Heart Popper -->
+    <div id="heartPopper" class="hidden">
+        <div class="popper-heart" onclick="explodeHeart()">❤️</div>
+        <div class="popper-text">tap the heart for a surprise!</div>
+    </div>
+
+    <!-- Confetti Canvas -->
+    <canvas id="confettiCanvas" class="hidden"></canvas>
+
     <!-- Win Screen -->
     <div id="winScreen" class="hidden">
         <div class="win-content">
@@ -1038,8 +1202,10 @@
         
         const startModal = document.getElementById('startModal');
         const memoryModal = document.getElementById('memoryModal');
+        const memoryCardModal = document.getElementById('memoryCardModal');
         const timeCapsuleModal = document.getElementById('timeCapsuleModal');
         const videoModal = document.getElementById('videoModal');
+        const heartPopper = document.getElementById('heartPopper');
         const winScreen = document.getElementById('winScreen');
         const surpriseVideo = document.getElementById('surpriseVideo');
         const winPhoto = document.getElementById('winPhoto');
@@ -1053,12 +1219,25 @@
         const modalHint = document.getElementById('modalHint');
         const modalSubmit = document.getElementById('modalSubmit');
         
+        // Card elements
+        const cardMedia = document.getElementById('cardMedia');
+        const cardTitle = document.getElementById('cardTitle');
+        const cardSubtitle = document.getElementById('cardSubtitle');
+        const cardMessage = document.getElementById('cardMessage');
+        const cardNextBtn = document.getElementById('cardNextBtn');
+        
         // Time elements
         const totalDaysSpan = document.getElementById('totalDays');
         const totalYearsSpan = document.getElementById('totalYears');
         const totalMonthsSpan = document.getElementById('totalMonths');
         const totalHoursSpan = document.getElementById('totalHours');
         const timeMessage = document.getElementById('timeMessage');
+        
+        // Confetti
+        const canvas = document.getElementById('confettiCanvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let animationFrame;
         
         let gameActive = false;
         let currentMemoryIndex = 0;
@@ -1077,7 +1256,7 @@
         let cardImage = null;
         let fadeInterval;
         
-        // Memories
+        // UPDATED MEMORIES - Removed Summerblast, added Ka Lito memory
         const memories = [
             {
                 title: "💒 the beginning",
@@ -1089,7 +1268,8 @@
                 media: null,
                 verse: "kawikaan 19:14 - 'ang mabait na asawa ay galing sa panginoon.'",
                 subtitle: "the invitation",
-                isUpload: true
+                isUpload: true,
+                type: "question"
             },
             {
                 title: "🏔️ first adventure",
@@ -1099,27 +1279,22 @@
                 hint: "🌋 we saw taal volcano!",
                 memory: "our first trip to tagaytay! the cold weather, the view, and your smile - perfect.",
                 media: "tagaytay_us.jpg",
-                subtitle: "tagaytay"
+                subtitle: "tagaytay",
+                type: "question"
             },
             {
-                title: "🎂 special birthday",
-                question: "whose birthday did we celebrate at summerblast?",
-                options: ["yours", "mine", "our friend's", "no one's"],
-                correct: 0,
-                hint: "🎈 it was YOUR special day!",
-                memory: "april 30, 2022 - first time celebrating your birthday with a concert! and june 5, 2021 - the first time someone gave me a cake.",
-                media: "summerblast.jpg",
-                subtitle: "summerblast & birthday"
+                title: "🙏 ka lito's farewell",
+                subtitle: "july 2022",
+                message: "the farewell of ka lito, our destinado. this is one of our core memories together. a moment that strengthened our faith and our bond. 💒",
+                media: "ka_lito.jpg",
+                type: "card"
             },
             {
-                title: "☕ first anniversary",
-                question: "where did we celebrate our first anniversary?",
-                options: ["jdb cafe", "tagaytay", "cebu", "church"],
-                correct: 0,
-                hint: "☕ j... d... b...",
-                memory: "march 13, 2023 at jdb cafe - our first anniversary. now we're 5 years!",
-                media: "anniversary.jpg",
-                subtitle: "jdb cafe"
+                title: "👨‍👩‍👧‍👦 family firsts",
+                subtitle: "may 1, 2023",
+                message: "our first family picture together! celebrating her birthday with tita, tito, and mama. this is when i knew our families were becoming one. 💕",
+                media: "family_birthday.jpg",
+                type: "card"
             },
             {
                 title: "🚁 our cebu adventure",
@@ -1130,6 +1305,7 @@
                 memory: "december 2025 - our first trip to cebu! before the video, let's see how long we've been together...",
                 media: null,
                 subtitle: "tops360",
+                type: "question",
                 isLast: true
             }
         ];
@@ -1298,7 +1474,9 @@
                 "from that first chat to forever",
                 "you are the answer to my prayers",
                 "1,826 days of growing together",
-                "and this is just the beginning..."
+                "and this is just the beginning...",
+                "our families became one",
+                "love that grew and multiplied"
             ];
             timeMessage.textContent = messages[Math.floor(Math.random() * messages.length)];
         }
@@ -1336,9 +1514,7 @@
             }, 100);
         }
         
-        // Modal functions
-        let selectedOption = null;
-        
+        // Show memory based on type
         function showMemoryModal(index) {
             gameActive = false;
             const memory = memories[index];
@@ -1346,6 +1522,18 @@
             fallingHearts.forEach(heart => heart.element.remove());
             fallingHearts = [];
             
+            // If it's a card type, show the card modal
+            if (memory.type === "card") {
+                showCardModal(memory);
+            } 
+            // If it's a question type
+            else if (memory.type === "question") {
+                showQuestionModal(memory, index);
+            }
+        }
+        
+        // Show question modal
+        function showQuestionModal(memory, index) {
             modalTitle.textContent = memory.title;
             modalSubtitle.textContent = memory.subtitle;
             
@@ -1396,6 +1584,50 @@
             selectedOption = null;
             memoryModal.classList.remove('hidden');
         }
+        
+        // Show card modal
+        function showCardModal(memory) {
+            cardTitle.textContent = memory.title;
+            cardSubtitle.textContent = memory.subtitle;
+            cardMessage.textContent = memory.message;
+            
+            // Load the image
+            cardMedia.innerHTML = `<img src="${memory.media}" alt="Memory" onerror="this.onerror=null; this.innerHTML='📸 memory photo';">`;
+            
+            // Hide next button for last card? No, we have 5 memories total
+            memoryCardModal.classList.remove('hidden');
+        }
+        
+        // Close card modal and go to next memory
+        function goToNextFromCard() {
+            memoryCardModal.classList.add('hidden');
+            
+            // Move to next memory
+            currentMemoryIndex++;
+            
+            // If we've completed all memories (should be 5 total)
+            if (currentMemoryIndex < memories.length) {
+                heartsForCurrent = 0;
+                memoriesUnlockedDisplay.textContent = currentMemoryIndex + '/5';
+                progressFill.style.width = '0%';
+                messageDisplay.textContent = `💕 catch ${heartsNeeded} hearts for next memory!`;
+                gameActive = true;
+            } else {
+                // This shouldn't happen as we have exactly 5 memories
+                console.log("All memories completed");
+            }
+        }
+        
+        // Close card modal without advancing
+        function closeCardModal() {
+            memoryCardModal.classList.add('hidden');
+            heartsForCurrent = 0;
+            progressFill.style.width = '0%';
+            messageDisplay.textContent = `💕 catch ${heartsNeeded} hearts for this memory`;
+            gameActive = true;
+        }
+        
+        let selectedOption = null;
         
         function selectOption(idx) {
             selectedOption = idx;
@@ -1464,17 +1696,17 @@
                                 timeCapsuleModal.style.animation = '';
                                 videoModal.classList.remove('hidden');
                                 
-                                // Try to play video with multiple format support
+                                // Try to play video
                                 surpriseVideo.load();
                                 surpriseVideo.play().catch(e => {
                                     console.log("Video play failed:", e);
-                                    // If autoplay fails, show play button
                                     surpriseVideo.controls = true;
                                 });
                                 
                                 surpriseVideo.onended = () => {
                                     videoModal.classList.add('hidden');
-                                    showWinScreen();
+                                    // Show heart popper instead of win screen directly
+                                    showHeartPopper();
                                 };
                             }, 1000);
                         }, 6000);
@@ -1535,14 +1767,91 @@
             }
         });
         
-        // Win Screen
+        // ==================== HEART POPPER ====================
+        function showHeartPopper() {
+            heartPopper.classList.remove('hidden');
+        }
+        
+        function explodeHeart() {
+            // Hide heart popper
+            heartPopper.classList.add('hidden');
+            
+            // Start confetti
+            startConfetti();
+            
+            // Show win screen after a short delay
+            setTimeout(() => {
+                stopConfetti();
+                showWinScreen();
+            }, 2000);
+        }
+        
+        // ==================== CONFETTI ====================
+        function startConfetti() {
+            canvas.classList.remove('hidden');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            
+            // Create particles
+            for (let i = 0; i < 150; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height - canvas.height,
+                    size: Math.random() * 8 + 4,
+                    speed: Math.random() * 5 + 3,
+                    color: `hsl(${Math.random() * 360}, 100%, 70%)`,
+                    shape: Math.random() > 0.5 ? '❤️' : '🎉'
+                });
+            }
+            
+            animateConfetti();
+        }
+        
+        function animateConfetti() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            for (let i = 0; i < particles.length; i++) {
+                const p = particles[i];
+                p.y += p.speed;
+                
+                // Reset if off screen
+                if (p.y > canvas.height) {
+                    p.y = -10;
+                    p.x = Math.random() * canvas.width;
+                }
+                
+                // Draw either heart or confetti
+                if (p.shape === '❤️') {
+                    ctx.font = `${p.size}px Arial`;
+                    ctx.fillStyle = p.color;
+                    ctx.fillText('❤️', p.x, p.y);
+                } else {
+                    ctx.fillStyle = p.color;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.size/2, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+            
+            animationFrame = requestAnimationFrame(animateConfetti);
+        }
+        
+        function stopConfetti() {
+            cancelAnimationFrame(animationFrame);
+            canvas.classList.add('hidden');
+            particles = [];
+        }
+        
+        // ==================== WIN SCREEN ====================
         function showWinScreen() {
             gameActive = false;
             
             startModal.classList.add('hidden');
             memoryModal.classList.add('hidden');
+            memoryCardModal.classList.add('hidden');
             timeCapsuleModal.classList.add('hidden');
             videoModal.classList.add('hidden');
+            heartPopper.classList.add('hidden');
             winScreen.classList.remove('hidden');
             
             if (cardImage) {
@@ -1555,12 +1864,14 @@
 
 from that first chat in march 2021,
 to our tagaytay adventure,
-your birthday surprise, the first cake i ever received,
-our first anniversary at jdb cafe,
+ka lito's farewell that strengthened our faith,
+our first family celebration with tita, tito, and mama,
 and now cebu with drone shots at tops360...
 
 5 years. 1,826 days.
 you are the answer to kawikaan 19:14.
+our faith grew, our families became one.
+our love grew stronger every single day.
 
 happy anniversary, my love!
 
@@ -1570,7 +1881,7 @@ forever yours,
             document.getElementById('winMessage').textContent = winMessage;
         }
         
-        // Start Game
+        // ==================== START GAME ====================
         function startGame() {
             gameActive = true;
             currentMemoryIndex = 0;
@@ -1588,8 +1899,10 @@ forever yours,
             startModal.classList.add('hidden');
             winScreen.classList.add('hidden');
             memoryModal.classList.add('hidden');
+            memoryCardModal.classList.add('hidden');
             timeCapsuleModal.classList.add('hidden');
             videoModal.classList.add('hidden');
+            heartPopper.classList.add('hidden');
             
             messageDisplay.textContent = `💕 catch ${heartsNeeded} hearts for our first memory!`;
             
@@ -1606,7 +1919,7 @@ forever yours,
             }, 20);
         }
         
-        // Reset Game
+        // ==================== RESET GAME ====================
         function resetGame() {
             gameActive = false;
             clearInterval(heartInterval);
@@ -1614,15 +1927,21 @@ forever yours,
             clearInterval(fadeInterval);
             bgMusic.pause();
             bgMusic.currentTime = 0;
+            stopConfetti();
             
             startModal.classList.remove('hidden');
             winScreen.classList.add('hidden');
             memoryModal.classList.add('hidden');
+            memoryCardModal.classList.add('hidden');
             timeCapsuleModal.classList.add('hidden');
             videoModal.classList.add('hidden');
+            heartPopper.classList.add('hidden');
         }
         
         window.closeModal = closeModal;
+        window.closeCardModal = closeCardModal;
+        window.goToNextFromCard = goToNextFromCard;
+        window.explodeHeart = explodeHeart;
     </script>
 </body>
 </html>
