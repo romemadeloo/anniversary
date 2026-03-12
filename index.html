@@ -70,34 +70,6 @@
             50% { transform: translateY(-10px); }
         }
         
-        #musicControl {
-            margin: 15px 0;
-        }
-        
-        #musicToggle {
-            background: white;
-            color: #d44e7a;
-            border: 3px solid #ffb3c6;
-            padding: 12px 30px;
-            border-radius: 60px;
-            cursor: pointer;
-            font-size: 1rem;
-            font-weight: bold;
-            box-shadow: 0 5px 0 #ff9eb5;
-            transition: all 0.2s;
-            font-family: 'Quicksand', sans-serif;
-        }
-        
-        #musicToggle:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 0 #ff9eb5;
-        }
-        
-        #musicToggle:active {
-            transform: translateY(3px);
-            box-shadow: 0 2px 0 #ff9eb5;
-        }
-        
         #stats {
             display: flex;
             justify-content: center;
@@ -340,6 +312,19 @@
         
         .instruction-box p b {
             color: #d44e7a;
+        }
+        
+        .volume-note {
+            background: #ffb3c6;
+            color: white;
+            padding: 12px;
+            border-radius: 40px;
+            margin-top: 15px;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
         
         .start-button {
@@ -756,10 +741,6 @@
                 <span>💕</span>
                 <span>💗</span>
             </div>
-            
-            <div id="musicControl">
-                <button id="musicToggle">🎵 play music</button>
-            </div>
         </div>
         
         <div id="stats">
@@ -809,6 +790,13 @@
                 <p>💕 each heart unlocks a special memory</p>
                 <p>💗 answer the questions about us</p>
                 <p>🎁 the last memory has a surprise</p>
+                
+                <!-- Volume reminder -->
+                <div class="volume-note">
+                    <span>🔊</span>
+                    <span>make sure your volume is on!</span>
+                    <span>🎵</span>
+                </div>
             </div>
             <p style="color: #b3547c; font-size: 1.2rem; margin: 20px 0;">ready to relive our story?</p>
             <button class="start-button" onclick="startGame()">start our journey ❤️</button>
@@ -868,26 +856,8 @@
     <script>
         // ==================== MUSIC CONTROL ====================
         const bgMusic = document.getElementById('bgMusic');
-        const musicToggle = document.getElementById('musicToggle');
-        let musicPlaying = false;
         
-        musicToggle.addEventListener('click', toggleMusic);
-        
-        function toggleMusic() {
-            if (musicPlaying) {
-                bgMusic.pause();
-                musicToggle.textContent = '🎵 play music';
-                musicPlaying = false;
-            } else {
-                bgMusic.play().then(() => {
-                    musicToggle.textContent = '🔊 pause music';
-                    musicPlaying = true;
-                }).catch(e => {
-                    console.log("Click to enable music");
-                });
-            }
-        }
-        
+        // Set volume
         bgMusic.volume = 0.3;
         
         // ==================== GAME VARIABLES ====================
@@ -1249,11 +1219,7 @@
                     
                     setTimeout(() => {
                         memoryModal.classList.add('hidden');
-                        if (musicPlaying) {
-                            bgMusic.pause();
-                            musicToggle.textContent = '🎵 play music';
-                            musicPlaying = false;
-                        }
+                        bgMusic.pause(); // Stop background music for video
                         showVideoModal();
                     }, 2000);
                 } else {
@@ -1384,9 +1350,8 @@ forever yours,
             
             messageDisplay.textContent = '💕 catch 3 hearts for our first memory!';
             
-            if (!musicPlaying) {
-                toggleMusic();
-            }
+            // Start music automatically
+            bgMusic.play().catch(e => console.log("Auto-play prevented - user will interact"));
             
             if (heartInterval) clearInterval(heartInterval);
             if (gameLoopInterval) clearInterval(gameLoopInterval);
