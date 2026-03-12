@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>4 Years of Us - Our Anniversary Game</title>
+    <title>Catch Our Love - 4th Anniversary</title>
     <style>
         * {
             margin: 0;
@@ -25,11 +25,12 @@
         
         #gameContainer {
             background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 15px;
+            border-radius: 30px;
+            padding: 20px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            max-width: 800px;
+            max-width: 500px;
             width: 100%;
+            backdrop-filter: blur(5px);
         }
         
         #gameHeader {
@@ -39,10 +40,23 @@
         }
         
         #gameHeader h1 {
-            color: #b76e79;
-            font-size: clamp(1.8em, 5vw, 2.5em);
+            color: #d44e5e;
+            font-size: clamp(1.8em, 5vw, 2.2em);
             margin-bottom: 5px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            text-shadow: 2px 2px 4px rgba(255,255,255,0.5);
+            font-family: 'Georgia', serif;
+        }
+        
+        #anniversaryBadge {
+            background: linear-gradient(145deg, #fff, #f8e0e0);
+            color: #d44e5e;
+            padding: 8px 25px;
+            border-radius: 50px;
+            display: inline-block;
+            font-weight: bold;
+            margin: 10px 0;
+            box-shadow: 0 4px 15px rgba(212, 78, 94, 0.2);
+            border: 1px solid rgba(212, 78, 94, 0.3);
         }
         
         #musicControl {
@@ -50,320 +64,322 @@
         }
         
         #musicToggle {
-            background: #f8f0e7;
-            color: #b76e79;
-            border: 2px solid #b76e79;
-            padding: 10px 25px;
+            background: white;
+            color: #d44e5e;
+            border: 2px solid #d44e5e;
+            padding: 8px 25px;
             border-radius: 50px;
             cursor: pointer;
-            font-size: 1.1em;
+            font-size: 1em;
             font-weight: bold;
             transition: all 0.3s;
+            box-shadow: 0 2px 10px rgba(212, 78, 94, 0.2);
         }
         
         #musicToggle:hover {
-            background: #b76e79;
+            background: #d44e5e;
             color: white;
-        }
-        
-        #countdownTimer {
-            color: #4a4e69;
-            font-size: 1.1em;
-            margin-top: 10px;
-            padding: 8px;
-            background: #f8f0e7;
-            border-radius: 50px;
-            display: inline-block;
-        }
-        
-        #countdownTimer span {
-            color: #b76e79;
-            font-weight: bold;
-            font-size: 1.2em;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(212, 78, 94, 0.4);
         }
         
         #stats {
             display: flex;
-            flex-wrap: wrap;
             justify-content: space-around;
-            margin-bottom: 15px;
-            padding: 10px;
-            background: #f8f0e7;
-            border-radius: 10px;
-            font-weight: bold;
-            gap: 10px;
+            margin: 20px 0;
+            padding: 15px;
+            background: linear-gradient(145deg, #fff, #fce4e4);
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border: 1px solid rgba(212, 78, 94, 0.2);
         }
         
-        #stats div {
-            color: #4a4e69;
-            flex: 1;
-            min-width: 100px;
+        .stat-box {
             text-align: center;
+            position: relative;
         }
         
-        #stats span {
-            color: #b76e79;
-            font-size: 1.3em;
-            margin-left: 5px;
+        .stat-label {
+            color: #888;
+            font-size: 0.9em;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         
-        canvas {
-            display: block;
-            margin: 0 auto;
-            border: 3px solid #b76e79;
-            border-radius: 10px;
-            background: #87CEEB;
+        .stat-value {
+            color: #d44e5e;
+            font-size: 2.2em;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(212, 78, 94, 0.2);
+        }
+        
+        #gameArea {
+            position: relative;
             width: 100%;
-            max-width: 760px;
-            height: auto;
+            height: 500px;
+            background: linear-gradient(180deg, #ffd1dc 0%, #b5e6e6 100%);
+            border-radius: 30px;
+            overflow: hidden;
+            border: 3px solid white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
             touch-action: none;
         }
         
-        #touchControls {
-            display: none;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-top: 15px;
-            padding: 10px;
-            background: #f8f0e7;
-            border-radius: 10px;
+        /* Decorative elements */
+        .tree {
+            position: absolute;
+            bottom: 0;
+            width: 80px;
+            height: 120px;
+            z-index: 5;
         }
         
-        .touch-btn {
-            display: inline-block;
-            padding: 15px;
-            font-size: 1.3em;
-            background: #b76e79;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: transform 0.1s;
+        .tree-left {
+            left: 10px;
+        }
+        
+        .tree-right {
+            right: 10px;
+        }
+        
+        .tree-trunk {
+            position: absolute;
+            bottom: 0;
+            left: 30px;
+            width: 20px;
+            height: 80px;
+            background: linear-gradient(90deg, #8B4513, #A0522D);
+            border-radius: 5px 5px 0 0;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.2);
+        }
+        
+        .tree-leaves {
+            position: absolute;
+            bottom: 60px;
+            left: 10px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(145deg, #ffb7c5, #ff9eb2);
+            border-radius: 50%;
+            box-shadow: 0 5px 15px rgba(255, 158, 178, 0.5);
+        }
+        
+        .tree-leaves::before, .tree-leaves::after {
+            content: '';
+            position: absolute;
+            background: inherit;
+            border-radius: 50%;
+        }
+        
+        .tree-leaves::before {
+            width: 40px;
+            height: 40px;
+            top: -20px;
+            left: 10px;
+        }
+        
+        .tree-leaves::after {
+            width: 35px;
+            height: 35px;
+            top: -10px;
+            right: -10px;
+        }
+        
+        /* Cherry blossoms */
+        .blossom {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #ffa5b9;
+            border-radius: 50%;
+            animation: fallBlossom linear infinite;
+            z-index: 10;
+        }
+        
+        @keyframes fallBlossom {
+            from {
+                transform: translateY(-20px) rotate(0deg);
+                opacity: 0.8;
+            }
+            to {
+                transform: translateY(520px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        /* Animals */
+        .animal {
+            position: absolute;
+            font-size: 25px;
+            z-index: 15;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.2));
+            animation: runAnimation linear infinite;
+        }
+        
+        @keyframes runAnimation {
+            from {
+                transform: translateX(-50px);
+            }
+            to {
+                transform: translateX(550px);
+            }
+        }
+        
+        .dog {
+            bottom: 10px;
+        }
+        
+        .cat {
+            bottom: 45px;
+        }
+        
+        /* Floating lanterns */
+        .lantern {
+            position: absolute;
+            font-size: 20px;
+            z-index: 8;
+            opacity: 0.6;
+            animation: floatLantern 8s ease-in-out infinite;
+        }
+        
+        @keyframes floatLantern {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            25% {
+                transform: translateY(-20px) rotate(5deg);
+            }
+            75% {
+                transform: translateY(20px) rotate(-5deg);
+            }
+        }
+        
+        /* Ground */
+        .ground {
+            position: absolute;
+            bottom: 0;
             width: 100%;
+            height: 20px;
+            background: linear-gradient(180deg, #90be6d, #6a994e);
+            border-radius: 10px 10px 0 0;
+            z-index: 20;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
         }
         
-        .touch-btn:active {
-            transform: scale(0.95);
+        .ground::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 3px;
+            top: 0;
+            background: rgba(255,255,255,0.3);
         }
         
-        #controls {
-            text-align: center;
-            margin-top: 15px;
-            padding: 15px;
-            background: #f8f0e7;
-            border-radius: 10px;
+        #catcher {
+            position: absolute;
+            bottom: 25px;
+            width: 100px;
+            height: 60px;
+            background: #d44e5e;
+            border-radius: 50px 50px 20px 20px;
+            transform: translateX(-50%);
+            left: 50%;
+            transition: left 0.1s ease;
+            box-shadow: 0 8px 0 #a13e4a, 0 10px 15px rgba(0,0,0,0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 35px;
+            z-index: 30;
+            border: 2px solid #ffe6e6;
         }
         
-        #controls p {
-            margin: 5px 0;
-            color: #4a4e69;
+        #catcher::before {
+            content: "👫";
+            filter: drop-shadow(0 2px 2px rgba(0,0,0,0.3));
         }
         
-        .key {
-            display: inline-block;
-            padding: 5px 15px;
-            background: white;
-            border: 2px solid #b76e79;
-            border-radius: 5px;
-            margin: 0 5px;
-            font-weight: bold;
-            color: #b76e79;
+        #catcher::after {
+            content: '';
+            position: absolute;
+            width: 120%;
+            height: 10px;
+            background: rgba(0,0,0,0.1);
+            border-radius: 50%;
+            bottom: -10px;
+            left: -10%;
+            filter: blur(3px);
+        }
+        
+        .heart {
+            position: absolute;
+            font-size: 35px;
+            cursor: pointer;
+            user-select: none;
+            animation: float 3s infinite ease-in-out;
+            filter: drop-shadow(0 5px 10px rgba(212, 78, 94, 0.4));
+            z-index: 25;
+            text-shadow: 0 2px 5px white;
+        }
+        
+        @keyframes float {
+            0%, 100% { 
+                transform: translateY(0) rotate(0deg); 
+            }
+            25% { 
+                transform: translateY(-8px) rotate(5deg); 
+            }
+            75% { 
+                transform: translateY(8px) rotate(-5deg); 
+            }
+        }
+        
+        .heart.special {
+            font-size: 45px;
+            filter: drop-shadow(0 0 20px gold);
+            animation: specialFloat 2s infinite ease-in-out;
+        }
+        
+        @keyframes specialFloat {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-15px) scale(1.2); }
         }
         
         #message {
             text-align: center;
-            margin-top: 15px;
-            padding: 10px;
+            margin: 15px 0;
+            padding: 15px;
             font-size: 1.2em;
-            color: #b76e79;
+            color: #d44e5e;
             font-weight: bold;
             min-height: 50px;
+            background: linear-gradient(145deg, #fff, #fce4e4);
+            border-radius: 50px;
+            border: 1px solid rgba(212, 78, 94, 0.3);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
         
-        #startScreen, #winScreen {
+        #startScreen, #memoryScreen, #winScreen {
             text-align: center;
-            padding: 20px;
+            padding: 30px 20px;
         }
         
-        #startScreen h2, #winScreen h2 {
-            color: #b76e79;
+        #startScreen h2, #memoryScreen h2, #winScreen h2 {
+            color: #d44e5e;
             font-size: 2em;
             margin-bottom: 20px;
+            font-family: 'Georgia', serif;
         }
         
-        #startScreen p, #winScreen p {
-            color: #4a4e69;
+        #startScreen p, #memoryScreen p, #winScreen p {
+            color: #666;
             margin-bottom: 15px;
             line-height: 1.6;
         }
         
         button {
-            background: #b76e79;
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            font-size: 1.2em;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: transform 0.2s, box-shadow 0.2s;
-            margin: 10px;
-        }
-        
-        button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(183, 110, 121, 0.4);
-        }
-        
-        button:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-        
-        #winMessage {
-            font-size: 1.3em;
-            color: #b76e79;
-            margin: 20px 0;
-            padding: 20px;
-            background: #f8f0e7;
-            border-radius: 10px;
-            white-space: pre-line;
-        }
-        
-        .hidden {
-            display: none !important;
-        }
-        
-        /* Question Modal Styles */
-        #questionModal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            padding: 20px;
-        }
-        
-        .modal-content {
-            background: white;
-            padding: 30px 20px;
-            border-radius: 20px;
-            max-width: 500px;
-            width: 100%;
-            max-height: 90vh;
-            overflow-y: auto;
-            text-align: center;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            animation: slideIn 0.5s ease-out;
-        }
-        
-        @keyframes slideIn {
-            from {
-                transform: translateY(-50px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-        
-        .modal-content h2 {
-            color: #b76e79;
-            margin-bottom: 20px;
-            font-size: 1.8em;
-        }
-        
-        .photo-memory {
-            width: 100%;
-            height: 200px;
-            background: linear-gradient(145deg, #ffcdb2, #ffb4a2);
-            border-radius: 10px;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #6d6875;
-            font-style: italic;
-            border: 2px dashed #b76e79;
-            overflow: hidden;
-        }
-        
-        .photo-memory img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .photo-placeholder {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            height: 100%;
-            background: #f8f0e7;
-        }
-        
-        .question-text {
-            background: #f8f0e7;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            font-size: 1.2em;
-            color: #333;
-            font-weight: bold;
-        }
-        
-        .options {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-        
-        .option-btn {
-            background: #f8f0e7;
-            color: #4a4e69;
-            border: 2px solid #b76e79;
-            padding: 15px;
-            font-size: 1.1em;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s;
-            width: 100%;
-        }
-        
-        .option-btn:hover {
-            background: #b76e79;
-            color: white;
-        }
-        
-        .option-btn.selected {
-            background: #b76e79;
-            color: white;
-            border-color: #4a4e69;
-        }
-        
-        .option-btn.correct {
-            background: #4CAF50;
-            color: white;
-            border-color: #45a049;
-        }
-        
-        .option-btn.wrong {
-            background: #f44336;
-            color: white;
-            border-color: #da190b;
-        }
-        
-        #submitAnswer {
-            background: #b76e79;
+            background: linear-gradient(145deg, #d44e5e, #b13e4c);
             color: white;
             border: none;
             padding: 15px 40px;
@@ -372,45 +388,186 @@
             cursor: pointer;
             font-weight: bold;
             transition: all 0.3s;
+            margin: 10px;
+            box-shadow: 0 8px 0 #7a2c36, 0 10px 20px rgba(212, 78, 94, 0.4);
+            border: 1px solid #ffb6b6;
+        }
+        
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 11px 0 #7a2c36, 0 15px 25px rgba(212, 78, 94, 0.5);
+        }
+        
+        button:active {
+            transform: translateY(5px);
+            box-shadow: 0 3px 0 #7a2c36, 0 5px 15px rgba(212, 78, 94, 0.4);
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+        
+        #memoryContent {
+            background: linear-gradient(145deg, #fff, #fce4e4);
+            border-radius: 20px;
+            padding: 25px;
+            margin: 20px 0;
+            border: 2px solid white;
+            box-shadow: 0 10px 30px rgba(212, 78, 94, 0.2);
+        }
+        
+        #memoryPhoto {
             width: 100%;
-            max-width: 300px;
-            margin: 0 auto;
+            height: 200px;
+            background: linear-gradient(145deg, #ffe6e6, #ffd1d1);
+            border-radius: 15px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px dashed #d44e5e;
+            box-shadow: inset 0 0 20px rgba(212, 78, 94, 0.1);
         }
         
-        #submitAnswer:hover:not(:disabled) {
-            transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(183, 110, 121, 0.4);
+        #memoryPhoto img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
         
-        .feedback {
-            margin-top: 20px;
+        #memoryQuestion {
+            font-size: 1.3em;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: bold;
+            line-height: 1.5;
+        }
+        
+        #memoryOptions {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .memory-option {
+            background: white;
+            color: #333;
+            border: 2px solid #d44e5e;
+            padding: 15px;
+            border-radius: 15px;
             font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .memory-option:hover {
+            background: #d44e5e;
+            color: white;
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(212, 78, 94, 0.3);
+        }
+        
+        .memory-option.selected {
+            background: #d44e5e;
+            color: white;
+            border-color: #a13e4a;
+        }
+        
+        .memory-option.correct {
+            background: #4CAF50;
+            border-color: #45a049;
+            color: white;
+        }
+        
+        .memory-option.wrong {
+            background: #f44336;
+            border-color: #da190b;
+            color: white;
+        }
+        
+        #memoryFeedback {
+            margin: 15px 0;
+            font-size: 1.2em;
             min-height: 30px;
+            font-weight: bold;
         }
         
-        .feedback.success {
-            color: #4CAF50;
-        }
-        
-        .feedback.error {
-            color: #f44336;
-        }
+        .success { color: #4CAF50; }
+        .error { color: #f44336; }
         
         #memoryHint {
+            color: #888;
             font-style: italic;
-            color: #6d6875;
-            margin-top: 15px;
-            font-size: 0.9em;
+            margin-top: 10px;
+            font-size: 0.95em;
         }
         
-        /* Mobile styles */
+        #winMessage {
+            font-size: 1.3em;
+            color: #d44e5e;
+            margin: 20px 0;
+            padding: 25px;
+            background: linear-gradient(145deg, #fff, #fce4e4);
+            border-radius: 20px;
+            white-space: pre-line;
+            border: 2px solid white;
+            box-shadow: 0 10px 30px rgba(212, 78, 94, 0.2);
+            line-height: 1.8;
+        }
+        
+        #progressBar {
+            width: 100%;
+            height: 12px;
+            background: #f0d0d0;
+            border-radius: 6px;
+            margin: 15px 0;
+            overflow: hidden;
+            border: 1px solid rgba(212, 78, 94, 0.3);
+        }
+        
+        #progressFill {
+            height: 100%;
+            background: linear-gradient(90deg, #ffb6c1, #d44e5e, #a13e4a);
+            width: 0%;
+            transition: width 0.3s ease;
+            border-radius: 6px;
+            box-shadow: 0 0 10px #ffb6c1;
+        }
+        
+        /* Decorative corner hearts */
+        .corner-heart {
+            position: absolute;
+            font-size: 20px;
+            opacity: 0.3;
+            color: #d44e5e;
+            z-index: 1;
+        }
+        
         @media (max-width: 600px) {
-            #touchControls {
-                display: grid;
+            #gameArea {
+                height: 400px;
             }
             
-            .key {
-                display: none;
+            #catcher {
+                width: 80px;
+                height: 50px;
+                font-size: 30px;
+            }
+            
+            .heart {
+                font-size: 28px;
+            }
+            
+            .animal {
+                font-size: 22px;
+            }
+            
+            .tree {
+                width: 60px;
+                height: 100px;
             }
         }
     </style>
@@ -418,82 +575,102 @@
 <body>
     <div id="gameContainer">
         <div id="gameHeader">
-            <h1>❤️ 4 Years of Us ❤️</h1>
+            <h1>🌸 Catch Our Love 🌸</h1>
+            <div id="anniversaryBadge">4 Years Together ❤️</div>
             
-            <!-- Music Control Button -->
+            <!-- Music Control -->
             <div id="musicControl">
                 <button id="musicToggle">🎵 Play Music</button>
             </div>
-            
-            <div id="countdownTimer">Together for: <span id="countdownDisplay">Calculating...</span></div>
         </div>
         
+        <!-- Game Stats -->
         <div id="stats">
-            <div>Level: <span id="levelDisplay">1/4</span></div>
-            <div>Hearts: <span id="heartsCollected">0</span>/<span id="totalHearts">3</span></div>
-            <div>💕 <span id="loveMeter">0</span>%</div>
+            <div class="stat-box">
+                <div class="stat-label">Hearts</div>
+                <div class="stat-value" id="heartsCaught">0</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">Memories</div>
+                <div class="stat-value" id="memoriesUnlocked">0/4</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">Year</div>
+                <div class="stat-value" id="currentLevel">1</div>
+            </div>
         </div>
         
-        <canvas id="gameCanvas" width="760" height="400"></canvas>
-        
-        <!-- Touch Controls for Mobile -->
-        <div id="touchControls">
-            <div></div>
-            <button class="touch-btn" id="touchUp">⬆️</button>
-            <div></div>
-            <button class="touch-btn" id="touchLeft">⬅️</button>
-            <button class="touch-btn" id="touchDown">⬇️</button>
-            <button class="touch-btn" id="touchRight">➡️</button>
+        <!-- Progress Bar -->
+        <div id="progressBar">
+            <div id="progressFill"></div>
         </div>
         
-        <div id="controls">
-            <p>Use <span class="key">←</span> <span class="key">→</span> <span class="key">↑</span> to move</p>
-            <p>Collect all 3 hearts to unlock a question about our memories</p>
+        <!-- Game Area -->
+        <div id="gameArea">
+            <!-- Ground -->
+            <div class="ground"></div>
+            
+            <!-- Cherry Blossom Trees -->
+            <div class="tree tree-left">
+                <div class="tree-trunk"></div>
+                <div class="tree-leaves"></div>
+            </div>
+            
+            <div class="tree tree-right">
+                <div class="tree-trunk"></div>
+                <div class="tree-leaves"></div>
+            </div>
+            
+            <!-- Catcher (will be positioned by JS) -->
+            <div id="catcher"></div>
+            
+            <!-- Decorative corner hearts -->
+            <span class="corner-heart" style="top: 10px; left: 10px;">❤️</span>
+            <span class="corner-heart" style="top: 10px; right: 10px;">❤️</span>
+            <span class="corner-heart" style="bottom: 30px; left: 10px;">❤️</span>
+            <span class="corner-heart" style="bottom: 30px; right: 10px;">❤️</span>
         </div>
         
-        <div id="message"></div>
+        <div id="message">🌸 Catch hearts to unlock our memories! 🌸</div>
         
+        <!-- Start Screen -->
         <div id="startScreen">
-            <h2>Our 4th Anniversary Adventure!</h2>
-            <p>Help our love story navigate through 4 years of beautiful memories.</p>
-            <p>Each level represents a year together, filled with special moments.</p>
-            <p>Collect all the hearts, then answer the question about us to proceed!</p>
-            <button onclick="startGame()">Start Our Story ❤️</button>
+            <h2>🌸 Our 4th Anniversary! 🌸</h2>
+            <p>Catch the falling hearts to unlock special memories from our 4 years together.</p>
+            <p>Watch the cherry blossoms fall, the dogs and cats play, and catch all the hearts!</p>
+            <p>Each year has 3 hearts. Answer the question to unlock the next year!</p>
+            <p>❤️ Move left and right to catch the hearts ❤️</p>
+            <button onclick="startGame()">Start Catching Love 🌸</button>
         </div>
         
+        <!-- Memory Screen (Question Modal) -->
+        <div id="memoryScreen" class="hidden">
+            <h2 id="memoryYear">Year 1 Memory</h2>
+            <div id="memoryContent">
+                <div id="memoryPhoto"></div>
+                <div id="memoryQuestion"></div>
+                <div id="memoryOptions"></div>
+                <div id="memoryFeedback"></div>
+                <div id="memoryHint"></div>
+                <button id="submitMemory" disabled>Check Answer</button>
+            </div>
+        </div>
+        
+        <!-- Win Screen -->
         <div id="winScreen" class="hidden">
             <h2>🎉 4 Years Complete! 🎉</h2>
             <div id="winMessage"></div>
-            <button onclick="resetToStart()">Play Again</button>
+            <button onclick="resetGame()">Play Again 🌸</button>
         </div>
     </div>
 
-    <!-- Question Modal -->
-    <div id="questionModal" class="hidden">
-        <div class="modal-content">
-            <h2 id="modalYear">Year 1 Question</h2>
-            <div id="photoMemory" class="photo-memory">
-                <div class="photo-placeholder" id="photoPlaceholder">📸 Memory Photo</div>
-            </div>
-            <p id="modalMemory" class="question-text"></p>
-            <div id="optionsContainer" class="options"></div>
-            <button id="submitAnswer" disabled>Check Answer</button>
-            <div id="feedback" class="feedback"></div>
-            <div id="memoryHint"></div>
-        </div>
-    </div>
-
-    <!-- Audio element for background music -->
+    <!-- Audio -->
     <audio id="bgMusic" loop preload="auto">
         <source src="bg-music.mp3" type="audio/mpeg">
-        Your browser doesn't support audio. I love you! ❤️
     </audio>
 
     <script>
-        const canvas = document.getElementById('gameCanvas');
-        const ctx = canvas.getContext('2d');
-        
-        // Music control
+        // ==================== MUSIC CONTROL ====================
         const bgMusic = document.getElementById('bgMusic');
         const musicToggle = document.getElementById('musicToggle');
         let musicPlaying = false;
@@ -508,671 +685,522 @@
                     musicToggle.textContent = '🔊 Pause Music';
                     musicPlaying = true;
                 }).catch(e => {
-                    console.log("Playback failed - user interaction needed");
-                    alert("Click anywhere on the page first to enable music!");
+                    alert("🌸 Click anywhere on the page first to enable music! 🌸");
                 });
             }
         });
         
-        // Set volume
         bgMusic.volume = 0.3;
         
-        // Game state
-        let gameStarted = false;
-        let gameWon = false;
-        let currentLevel = 1;
-        let heartsCollected = 0;
-        let totalHeartsInLevel = 3;
-        let loveMeter = 0;
-        let showingQuestion = false;
-        let selectedOption = null;
+        // ==================== GAME VARIABLES ====================
+        const gameArea = document.getElementById('gameArea');
+        const catcher = document.getElementById('catcher');
+        const heartsCaughtDisplay = document.getElementById('heartsCaught');
+        const memoriesUnlockedDisplay = document.getElementById('memoriesUnlocked');
+        const currentLevelDisplay = document.getElementById('currentLevel');
+        const messageDisplay = document.getElementById('message');
+        const progressFill = document.getElementById('progressFill');
         
-        // Anniversary countdown
-        function updateCountdown() {
-            const today = new Date();
-            const anniversary = new Date(today.getFullYear(), 2, 13); // March 13
-            
-            if (today > anniversary) {
-                anniversary.setFullYear(anniversary.getFullYear() + 1);
-            }
-            
-            const diffTime = anniversary - today;
-            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-            
-            if (diffDays === 0) {
-                document.getElementById('countdownDisplay').textContent = "TODAY! ❤️";
-            } else if (diffDays === 365) {
-                document.getElementById('countdownDisplay').textContent = "ONE YEAR! 🎉";
-            } else {
-                document.getElementById('countdownDisplay').textContent = `${diffDays} days until our anniversary`;
-            }
-        }
+        let gameActive = false;
+        let currentYear = 1;
+        let heartsForCurrentYear = 0;
+        const heartsNeededPerYear = 3;
+        let totalHeartsCaught = 0;
+        let unlockedYears = [1];
         
-        // Update countdown every second
-        setInterval(updateCountdown, 1000);
-        updateCountdown();
+        // Falling hearts array
+        let fallingHearts = [];
+        let heartInterval;
+        let gameLoopInterval;
+        let blossomInterval;
+        let animalInterval;
         
-        // Player object
-        let player = {
-            x: 100,
-            y: 300,
-            width: 30,
-            height: 30,
-            speed: 5,
-            velocityY: 0,
-            jumping: false,
-            grounded: false
-        };
+        // Animals
+        const animals = ['🐕', '🐕‍🦺', '🐩', '🐈', '🐈⬛', '🐱', '🐶'];
+        let runningAnimals = [];
         
-        // Gravity
-        const gravity = 0.5;
-        const jumpStrength = -10;
+        // Catcher position
+        let catcherX = 50; // percentage
+        let moveLeft = false;
+        let moveRight = false;
         
-        // Platforms
-        let platforms = [];
-        
-        // Hearts
-        let hearts = [];
-        
-        // !!! PERSONALIZE THESE WITH YOUR REAL MEMORIES AND PHOTOS !!!
-        const levelQuestions = {
+        // ==================== YOUR PERSONALIZED MEMORIES ====================
+        const memories = {
             1: {
-                year: "Year 1: The Beginning",
+                year: "🌸 Year 1: The Beginning 🌸",
                 question: "Where did we go on our very first date?",
                 options: [
-                    "That cozy coffee shop downtown",
-                    "The Italian restaurant on Main Street",
-                    "The pizza place near the park",
-                    "The sushi spot you loved"
+                    "Cozy Coffee Shop Downtown",
+                    "Italian Restaurant on Main",
+                    "Pizza Place near the Park",
+                    "Sushi Spot You Loved"
                 ],
-                correct: 0, // Change this to the correct answer index (0, 1, 2, or 3)
-                memory: "I still remember how your eyes lit up when you tried their caramel latte. ☕",
-                hint: "Think about where we had our first coffee together...",
-                photo: "photo1.jpg" // Your first date photo
+                correct: 0,
+                memory: "I still remember your smile when you tried their caramel latte. ☕",
+                hint: "Think about where we had our first coffee...",
+                photo: "photo1.jpg"
             },
             2: {
-                year: "Year 2: First Adventures",
-                question: "What was the name of the place we took our first weekend trip to?",
+                year: "🐕 Year 2: First Adventures 🐈",
+                question: "Where did we take our first weekend trip together?",
                 options: [
                     "Lake Tahoe",
-                    "The beach house",
-                    "Mountain cabin retreat",
-                    "That cute bed & breakfast"
+                    "The Beach House",
+                    "Mountain Cabin",
+                    "Bed & Breakfast"
                 ],
-                correct: 1, // Change this!
-                memory: "We got lost trying to find it, but getting lost with you was the best adventure.",
-                hint: "Remember the sound of waves and the sunset walks?",
-                photo: "photo2.jpg" // Your first trip photo
+                correct: 1,
+                memory: "We got lost finding it, but getting lost with you was the best adventure.",
+                hint: "Remember the sound of waves?",
+                photo: "photo2.jpg"
             },
             3: {
-                year: "Year 3: Growing Together",
-                question: "What was the first piece of furniture we built together?",
+                year: "🏠 Year 3: Growing Together 🏠",
+                question: "What was the first furniture we built together?",
                 options: [
-                    "The bookshelf",
-                    "Our bed frame",
-                    "The IKEA dresser",
-                    "The kitchen table"
+                    "Bookshelf",
+                    "Bed Frame",
+                    "IKEA Dresser",
+                    "Kitchen Table"
                 ],
-                correct: 2, // Change this!
-                memory: "We argued over the instructions, but we figured it out together. Just like everything else.",
-                hint: "It came in a flat box and had way too many screws...",
-                photo: "photo3.jpg" // Your moving in / furniture photo
+                correct: 2,
+                memory: "We argued over instructions, but figured it out together.",
+                hint: "It came in a flat box with many screws...",
+                photo: "photo3.jpg"
             },
             4: {
-                year: "Year 4: Stronger Than Ever",
+                year: "❤️ Year 4: Stronger Than Ever ❤️",
                 question: "What's my favorite thing about you?",
                 options: [
-                    "Your beautiful smile",
-                    "The way you laugh at my bad jokes",
-                    "How kind you are to everyone",
-                    "All of the above"
+                    "Your Smile",
+                    "Your Laugh",
+                    "Your Kindness",
+                    "All of the Above"
                 ],
-                correct: 3, // This one is probably "All of the above" ❤️
-                memory: "It's impossible to pick just one thing. I love EVERYTHING about you.",
-                hint: "The answer is always 'all of the above' when it comes to you ❤️",
-                photo: "photo4.jpg" // Your recent favorite photo
+                correct: 3,
+                memory: "It's impossible to pick just one. I love EVERYTHING about you.",
+                hint: "The answer is always 'all of the above' ❤️",
+                photo: "photo4.jpg"
             }
         };
         
-        // Level data
-        const levelData = {
-            1: {
-                name: "Year 1: The Beginning",
-                message: "March 13, 2022 - Our first date. I knew from that moment you were special.",
-                platforms: [
-                    { x: 0, y: 350, width: 200, height: 20 },
-                    { x: 250, y: 300, width: 150, height: 20 },
-                    { x: 450, y: 250, width: 150, height: 20 },
-                    { x: 650, y: 200, width: 110, height: 20 }
-                ],
-                hearts: [
-                    { x: 100, y: 320, collected: false },
-                    { x: 300, y: 270, collected: false },
-                    { x: 500, y: 220, collected: false }
-                ]
-            },
-            2: {
-                name: "Year 2: First Adventures",
-                message: "Summer 2023 - Our first trip together. Getting lost with you was the best adventure.",
-                platforms: [
-                    { x: 0, y: 350, width: 150, height: 20 },
-                    { x: 200, y: 300, width: 100, height: 20 },
-                    { x: 350, y: 250, width: 100, height: 20 },
-                    { x: 500, y: 200, width: 100, height: 20 },
-                    { x: 650, y: 150, width: 110, height: 20 }
-                ],
-                hearts: [
-                    { x: 50, y: 320, collected: false },
-                    { x: 250, y: 270, collected: false },
-                    { x: 550, y: 170, collected: false }
-                ]
-            },
-            3: {
-                name: "Year 3: Growing Together",
-                message: "January 2024 - Moving in together. Building a home and a life with you is my greatest joy.",
-                platforms: [
-                    { x: 0, y: 350, width: 300, height: 20 },
-                    { x: 350, y: 280, width: 150, height: 20 },
-                    { x: 550, y: 210, width: 210, height: 20 },
-                    { x: 400, y: 140, width: 100, height: 20 }
-                ],
-                hearts: [
-                    { x: 150, y: 320, collected: false },
-                    { x: 400, y: 250, collected: false },
-                    { x: 600, y: 180, collected: false }
-                ]
-            },
-            4: {
-                name: "Year 4: Stronger Than Ever",
-                message: "Today - 4 years, 1,461 days, and countless beautiful moments. Here's to forever with you.",
-                platforms: [
-                    { x: 0, y: 350, width: 200, height: 20 },
-                    { x: 250, y: 300, width: 100, height: 20 },
-                    { x: 400, y: 250, width: 100, height: 20 },
-                    { x: 550, y: 200, width: 100, height: 20 },
-                    { x: 650, y: 150, width: 110, height: 20 },
-                    { x: 300, y: 100, width: 200, height: 20 }
-                ],
-                hearts: [
-                    { x: 50, y: 320, collected: false },
-                    { x: 280, y: 270, collected: false },
-                    { x: 600, y: 120, collected: false }
-                ]
-            }
-        };
+        // ==================== DECORATIVE ELEMENTS ====================
         
-        // Controls
-        let leftPressed = false;
-        let rightPressed = false;
-        let upPressed = false;
+        // Create falling cherry blossoms
+        function createBlossom() {
+            if (!gameActive) return;
+            
+            const blossom = document.createElement('div');
+            blossom.className = 'blossom';
+            
+            // Random position
+            blossom.style.left = Math.random() * 100 + '%';
+            blossom.style.animationDuration = (Math.random() * 3 + 3) + 's';
+            blossom.style.animationDelay = Math.random() * 2 + 's';
+            
+            // Random pink shade
+            const pinkShades = ['#ffb7c5', '#ff9eb2', '#ff85a0', '#ff6b8b'];
+            blossom.style.background = pinkShades[Math.floor(Math.random() * pinkShades.length)];
+            
+            gameArea.appendChild(blossom);
+            
+            // Remove after animation
+            setTimeout(() => {
+                if (blossom.parentNode) {
+                    blossom.remove();
+                }
+            }, 6000);
+        }
+        
+        // Create running animals
+        function createAnimal() {
+            if (!gameActive) return;
+            
+            const animal = document.createElement('div');
+            animal.className = 'animal';
+            
+            // Random animal
+            animal.textContent = animals[Math.floor(Math.random() * animals.length)];
+            
+            // Random position (dog on ground, cat slightly higher)
+            if (animal.textContent.includes('🐕') || animal.textContent.includes('🐶')) {
+                animal.classList.add('dog');
+                animal.style.bottom = '10px';
+            } else {
+                animal.classList.add('cat');
+                animal.style.bottom = '45px';
+            }
+            
+            animal.style.left = '-50px';
+            animal.style.animationDuration = (Math.random() * 3 + 4) + 's';
+            animal.style.animationDelay = Math.random() * 2 + 's';
+            animal.style.fontSize = (Math.random() * 10 + 20) + 'px';
+            
+            gameArea.appendChild(animal);
+            
+            // Remove after animation
+            setTimeout(() => {
+                if (animal.parentNode) {
+                    animal.remove();
+                }
+            }, 7000);
+        }
+        
+        // Create floating lanterns
+        function createLantern() {
+            if (!gameActive) return;
+            
+            const lantern = document.createElement('div');
+            lantern.className = 'lantern';
+            lantern.textContent = '🏮';
+            lantern.style.left = Math.random() * 100 + '%';
+            lantern.style.top = Math.random() * 60 + '%';
+            lantern.style.animationDuration = (Math.random() * 4 + 6) + 's';
+            
+            gameArea.appendChild(lantern);
+        }
+        
+        // ==================== GAME FUNCTIONS ====================
+        
+        // Move catcher with mouse/touch
+        gameArea.addEventListener('mousemove', (e) => {
+            if (!gameActive) return;
+            const rect = gameArea.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const percentage = (x / rect.width) * 100;
+            catcherX = Math.min(95, Math.max(5, percentage));
+            catcher.style.left = catcherX + '%';
+        });
+        
+        // Touch support
+        gameArea.addEventListener('touchmove', (e) => {
+            if (!gameActive) return;
+            e.preventDefault();
+            const rect = gameArea.getBoundingClientRect();
+            const x = e.touches[0].clientX - rect.left;
+            const percentage = (x / rect.width) * 100;
+            catcherX = Math.min(95, Math.max(5, percentage));
+            catcher.style.left = catcherX + '%';
+        });
         
         // Keyboard controls
         document.addEventListener('keydown', (e) => {
-            if (!gameStarted || gameWon || showingQuestion) return;
-            
+            if (!gameActive) return;
             if (e.key === 'ArrowLeft') {
-                leftPressed = true;
+                moveLeft = true;
                 e.preventDefault();
             }
             if (e.key === 'ArrowRight') {
-                rightPressed = true;
-                e.preventDefault();
-            }
-            if (e.key === 'ArrowUp') {
-                upPressed = true;
+                moveRight = true;
                 e.preventDefault();
             }
         });
         
         document.addEventListener('keyup', (e) => {
             if (e.key === 'ArrowLeft') {
-                leftPressed = false;
+                moveLeft = false;
                 e.preventDefault();
             }
             if (e.key === 'ArrowRight') {
-                rightPressed = false;
-                e.preventDefault();
-            }
-            if (e.key === 'ArrowUp') {
-                upPressed = false;
+                moveRight = false;
                 e.preventDefault();
             }
         });
         
-        // Touch controls
-        document.getElementById('touchLeft').addEventListener('mousedown', (e) => { e.preventDefault(); leftPressed = true; });
-        document.getElementById('touchLeft').addEventListener('mouseup', () => { leftPressed = false; });
-        document.getElementById('touchLeft').addEventListener('mouseleave', () => { leftPressed = false; });
-        document.getElementById('touchLeft').addEventListener('touchstart', (e) => { e.preventDefault(); leftPressed = true; });
-        document.getElementById('touchLeft').addEventListener('touchend', (e) => { e.preventDefault(); leftPressed = false; });
-        
-        document.getElementById('touchRight').addEventListener('mousedown', (e) => { e.preventDefault(); rightPressed = true; });
-        document.getElementById('touchRight').addEventListener('mouseup', () => { rightPressed = false; });
-        document.getElementById('touchRight').addEventListener('mouseleave', () => { rightPressed = false; });
-        document.getElementById('touchRight').addEventListener('touchstart', (e) => { e.preventDefault(); rightPressed = true; });
-        document.getElementById('touchRight').addEventListener('touchend', (e) => { e.preventDefault(); rightPressed = false; });
-        
-        document.getElementById('touchUp').addEventListener('mousedown', (e) => { e.preventDefault(); upPressed = true; });
-        document.getElementById('touchUp').addEventListener('mouseup', () => { upPressed = false; });
-        document.getElementById('touchUp').addEventListener('mouseleave', () => { upPressed = false; });
-        document.getElementById('touchUp').addEventListener('touchstart', (e) => { e.preventDefault(); upPressed = true; });
-        document.getElementById('touchUp').addEventListener('touchend', (e) => { e.preventDefault(); upPressed = false; });
-        
-        function loadLevel(level) {
-            const data = levelData[level];
-            platforms = data.platforms.map(p => ({...p}));
-            hearts = data.hearts.map(h => ({...h, collected: false}));
-            heartsCollected = 0;
-            totalHeartsInLevel = hearts.length;
+        // Update catcher position with keyboard
+        function updateCatcher() {
+            if (!gameActive) return;
             
-            // Reset player position
-            player.x = 100;
-            player.y = 300;
-            player.velocityY = 0;
-            
-            document.getElementById('levelDisplay').textContent = `${level}/4`;
-            document.getElementById('totalHearts').textContent = totalHeartsInLevel;
-            document.getElementById('heartsCollected').textContent = '0';
-            
-            updateLoveMeter();
-        }
-        
-        function updateLoveMeter() {
-            let totalCollected = 0;
-            for (let l = 1; l <= 4; l++) {
-                totalCollected += levelData[l].hearts.filter(h => h.collected).length;
+            if (moveLeft) {
+                catcherX = Math.max(5, catcherX - 2);
             }
-            loveMeter = Math.round((totalCollected / 12) * 100);
-            document.getElementById('loveMeter').textContent = loveMeter;
+            if (moveRight) {
+                catcherX = Math.min(95, catcherX + 2);
+            }
+            catcher.style.left = catcherX + '%';
         }
         
-        function showQuestion(level) {
-            showingQuestion = true;
-            const question = levelQuestions[level];
-            const modal = document.getElementById('questionModal');
-            const optionsContainer = document.getElementById('optionsContainer');
-            const submitBtn = document.getElementById('submitAnswer');
-            const feedback = document.getElementById('feedback');
-            const memoryHint = document.getElementById('memoryHint');
-            const photoMemory = document.getElementById('photoMemory');
+        // Create a new heart
+        function createHeart() {
+            if (!gameActive) return;
             
-            document.getElementById('modalYear').textContent = question.year;
-            document.getElementById('modalMemory').textContent = question.question;
+            const heart = document.createElement('div');
+            heart.className = 'heart';
             
-            // Show photo if available
-            if (question.photo) {
-                photoMemory.innerHTML = `<img src="${question.photo}" alt="Memory" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'photo-placeholder\'>📸 Photo not found</div>';">`;
+            // Random heart emoji
+            const hearts = ['❤️', '💕', '💗', '💓', '💖', '💘', '💝'];
+            heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+            
+            // Random position
+            const left = Math.random() * 90 + 5;
+            heart.style.left = left + '%';
+            heart.style.top = '-40px';
+            
+            // Random speed
+            const baseSpeed = 1 + (currentYear * 0.3);
+            const speed = baseSpeed + Math.random() * 1.5;
+            
+            // Store heart data
+            const heartData = {
+                element: heart,
+                speed: speed,
+                caught: false
+            };
+            
+            fallingHearts.push(heartData);
+            gameArea.appendChild(heart);
+        }
+        
+        // Update heart positions
+        function updateHearts() {
+            if (!gameActive) return;
+            
+            for (let i = fallingHearts.length - 1; i >= 0; i--) {
+                const heart = fallingHearts[i];
+                const top = parseFloat(heart.element.style.top) || -40;
+                const newTop = top + heart.speed;
+                
+                heart.element.style.top = newTop + 'px';
+                
+                // Check if caught
+                const heartRect = heart.element.getBoundingClientRect();
+                const catcherRect = catcher.getBoundingClientRect();
+                
+                if (!heart.caught && 
+                    heartRect.bottom >= catcherRect.top &&
+                    heartRect.left >= catcherRect.left - 20 &&
+                    heartRect.right <= catcherRect.right + 20) {
+                    
+                    // Heart caught!
+                    heart.caught = true;
+                    heart.element.remove();
+                    fallingHearts.splice(i, 1);
+                    
+                    // Update counters
+                    totalHeartsCaught++;
+                    heartsForCurrentYear++;
+                    heartsCaughtDisplay.textContent = totalHeartsCaught;
+                    
+                    // Update progress bar
+                    const progress = (heartsForCurrentYear / heartsNeededPerYear) * 100;
+                    progressFill.style.width = progress + '%';
+                    
+                    // Show message
+                    messageDisplay.textContent = `❤️ You caught a heart! ${heartsForCurrentYear}/${heartsNeededPerYear} for Year ${currentYear}`;
+                    
+                    // Check if year complete
+                    if (heartsForCurrentYear >= heartsNeededPerYear) {
+                        showMemoryQuestion(currentYear);
+                    }
+                }
+                
+                // Remove if off screen
+                if (newTop > gameArea.offsetHeight) {
+                    heart.element.remove();
+                    fallingHearts.splice(i, 1);
+                }
+            }
+        }
+        
+        // Show memory question
+        function showMemoryQuestion(year) {
+            gameActive = false;
+            const memory = memories[year];
+            
+            // Clear falling hearts
+            fallingHearts.forEach(heart => heart.element.remove());
+            fallingHearts = [];
+            
+            // Show memory screen
+            document.getElementById('startScreen').classList.add('hidden');
+            document.getElementById('memoryScreen').classList.remove('hidden');
+            document.getElementById('winScreen').classList.add('hidden');
+            
+            // Set content
+            document.getElementById('memoryYear').textContent = memory.year;
+            document.getElementById('memoryQuestion').textContent = memory.question;
+            
+            // Show photo
+            const photoDiv = document.getElementById('memoryPhoto');
+            if (memory.photo) {
+                photoDiv.innerHTML = `<img src="${memory.photo}" alt="Memory" onerror="this.onerror=null; this.parentElement.innerHTML='🌸 Memory Photo 🌸';">`;
             } else {
-                photoMemory.innerHTML = '<div class="photo-placeholder">📸 Add your photo here</div>';
+                photoDiv.innerHTML = '🌸 Add your photo here 🌸';
             }
             
-            // Clear previous options
-            optionsContainer.innerHTML = '';
-            question.options.forEach((option, index) => {
-                const btn = document.createElement('button');
-                btn.className = 'option-btn';
+            // Create options
+            const optionsDiv = document.getElementById('memoryOptions');
+            optionsDiv.innerHTML = '';
+            memory.options.forEach((option, index) => {
+                const btn = document.createElement('div');
+                btn.className = 'memory-option';
                 btn.textContent = option;
-                btn.onclick = () => selectOption(index);
-                optionsContainer.appendChild(btn);
+                btn.dataset.index = index;
+                btn.onclick = () => selectMemoryOption(index);
+                optionsDiv.appendChild(btn);
             });
             
-            memoryHint.textContent = question.hint;
-            feedback.textContent = '';
-            submitBtn.disabled = true;
-            selectedOption = null;
-            
-            modal.classList.remove('hidden');
+            document.getElementById('memoryHint').textContent = memory.hint;
+            document.getElementById('memoryFeedback').textContent = '';
+            document.getElementById('submitMemory').disabled = true;
         }
         
-        function selectOption(index) {
+        // Select memory option
+        let selectedOption = null;
+        
+        function selectMemoryOption(index) {
             selectedOption = index;
-            const options = document.querySelectorAll('.option-btn');
-            options.forEach((btn, i) => {
+            document.querySelectorAll('.memory-option').forEach((btn, i) => {
                 btn.classList.remove('selected');
                 if (i === index) {
                     btn.classList.add('selected');
                 }
             });
-            document.getElementById('submitAnswer').disabled = false;
+            document.getElementById('submitMemory').disabled = false;
         }
         
-        function checkAnswer() {
-            const question = levelQuestions[currentLevel];
-            const feedback = document.getElementById('feedback');
-            const submitBtn = document.getElementById('submitAnswer');
-            const options = document.querySelectorAll('.option-btn');
+        // Submit answer
+        document.getElementById('submitMemory').addEventListener('click', () => {
+            const memory = memories[currentYear];
+            const feedback = document.getElementById('memoryFeedback');
+            const options = document.querySelectorAll('.memory-option');
             
-            if (selectedOption === question.correct) {
-                // Correct answer
+            if (selectedOption === memory.correct) {
+                // Correct!
                 options.forEach((btn, i) => {
-                    if (i === question.correct) {
-                        btn.classList.add('correct');
-                    }
+                    if (i === memory.correct) btn.classList.add('correct');
                 });
                 
                 feedback.textContent = '✨ Correct! You remember! ✨';
-                feedback.className = 'feedback success';
+                feedback.className = 'success';
+                document.getElementById('memoryHint').textContent = memory.memory;
+                document.getElementById('submitMemory').disabled = true;
                 
-                // Show the sweet memory
-                document.getElementById('memoryHint').textContent = question.memory;
-                
-                submitBtn.disabled = true;
-                
-                // Move to next level after a delay
+                // Unlock next year
                 setTimeout(() => {
-                    document.getElementById('questionModal').classList.add('hidden');
-                    showingQuestion = false;
+                    document.getElementById('memoryScreen').classList.add('hidden');
                     
-                    if (currentLevel < 4) {
-                        currentLevel++;
-                        loadLevel(currentLevel);
-                        document.getElementById('message').textContent = `✨ Moving to ${levelData[currentLevel].name}! ✨`;
+                    if (currentYear < 4) {
+                        currentYear++;
+                        heartsForCurrentYear = 0;
+                        currentLevelDisplay.textContent = currentYear;
+                        memoriesUnlockedDisplay.textContent = `${currentYear-1}/4`;
+                        progressFill.style.width = '0%';
+                        messageDisplay.textContent = `🌸 Year ${currentYear} unlocked! Catch ${heartsNeededPerYear} hearts! 🌸`;
+                        gameActive = true;
                     } else {
-                        gameWon = true;
-                        showWinScreen();
+                        // All years complete!
+                        winGame();
                     }
                 }, 3000);
             } else {
                 // Wrong answer
                 options.forEach((btn, i) => {
-                    if (i === selectedOption) {
-                        btn.classList.add('wrong');
-                    }
-                    if (i === question.correct) {
-                        btn.classList.add('correct');
-                    }
+                    if (i === selectedOption) btn.classList.add('wrong');
+                    if (i === memory.correct) btn.classList.add('correct');
                 });
                 
                 feedback.textContent = '❤️ Not quite... but our memories are worth revisiting! Try again? ❤️';
-                feedback.className = 'feedback error';
+                feedback.className = 'error';
                 
-                // Reset hearts for this level
+                // Reset hearts for this year
                 setTimeout(() => {
-                    document.getElementById('questionModal').classList.add('hidden');
-                    showingQuestion = false;
-                    
-                    // Reset hearts for current level
-                    levelData[currentLevel].hearts.forEach(h => h.collected = false);
-                    loadLevel(currentLevel);
-                    document.getElementById('message').textContent = '💕 Let\'s collect those hearts again and remember! 💕';
+                    document.getElementById('memoryScreen').classList.add('hidden');
+                    heartsForCurrentYear = 0;
+                    progressFill.style.width = '0%';
+                    messageDisplay.textContent = `🌸 Let's catch ${heartsNeededPerYear} hearts again! 🌸`;
+                    gameActive = true;
                 }, 3000);
-            }
-        }
-        
-        function checkHeartCollisions() {
-            for (let heart of hearts) {
-                if (!heart.collected) {
-                    if (player.x < heart.x + 20 && 
-                        player.x + player.width > heart.x && 
-                        player.y < heart.y + 20 && 
-                        player.y + player.height > heart.y) {
-                        
-                        heart.collected = true;
-                        heartsCollected++;
-                        document.getElementById('heartsCollected').textContent = heartsCollected;
-                        
-                        const levelHeart = levelData[currentLevel].hearts.find(h => h.x === heart.x && h.y === heart.y);
-                        if (levelHeart) levelHeart.collected = true;
-                        
-                        updateLoveMeter();
-                        
-                        document.getElementById('message').textContent = `💕 You found a heart from ${levelData[currentLevel].name}! 💕`;
-                        
-                        // Check if level complete
-                        if (heartsCollected === totalHeartsInLevel) {
-                            document.getElementById('message').textContent = `✨ All hearts collected! Time to answer the question! ✨`;
-                            setTimeout(() => {
-                                showQuestion(currentLevel);
-                            }, 1000);
-                        }
-                    }
-                }
-            }
-        }
-        
-        function showWinScreen() {
-            document.getElementById('gameCanvas').classList.add('hidden');
-            document.getElementById('stats').classList.add('hidden');
-            document.getElementById('controls').classList.add('hidden');
-            document.getElementById('touchControls').classList.add('hidden');
-            document.getElementById('message').classList.add('hidden');
-            document.getElementById('startScreen').classList.add('hidden');
-            document.getElementById('winScreen').classList.remove('hidden');
-            
-            // !!! PERSONALIZE THIS FINAL MESSAGE !!!
-            const finalMessage = `My dearest [HER NAME],
-
-You did it! You collected all our memories AND answered every question perfectly.
-
-Every heart you collected represents a moment I've cherished with you:
-❤️ Our first date
-❤️ Our adventures together
-❤️ Building our home
-❤️ Every single day since
-
-And you remembered it all. That means more to me than words can say.
-
-1,461 days with you have been the best of my life.
-You are my everything, my best friend, my love.
-
-Happy 4th Anniversary!
-
-Forever yours,
-[YOUR NAME]
-
-March 13, 2026`;
-            
-            document.getElementById('winMessage').textContent = finalMessage;
-        }
-        
-        function update() {
-            if (!gameStarted || gameWon || showingQuestion) return;
-            
-            // Horizontal movement
-            if (leftPressed) player.x -= player.speed;
-            if (rightPressed) player.x += player.speed;
-            
-            player.x = Math.max(0, Math.min(canvas.width - player.width, player.x));
-            
-            // Jumping
-            if (upPressed && player.grounded) {
-                player.velocityY = jumpStrength;
-                player.jumping = true;
-                player.grounded = false;
-            }
-            
-            // Apply gravity
-            player.velocityY += gravity;
-            player.y += player.velocityY;
-            
-            // Platform collision
-            player.grounded = false;
-            for (let platform of platforms) {
-                if (player.velocityY >= 0 && 
-                    player.x < platform.x + platform.width && 
-                    player.x + player.width > platform.x && 
-                    player.y + player.height > platform.y && 
-                    player.y + player.height < platform.y + platform.height + player.velocityY) {
-                    
-                    player.y = platform.y - player.height;
-                    player.velocityY = 0;
-                    player.grounded = true;
-                    player.jumping = false;
-                }
-            }
-            
-            // Ground collision
-            if (player.y + player.height > canvas.height) {
-                player.y = canvas.height - player.height;
-                player.velocityY = 0;
-                player.grounded = true;
-                player.jumping = false;
-            }
-            
-            // Ceiling collision
-            if (player.y < 0) {
-                player.y = 0;
-                player.velocityY = 0;
-            }
-            
-            // Check heart collisions
-            checkHeartCollisions();
-        }
-        
-        function draw() {
-            // Clear canvas
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            // Draw sky gradient
-            const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
-            gradient.addColorStop(0, '#87CEEB');
-            gradient.addColorStop(1, '#E0F6FF');
-            ctx.fillStyle = gradient;
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
-            // Draw clouds
-            ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
-            ctx.beginPath();
-            ctx.arc(100, 50, 30, 0, Math.PI * 2);
-            ctx.arc(130, 50, 35, 0, Math.PI * 2);
-            ctx.arc(70, 50, 25, 0, Math.PI * 2);
-            ctx.fill();
-            
-            ctx.beginPath();
-            ctx.arc(600, 80, 25, 0, Math.PI * 2);
-            ctx.arc(630, 80, 30, 0, Math.PI * 2);
-            ctx.arc(570, 80, 20, 0, Math.PI * 2);
-            ctx.fill();
-            
-            // Draw floating hearts
-            ctx.fillStyle = 'rgba(255, 107, 107, 0.2)';
-            for (let i = 0; i < 3; i++) {
-                let x = 150 + i * 200;
-                let y = 100 + i * 50;
-                ctx.beginPath();
-                ctx.moveTo(x, y);
-                ctx.bezierCurveTo(x-10, y-10, x-20, y+10, x, y+20);
-                ctx.bezierCurveTo(x+20, y+10, x+10, y-10, x, y);
-                ctx.fill();
-            }
-            
-            // Draw platforms
-            platforms.forEach(platform => {
-                ctx.fillStyle = '#8B4513';
-                ctx.fillRect(platform.x, platform.y, platform.width, platform.height);
-                
-                ctx.fillStyle = '#A0522D';
-                ctx.fillRect(platform.x + 5, platform.y + 5, platform.width - 10, 3);
-                ctx.fillRect(platform.x + 5, platform.y + 12, platform.width - 10, 3);
-            });
-            
-            // Draw hearts
-            hearts.forEach(heart => {
-                if (!heart.collected) {
-                    ctx.fillStyle = '#ff6b6b';
-                    ctx.beginPath();
-                    ctx.moveTo(heart.x + 10, heart.y + 5);
-                    ctx.bezierCurveTo(heart.x, heart.y, heart.x - 5, heart.y + 10, heart.x + 10, heart.y + 18);
-                    ctx.bezierCurveTo(heart.x + 25, heart.y + 10, heart.x + 20, heart.y, heart.x + 10, heart.y + 5);
-                    ctx.fill();
-                    
-                    // Sparkle
-                    ctx.fillStyle = '#fff';
-                    ctx.beginPath();
-                    ctx.arc(heart.x + 6, heart.y + 8, 2, 0, Math.PI * 2);
-                    ctx.fill();
-                }
-            });
-            
-            // Draw player (two characters)
-            ctx.fillStyle = '#4a4e69';
-            ctx.fillRect(player.x, player.y, 12, player.height);
-            ctx.fillStyle = '#f2e9e4';
-            ctx.beginPath();
-            ctx.arc(player.x + 6, player.y - 5, 8, 0, Math.PI * 2);
-            ctx.fill();
-            
-            ctx.fillStyle = '#b76e79';
-            ctx.fillRect(player.x + 18, player.y, 12, player.height);
-            ctx.fillStyle = '#f2e9e4';
-            ctx.beginPath();
-            ctx.arc(player.x + 24, player.y - 5, 8, 0, Math.PI * 2);
-            ctx.fill();
-            
-            // Connection heart
-            ctx.fillStyle = '#ff6b6b';
-            ctx.font = '20px Arial';
-            ctx.fillText('❤️', player.x + 9, player.y - 15);
-            
-            // Level name
-            ctx.fillStyle = '#4a4e69';
-            ctx.font = 'bold 14px Arial';
-            ctx.fillText(levelData[currentLevel].name, 10, 25);
-        }
-        
-        function gameLoop() {
-            update();
-            draw();
-            requestAnimationFrame(gameLoop);
-        }
-        
-        function startGame() {
-            gameStarted = true;
-            gameWon = false;
-            currentLevel = 1;
-            
-            // Reset all hearts
-            for (let l = 1; l <= 4; l++) {
-                levelData[l].hearts.forEach(h => h.collected = false);
-            }
-            
-            loadLevel(1);
-            
-            document.getElementById('startScreen').classList.add('hidden');
-            document.getElementById('winScreen').classList.add('hidden');
-            document.getElementById('gameCanvas').classList.remove('hidden');
-            document.getElementById('stats').classList.remove('hidden');
-            document.getElementById('controls').classList.remove('hidden');
-            document.getElementById('message').classList.remove('hidden');
-            
-            // Show touch controls on mobile
-            if (window.innerWidth <= 600) {
-                document.getElementById('touchControls').classList.remove('hidden');
-            }
-        }
-        
-        function resetToStart() {
-            gameStarted = false;
-            gameWon = false;
-            
-            document.getElementById('startScreen').classList.remove('hidden');
-            document.getElementById('winScreen').classList.add('hidden');
-            document.getElementById('gameCanvas').classList.add('hidden');
-            document.getElementById('stats').classList.add('hidden');
-            document.getElementById('controls').classList.add('hidden');
-            document.getElementById('touchControls').classList.add('hidden');
-            document.getElementById('message').classList.add('hidden');
-        }
-        
-        // Set up submit button
-        document.getElementById('submitAnswer').addEventListener('click', checkAnswer);
-        
-        // Handle window resize
-        window.addEventListener('resize', () => {
-            if (gameStarted && !gameWon) {
-                if (window.innerWidth <= 600) {
-                    document.getElementById('touchControls').classList.remove('hidden');
-                } else {
-                    document.getElementById('touchControls').classList.add('hidden');
-                }
             }
         });
         
-        // Prevent context menu on canvas
-        canvas.addEventListener('contextmenu', (e) => e.preventDefault());
+        // Win game
+        function winGame() {
+            gameActive = false;
+            
+            document.getElementById('startScreen').classList.add('hidden');
+            document.getElementById('memoryScreen').classList.add('hidden');
+            document.getElementById('winScreen').classList.remove('hidden');
+            
+            // PERSONALIZE THIS MESSAGE!
+            const winMessage = `🌸 My love 🌸
+
+You caught all 12 hearts and unlocked every memory!
+Each heart represents a moment I've cherished with you.
+
+4 years. 1,461 days. Countless beautiful moments.
+And you remembered them all.
+
+You are my everything.
+Happy Anniversary, [Her Name]!
+
+Forever yours,
+[Your Name] ❤️
+
+🐕 🐈 🏮 🌸`;
+            
+            document.getElementById('winMessage').textContent = winMessage;
+        }
         
-        // Start the game loop
-        gameLoop();
+        // Start game
+        function startGame() {
+            gameActive = true;
+            currentYear = 1;
+            heartsForCurrentYear = 0;
+            totalHeartsCaught = 0;
+            unlockedYears = [1];
+            
+            heartsCaughtDisplay.textContent = '0';
+            memoriesUnlockedDisplay.textContent = '0/4';
+            currentLevelDisplay.textContent = '1';
+            progressFill.style.width = '0%';
+            
+            // Clear any existing elements
+            fallingHearts.forEach(heart => heart.element.remove());
+            fallingHearts = [];
+            
+            // Remove all decorative elements
+            document.querySelectorAll('.blossom, .animal, .lantern').forEach(el => el.remove());
+            
+            document.getElementById('startScreen').classList.add('hidden');
+            document.getElementById('memoryScreen').classList.add('hidden');
+            document.getElementById('winScreen').classList.add('hidden');
+            
+            messageDisplay.textContent = '🌸 Catch 3 hearts to unlock Year 1 memory! 🌸';
+            
+            // Start game loops
+            if (heartInterval) clearInterval(heartInterval);
+            if (gameLoopInterval) clearInterval(gameLoopInterval);
+            if (blossomInterval) clearInterval(blossomInterval);
+            if (animalInterval) clearInterval(animalInterval);
+            
+            heartInterval = setInterval(createHeart, 900);
+            blossomInterval = setInterval(createBlossom, 500);
+            animalInterval = setInterval(createAnimal, 3000);
+            
+            // Create initial lanterns
+            for (let i = 0; i < 3; i++) {
+                setTimeout(createLantern, i * 2000);
+            }
+            
+            gameLoopInterval = setInterval(() => {
+                updateCatcher();
+                updateHearts();
+            }, 20);
+        }
+        
+        // Reset game
+        function resetGame() {
+            gameActive = false;
+            clearInterval(heartInterval);
+            clearInterval(gameLoopInterval);
+            clearInterval(blossomInterval);
+            clearInterval(animalInterval);
+            
+            document.getElementById('startScreen').classList.remove('hidden');
+            document.getElementById('memoryScreen').classList.add('hidden');
+            document.getElementById('winScreen').classList.add('hidden');
+        }
     </script>
 </body>
 </html>
